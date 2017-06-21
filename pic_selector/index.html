@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>图片选择器</title>
+    <link rel="Stylesheet" type="text/css" href="/css/pic_select/pic_select.css" />
+    <link type="text/css" href="/jquery/demos.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/css/VNew/style_editcss.css" />
+    <link rel="stylesheet" type="text/css" href="/js/zyupload/skins/zyupload-1.0.0.css">
+    <script src="/js/jquery-1.7.1.min.js" language="JavaScript" ></script>
+    <script language="javascript" src="/js/VNew/link.js?asd"></script>
+    <script type="text/javascript" src="/include/public.js"></script>
+    <script type="text/javascript" src="/js/zyupload/zyupload.basic-1.0.0.js"></script>
+</head>
+<body>
+<div class="imgSet">
+    <div class="imgSet_tab">
+        <div class="alertTabT" id="alert_tab_t">
+            <ul>
+                <li class="cur"><a href="/pic_selector?tj=1&banner=1&t_width=1440&t_height=480">上传</a></li>
+                <li><a href="/pic_selector2?tj=1&banner=1&t_width=1440&t_height=480">素材库</a></li>
+                <li><a href="/pic_selector3?tj=1&banner=1&t_width=1440&t_height=480">我的图片</a></li>
+                <li><a href="/pic_selector4?tj=1&banner=1&t_width=1440&t_height=480">图片搬家</a></li>
+            </ul>
+            <!-- <a id="addMo_customStyle_btn" class="addMoCustomStyleBtn" style="display: none;">添加自定义样式</a> -->
+        </div>
+        <div class="imgSet_tab_center">
+            <div class="upImg_admin" id="upImg_admin" style="height:395px;width:848px;overflow:hidden;">
+                <div class="add_sy">
+                    <label>
+                        <input type="checkbox" name="pic_water" id="waterSet" value='1'>添加水印
+                    </label>
+                    <a href="javascript:;" id="sy_btnn" onclick="show_Window()">设置</a>
+                </div>
+                <div id="demo" class="demo"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/js/zyupload/upload.js"></script>
+<script language="javascript">
+    function friame_kg() {
+        var tmp_title='图片选择器';
+        window.parent.resize_window('w5',tmp_title,900,520);
+    }
+    $(function(){
+        // 初始化插件
+        $("#demo").zyUpload({
+            width            :   "830px",                 // 宽度
+            height           :   "600px",                 // 宽度
+            itemWidth        :   "135px",                 // 文件项的宽度
+            itemHeight       :   "100px",                 // 文件项的高度
+            bestWidth        :   "1440",
+            bestHeight       :   "480",
+            fileType         :   ["jpg","png","gif","jpeg"],        // 上传文件的类型
+            fileSize         :   3*1024*1024,                          // 上传文件的大小
+            mFileSize        :   3,
+            url              :   "/action/pic_selector_action.php?id=0&t_width=1440&t_height=480&is_small=0&tag=0&time=1488944966&is_frame=0&m_id=0&w_id=0&tj=1&constant=0&banner=1",               // 上传文件的路径
+            multiple         :   0,                    // 是否可以多个文件上传
+            maximum          :   1,
+            dragDrop         :   false,                    // 是否可以拖动上传文件
+            del              :   true,                    // 是否可以删除文件
+            finishDel        :   false,                   // 是否在上传文件完成后删除预览
+            waterSet         :   'waterSet',
+            /* 外部获得的回调接口 */
+            onSelect: function(selectFiles, allFiles){},    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
+            onProgress: function(file, loaded, total){},    // 正在上传的进度的回调方法
+            onDelete: function(file, files){},              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
+            onSuccess: function(file, response){          // 文件上传成功的回调方法
+                if(parseInt(response.errorcode)){
+                    window.parent.Ev.pubFun.alertWindow(response.errormsg, response.type);
+                }else{
+                    window.parent.Ev.pubFun.alertWindow("上传成功，请设置图片裁剪压缩方式");
+                    window.location.href = response.errormsg;
+                }
+            },
+            onFailure: function(file, response){          // 文件上传失败的回调方法
+                window.parent.Ev.pubFun.alertWindow('文件（'+file.name+'）上传失败！', 'error');
+            }
+        });
+    });
+</script>
+</body>
+</html>
+
+
+

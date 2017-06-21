@@ -1,0 +1,508 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=7" />
+    <title>模块管理</title>
+    <link type="text/css" rel="stylesheet" href="/css/VNew/admin_20140730.css" />
+    <link type="text/css" rel="stylesheet" href="/css/VNew/style_editcss.css" />
+    <script type="text/javascript" src="/include/cookies.js"></script>
+    <script type="text/javascript" src="/js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/js/VNew/public_plugins.js"></script>
+    <script type="text/javascript" src="/include/public.js"></script>
+    <script type="text/javascript" src="/include/link2.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    $(function(){
+        var my_submit_div = $("#my_submit_div"),form = $('#form2');
+        $("#topEditList").cScroll({
+            w: 10,
+            tbB: true,
+            fun: function() {}
+        });
+        my_submit_div.on({
+            click : function(){
+                var t = $(this),action = t.data('action');
+                switch(action){
+                    case 'submit' :
+                        t.removeClass('but-blue').addClass('but-gray').text('保存中...');
+                        $('#add_tag').val(1);
+                        form.submit();
+                        break;
+                    case 'reset' :
+                        w.close_window();
+                        break;
+                }
+            }
+        },'.but');
+    });
+</script>
+<div class="alertTab toparea-tab-area">
+    <div class="alertTabT" id="alert_tab_t">
+        <ul>
+            <li data-id="topAreaEdit" id="topAreaEdit_tab" class="cur">
+                <a href="javascript:;">栏目管理</a>
+            </li>
+        </ul>
+    </div>
+    <div class="alertTabC" id="alert_tab_c">
+        <div class="alertTabCIn toparea-edit" id="topAreaEdit">
+            <form action="/own_set_top" method="post" enctype="multipart/form-data" id="form2" name="form2">
+                <div class="tableDiv">
+                    <input type="hidden" name="is_frame" id="is_frame" value="2" />
+                    <dl class="cus-table">
+                        <dt class="table-h">
+                        <div class="table-h-i">
+                            <table>
+                                <tr>
+                                    <td class="t-a-c td-1"><div class="td-i">名称</div></td>
+                                    <td class="t-a-c td-2"><div class="td-i">链接地址</div></td>
+                                    <td class="t-a-c td-3"><div class="td-i">打开方式</div></td>
+                                    <td class="t-a-c td-4"><div class="td-i">排序(小到大)</div></td>
+                                    <td class="t-a-c td-5"><div class="td-i">显示</div></td>
+                                </tr>
+                            </table>
+                        </div>
+                        </dt>
+                        <dd class="table-b" id="topEditList">
+                            <ul class="table-b-i">
+                                <li class="tr-item">
+                                    <table>
+                                        <tr>
+                                            <td class="t-a-c td-1"><div class="td-i">会员登录</div></td>
+                                            <td class="t-a-c td-2"><div class="td-i">系统链接</div></td>
+                                            <td class="t-a-c td-3"><div class="td-i">本窗口</div></td>
+                                            <td class="t-a-c td-4"><div class="td-i">0</div></td>
+                                            <td class="t-a-c td-5">
+                                                <div class="td-i">
+                                                    <input class="checkboxObj" type="checkbox" name="show_member_login" id="show_member_login" value="1" checked="checked">
+                                                </div></td>
+                                        </tr>
+                                    </table>
+                                </li>
+                                <li class="tr-item" data-key="1">
+                                    <table>
+                                        <tr>
+                                            <td class="t-a-c v-a-m td-1">
+                                                <div class="td-i">
+                                                        <span class="text-element-o t-27-disabled">
+                                                            <span class="text-element-i">
+                                                                <input type="text"  name="item_name[]" id="item_name_1" value="设为首页" readonly="readonly">
+                                                            </span>
+                                                        </span>
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-2">
+                                                <div class="td-i">
+                                                    系统链接<input type="hidden" name="item_url[]" id="item_url_1" value="">
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-3">
+                                                <div class="td-i">
+                                                    本窗口<input type="hidden" name="target[]" id="target_1" value="">
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-4">
+                                                <div class="td-i">
+                                                        <span class="text-element-o t-27-gray">
+                                                            <span class="text-element-i">
+                                                                <input type="text" name="order[]" id="order_1" value="1" size="5" maxlength="4">
+                                                            </span>
+                                                        </span>
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-5">
+                                                <div class="td-i">
+                                                    <input class="checkboxObj" type="checkbox"  name="show_1" id="show_1" value="1" checked="checked">
+                                                    <input type="hidden" name="system_type[]" id="system_type" value="1">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </li>
+                                <li class="tr-item" data-key="2">
+                                    <table>
+                                        <tr>
+                                            <td class="t-a-c v-a-m td-1">
+                                                <div class="td-i">
+                                                        <span class="text-element-o t-27-disabled">
+                                                            <span class="text-element-i">
+                                                                <input type="text"  name="item_name[]" id="item_name_2" value="加入收藏" readonly="readonly">
+                                                            </span>
+                                                        </span>
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-2">
+                                                <div class="td-i">
+                                                    系统链接<input type="hidden" name="item_url[]" id="item_url_2" value="">
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-3">
+                                                <div class="td-i">
+                                                    本窗口<input type="hidden" name="target[]" id="target_2" value="">
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-4">
+                                                <div class="td-i">
+                                                        <span class="text-element-o t-27-gray">
+                                                            <span class="text-element-i">
+                                                                <input type="text" name="order[]" id="order_2" value="2" size="5" maxlength="4">
+                                                            </span>
+                                                        </span>
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-5">
+                                                <div class="td-i">
+                                                    <input class="checkboxObj" type="checkbox"  name="show_2" id="show_2" value="1" checked="checked">
+                                                    <input type="hidden" name="system_type[]" id="system_type" value="2">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </li>
+                                <li class="tr-item" data-key="3">
+                                    <table>
+                                        <tr>
+                                            <td class="t-a-c v-a-m td-1">
+                                                <div class="td-i">
+                                                        <span class="text-element-o t-27-disabled">
+                                                            <span class="text-element-i">
+                                                                <input type="text"  name="item_name[]" id="item_name_3" value="在线留言" readonly="readonly">
+                                                            </span>
+                                                        </span>
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-2">
+                                                <div class="td-i">
+                                                    系统链接<input type="hidden" name="item_url[]" id="item_url_3" value="">
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-3">
+                                                <div class="td-i">
+                                                    <select class="selectObj" id="target_3" name="target[]">
+                                                        <option value="">本窗口</option>
+                                                        <option value="_blank" >新窗口</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-4">
+                                                <div class="td-i">
+                                                        <span class="text-element-o t-27-gray">
+                                                            <span class="text-element-i">
+                                                                <input type="text" name="order[]" id="order_3" value="3" size="5" maxlength="4">
+                                                            </span>
+                                                        </span>
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-5">
+                                                <div class="td-i">
+                                                    <input class="checkboxObj" type="checkbox"  name="show_3" id="show_3" value="1" checked="checked">
+                                                    <input type="hidden" name="system_type[]" id="system_type" value="3">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </li>
+                                <li class="tr-item" data-key="4">
+                                    <table>
+                                        <tr>
+                                            <td class="t-a-c v-a-m td-1">
+                                                <div class="td-i">
+                                                        <span class="text-element-o t-27-disabled">
+                                                            <span class="text-element-i">
+                                                                <input type="text"  name="item_name[]" id="item_name_4" value="企业位置" readonly="readonly">
+                                                            </span>
+                                                        </span>
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-2">
+                                                <div class="td-i">
+                                                    系统链接<input type="hidden" name="item_url[]" id="item_url_4" value="">
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-3">
+                                                <div class="td-i">
+                                                    <select class="selectObj" id="target_4" name="target[]">
+                                                        <option value="">本窗口</option>
+                                                        <option value="_blank" >新窗口</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-4">
+                                                <div class="td-i">
+                                                        <span class="text-element-o t-27-gray">
+                                                            <span class="text-element-i">
+                                                                <input type="text" name="order[]" id="order_4" value="4" size="5" maxlength="4">
+                                                            </span>
+                                                        </span>
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-5">
+                                                <div class="td-i">
+                                                    <input class="checkboxObj" type="checkbox"  name="show_4" id="show_4" value="1" checked="checked">
+                                                    <input type="hidden" name="system_type[]" id="system_type" value="4">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </li>
+                                <li class="tr-item" data-key="5">
+                                    <table>
+                                        <tr>
+                                            <td class="t-a-c v-a-m td-1">
+                                                <div class="td-i">
+                                                        <span class="text-element-o t-27-disabled">
+                                                            <span class="text-element-i">
+                                                                <input type="text"  name="item_name[]" id="item_name_5" value="手机站" readonly="readonly">
+                                                            </span>
+                                                        </span>
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-2">
+                                                <div class="td-i">
+                                                    系统链接<input type="hidden" name="item_url[]" id="item_url_5" value="">
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-3">
+                                                <div class="td-i">
+                                                    <select class="selectObj" id="target_5" name="target[]">
+                                                        <option value="">本窗口</option>
+                                                        <option value="_blank" selected>新窗口</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-4">
+                                                <div class="td-i">
+                                                        <span class="text-element-o t-27-gray">
+                                                            <span class="text-element-i">
+                                                                <input type="text" name="order[]" id="order_5" value="5" size="5" maxlength="4">
+                                                            </span>
+                                                        </span>
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-5">
+                                                <div class="td-i">
+                                                    <input class="checkboxObj" type="checkbox"  name="show_5" id="show_5" value="1" checked="checked">
+                                                    <input type="hidden" name="system_type[]" id="system_type" value="5">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </li>
+                                <li class="tr-item" data-key="6">
+                                    <table>
+                                        <tr>
+                                            <td class="t-a-c v-a-m td-1">
+                                                <div class="td-i">
+                                                        <span class="text-element-o t-27-gray">
+                                                            <span class="text-element-i">
+                                                                <input type="text"  name="item_name[]" id="item_name_6" value="" >
+                                                            </span>
+                                                        </span>
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-2">
+                                                <div class="td-i">
+                                                                                                                <span class="text-element-o t-27-disabled">
+                                                            <span class="text-element-i">
+                                                                <input type="text" name="item_url[]" id="item_url_6" value="" readonly="readonly">
+                                                            </span>
+                                                        </span>
+                                                    <span class="but-element-o b-26-blue" onclick="show_iframe('2','6');">
+                                                            <em class="but-element-i"><a href="###">查找链接</a></em>
+                                                        </span>
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-3">
+                                                <div class="td-i">
+                                                    <select class="selectObj" id="target_6" name="target[]">
+                                                        <option value="">本窗口</option>
+                                                        <option value="_blank" >新窗口</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-4">
+                                                <div class="td-i">
+                                                        <span class="text-element-o t-27-gray">
+                                                            <span class="text-element-i">
+                                                                <input type="text" name="order[]" id="order_6" value="6" size="5" maxlength="4">
+                                                            </span>
+                                                        </span>
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-5">
+                                                <div class="td-i">
+                                                    <input class="checkboxObj" type="checkbox"  name="show_6" id="show_6" value="1" >
+                                                    <input type="hidden" name="system_type[]" id="system_type" value="0">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </li>
+                                <li class="tr-item" data-key="7">
+                                    <table>
+                                        <tr>
+                                            <td class="t-a-c v-a-m td-1">
+                                                <div class="td-i">
+                                                        <span class="text-element-o t-27-gray">
+                                                            <span class="text-element-i">
+                                                                <input type="text"  name="item_name[]" id="item_name_7" value="" >
+                                                            </span>
+                                                        </span>
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-2">
+                                                <div class="td-i">
+                                                                                                                <span class="text-element-o t-27-disabled">
+                                                            <span class="text-element-i">
+                                                                <input type="text" name="item_url[]" id="item_url_7" value="" readonly="readonly">
+                                                            </span>
+                                                        </span>
+                                                    <span class="but-element-o b-26-blue" onclick="show_iframe('2','7');">
+                                                            <em class="but-element-i"><a href="###">查找链接</a></em>
+                                                        </span>
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-3">
+                                                <div class="td-i">
+                                                    <select class="selectObj" id="target_7" name="target[]">
+                                                        <option value="">本窗口</option>
+                                                        <option value="_blank" >新窗口</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-4">
+                                                <div class="td-i">
+                                                        <span class="text-element-o t-27-gray">
+                                                            <span class="text-element-i">
+                                                                <input type="text" name="order[]" id="order_7" value="7" size="5" maxlength="4">
+                                                            </span>
+                                                        </span>
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-5">
+                                                <div class="td-i">
+                                                    <input class="checkboxObj" type="checkbox"  name="show_7" id="show_7" value="1" >
+                                                    <input type="hidden" name="system_type[]" id="system_type" value="0">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </li>
+                                <li class="tr-item" data-key="8">
+                                    <table>
+                                        <tr>
+                                            <td class="t-a-c v-a-m td-1">
+                                                <div class="td-i">
+                                                        <span class="text-element-o t-27-gray">
+                                                            <span class="text-element-i">
+                                                                <input type="text"  name="item_name[]" id="item_name_8" value="" >
+                                                            </span>
+                                                        </span>
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-2">
+                                                <div class="td-i">
+                                                                                                                <span class="text-element-o t-27-disabled">
+                                                            <span class="text-element-i">
+                                                                <input type="text" name="item_url[]" id="item_url_8" value="" readonly="readonly">
+                                                            </span>
+                                                        </span>
+                                                    <span class="but-element-o b-26-blue" onclick="show_iframe('2','8');">
+                                                            <em class="but-element-i"><a href="###">查找链接</a></em>
+                                                        </span>
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-3">
+                                                <div class="td-i">
+                                                    <select class="selectObj" id="target_8" name="target[]">
+                                                        <option value="">本窗口</option>
+                                                        <option value="_blank" >新窗口</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-4">
+                                                <div class="td-i">
+                                                        <span class="text-element-o t-27-gray">
+                                                            <span class="text-element-i">
+                                                                <input type="text" name="order[]" id="order_8" value="8" size="5" maxlength="4">
+                                                            </span>
+                                                        </span>
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-5">
+                                                <div class="td-i">
+                                                    <input class="checkboxObj" type="checkbox"  name="show_8" id="show_8" value="1" >
+                                                    <input type="hidden" name="system_type[]" id="system_type" value="0">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </li>
+                                <li class="tr-item" data-key="9">
+                                    <table>
+                                        <tr>
+                                            <td class="t-a-c v-a-m td-1">
+                                                <div class="td-i">
+                                                        <span class="text-element-o t-27-gray">
+                                                            <span class="text-element-i">
+                                                                <input type="text"  name="item_name[]" id="item_name_9" value="" >
+                                                            </span>
+                                                        </span>
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-2">
+                                                <div class="td-i">
+                                                                                                                <span class="text-element-o t-27-disabled">
+                                                            <span class="text-element-i">
+                                                                <input type="text" name="item_url[]" id="item_url_9" value="" readonly="readonly">
+                                                            </span>
+                                                        </span>
+                                                    <span class="but-element-o b-26-blue" onclick="show_iframe('2','9');">
+                                                            <em class="but-element-i"><a href="###">查找链接</a></em>
+                                                        </span>
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-3">
+                                                <div class="td-i">
+                                                    <select class="selectObj" id="target_9" name="target[]">
+                                                        <option value="">本窗口</option>
+                                                        <option value="_blank" >新窗口</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-4">
+                                                <div class="td-i">
+                                                        <span class="text-element-o t-27-gray">
+                                                            <span class="text-element-i">
+                                                                <input type="text" name="order[]" id="order_9" value="9" size="5" maxlength="4">
+                                                            </span>
+                                                        </span>
+                                                </div>
+                                            </td>
+                                            <td class="t-a-c v-a-m td-5">
+                                                <div class="td-i">
+                                                    <input class="checkboxObj" type="checkbox"  name="show_9" id="show_9" value="1" >
+                                                    <input type="hidden" name="system_type[]" id="system_type" value="0">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="submitBut" id="my_submit_div">
+                    <b class="but but-blue" data-action="submit">保存</b>
+                    <b class="but but-gray" data-action="reset">取消</b>
+                    <input id="add_tag" name="add_tag" value="0" type="hidden">
+                    <input type="hidden" name="is_frame" id="is_frame" value="2" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+    <title>查找链接</title>
+    <style>
+        body{ font-size:12px; color:#666;padding:0px;margin:0px}
+        ul,li{list-style:none;padding:0px;margin:0px}
+        a{color:#589ADB}
+        a:hover{color:#C90}
+        .Link_box{width:760px;height:370px;margin:0px;padding:0px; background:#FFF;overflow:hidden; margin:0 auto;}
+        .Link_1{width:220px;margin-top:10px;float:left; padding-right:20px; border-right:1px solid #CCC;height:350px;}
+        .c_name{ width:220px; height:20px; line-height:20px; color:#666; font-size:12px; font-weight:bold; text-align:left}
+        .Link_c_ul{ width:220px;height:300px;overflow-y:scroll; overflow-x:hidden; margin-left:0px;margin-top:20px;}
+        .Link_c_ul li{width:200px; line-height:30px;zoom:1; border-bottom:1px solid #efefef;}
+        .Link_c_ul li:after{content:""; display:table; clear:both;}
+        .Link_2{ margin-top:10px;width:220px; height:350px;;padding-right:20px; margin-left:20px; float:left; display:inline; border-right:1px solid #CCC}
+
+        .Link_t_1{ width:200px;line-height:30px;zoom:1; border-bottom:1px solid #efefef;}
+        .Link_t_1:after{content:""; display:table; clear:both;}
+        .Link_t_2{ /*width:190px;*/ margin-top:0px; margin-left:10px;overflow:hidden; clear:both}
+
+        .Link_3{width:235px;margin-top:10px;  float:left;margin-left:20px;}
+        .Link_t_ul{float:left;/*width:180px;*/ margin-left:0px; margin-top:0px;}
+        .Link_t_ul li{/*width:190px;*/line-height:30px; text-align:left;clear:both}
+        .Link_t_ul li .left_span2{width:100px; display: inline-block;/* height: 20px;*/ overflow: hidden;}
+
+        .right_span{float:right; text-align:left; display:inline; width:96px;text-align:right}
+        .left_span{float:left;width:104px; overflow-wrap: break-word;}
+        .left_span_2{float:left;width:84px; overflow-wrap: break-word;}
+
+        #show_class_sub .left_span{float:left;width:164px; }
+        #show_class_sub .right_span{float:right; text-align:left; display:inline; width:36px;text-align:right}
+    </style>
+</head>
+<body>
+<div class="Link_box" >
+    <div class="Link_1">
+        <div class="c_name">栏目名称</div>
+        <ul class="Link_c_ul">
+            <li><span class="left_span">首页</span><span class="right_span">&nbsp;&nbsp;<a href="javascript:write_model('/vip_zwr123456.html','首页');">选定</a></span></li>
+            <li>
+                <span class="left_span">设计项目</span>
+                <span class="right_span">
+                                                    <a href="javascript:show_class('14798675')">下一级</a>&nbsp;&nbsp;
+                                                <a href="javascript:write_model('/zwr123456/item_14798675_0.html','设计项目');">选定</a>
+                    </span>
+            </li>
+            <li>
+                <span class="left_span">工程业绩</span>
+                <span class="right_span">
+                                                    <a href="javascript:show_class('14798674')">下一级</a>&nbsp;&nbsp;
+                                                <a href="javascript:write_model('/zwr123456/vip_doc/14798674_0_0_1.html','工程业绩');">选定</a>
+                    </span>
+            </li>
+            <li>
+                <span class="left_span">关于我们</span>
+                <span class="right_span">
+                                                <a href="javascript:write_model('/zwr123456/bk_14798676.html','关于我们');">选定</a>
+                    </span>
+            </li>
+            <li>
+                <span class="left_span">联系我们</span>
+                <span class="right_span">
+                                                <a href="javascript:write_model('/zwr123456/bk_14798677.html','联系我们');">选定</a>
+                    </span>
+            </li>
+            <li>
+                <span class="left_span">在线留言</span>
+                <span class="right_span">
+                                                <a href="javascript:write_model('/self_define/guest_book.php?username=zwr123456','在线留言');">选定</a>
+                    </span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="Link_2">
+        <div class="c_name">栏目列表页</div>
+        <div id="show_class" style="margin-top:20px;overflow-y:scroll;height:300px;">
+        </div>
+    </div>
+
+    <div class="Link_3">
+        <div class="c_name">栏目详细页 <span id="search_con" style="display:none"><input name="search_word" id="search_word" type="text" size="10" onchange="search_detail2()"><input type="button" onclick="search_detail()" value="搜索"></span></div>
+        <div id="show_class_sub" style="margin-top:20px;overflow-y:scroll;height:300px;">
+        </div>
+    </div>
+</div>
+<script language="javascript" src="/include/jQ.js"></script>
+<script language="javascript">
+    function search_detail2(){
+        var search_word=$('#search_word').val();
+        search_word = $.trim(search_word);
+        if(search_word==''){
+            $('#show_class_sub .Link_t_1').show();
+        }
+    }
+    function search_detail(){
+        var search_word=$('#search_word').val();
+        search_word = $.trim(search_word);
+        if(search_word==''){
+            $('#show_class_sub .Link_t_1').show();
+        }else{
+            $('#show_class_sub .Link_t_1').each(function(){
+                var tmp_str=$(this).find('.left_span').text();
+                tmp_str = $.trim(tmp_str);
+                if(tmp_str.indexOf(search_word) >=0 ){
+                    $(this).show();
+                }else{
+                    $(this).hide();
+                }
+            });
+        }
+    }
+
+    function write_model(url,name){
+
+        window.parent.set_window_id_val('w1',"item_url_"+6,url);
+        window.parent.set_window_id_val('w1',"item_name_"+6,name);
+        window.parent.close_window2(6);
+
+    }
+    //时间戳
+    function UTCTimeDemo(){
+        var now = new Date().getTime();
+        var datestr=escape(now*1000+Math.round(Math.random()*1000));
+        return datestr;
+    }
+
+    function show_class(id){
+        var url='./ajax_get_info.php?type=41&channel_id='+id+'&u='+UTCTimeDemo();
+        $('#show_class').load(url).ajaxSuccess(function(){
+            $(this) .show();
+        })
+        $('#show_class_sub').html('');
+    }
+
+    function show_content(channel_id,sub_id){
+        var url='./ajax_get_info.php?type=42&channel_id='+channel_id+'&sub_id='+sub_id+'&u='+UTCTimeDemo();
+        $('#show_class_sub').load(url).ajaxSuccess(function(){
+            $(this) .show();
+            $('#search_con').show();
+        });
+    }
+</script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>下拉菜单</title>
+  <link href="/css/VNew/admin_20140730.css" rel="stylesheet" type="text/css" />
+  <link href="/css/VNew/style_editcss.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript">
+    //document.domain = "ev123.net";
+  </script>
+  <script type="text/javascript" src="/js/VNew/jquery-1.8.3.min.js"></script>
+  <script type="text/javascript" src="/js/VNew/public_plugins.js"></script>
+  <script type="text/javascript">
+    var w = window.parent;
+    var winNum = window.name.substr(12);
+
+    $(function(){
+      w.Ev.admin.o.channelWinDom = $("body");
+      var columnClassSelect = $("#columnClassSelect"),adminColumnList = $("#adminColumnList"),ulList = $("#xiala_list");
+      ulList.find("ul:first").find("small.e-icon-upmove").hide();
+      ulList.find("ul:last").find("small.e-icon-downmove").hide();
+      w.Ev.pubFun.selectElement(columnClassSelect,function(val){
+        $("#channel_id").val(val);
+        check_form();
+      });
+      adminColumnList.find("dd").cScroll({
+        w:10,
+        tbB :true
+      });
+      //上移动按钮事件
+      ulList.on("click","ul small.e-icon-upmove", function(){
+        var that = $(this),ul = that.parent().parent();
+        w.Ev.pubFun.upMove(ul);
+        setTimeout(function(){
+          if(ul.index()==1){
+            ul.prev("ul").find("small.e-icon-upmove").show();
+            that.hide();
+          }
+          if(ul.index() == ulList.find("ul").length-1){
+            ul.find("small.e-icon-downmove").show();
+            ul.prev("ul").find("small.e-icon-downmove").hide();
+          }
+        },700);
+      });
+      //下移动按钮事件
+      ulList.on("click","ul small.e-icon-downmove", function(){
+        var that = $(this),ul = that.parent().parent();
+        w.Ev.pubFun.downMove(ul);
+        setTimeout(function(){
+          if(ul.index() == 0){
+            ul.find("small.e-icon-upmove").show();
+            ul.next("ul").find("small.e-icon-upmove").hide();
+          }
+          if(ul.index() == ulList.find("ul").length-2){
+            ul.prev("ul").find("small.e-icon-downmove").show();
+            that.hide();
+          }
+        },700);
+      });
+    });
+
+  </script>
+</head>
+
+<body>
+<div class="website-column">
+  <div class="alertTab column-tab">
+    <div class="alertTabT column-tab-t" id="alert_tab_t">
+      <ul class="q">
+        <li >
+          <span><a href="/VNew/tj/copyChannel/c_id_1">一键加栏目</a></span>
+        </li>
+        <li >
+          <span><a href="/VNew/column_list">栏目管理</a></span>
+        </li>
+        <li class="cur">
+          <span><a href="/VNew/column_xiala">下拉菜单</a></span>
+        </li>
+        <li><span><a id="uploadColumnContent" href="###">上传栏目内容</a></span></li>
+        <li >
+          <span><a href="/VNew/column_recycleBin">回收站</a></span>
+        </li>
+      </ul>
+      <div class="show-line"></div>
+    </div>
+    <script type="text/javascript">
+      $(function(){
+        $("#uploadColumnContent").on("click", function(){
+          w.$("#toolUpcon").trigger("click");
+          w.$.popupClose(winNum);
+        });
+      });
+    </script>
+    <div class="alertTabC column-tab-c">
+      <div class="alertTabCIn q admin-create-column" style="display: block;">
+        <div class="website-column-h q">
+          <div class="column-explain q">
+            <div class="explain-pic"><img src="/images/VNew/column_explain_pic_2.jpg" /></div>
+            <div class="explain-text">
+              <h5>什么是网站栏目？</h5>
+              <p>就是在网页的顶部导航条，也可以称为网站频道。</p>
+            </div>
+          </div>
+        </div>
+        <form action="/VNew/column_xiala.php" method="post" enctype="multipart/form-data" id="form1" name="form1">
+          <div class="select-column-class q">
+            <strong class="labels">网站栏目：</strong>
+            <div class="select-element-o s-27-gray" id="columnClassSelect"><div class="select-element-i">
+              <span class="cursel">维修项目</span><small class="select-element-s"></small><input type="hidden" name="selectVal" />
+              <div class="select-element-l">
+                <div class="select-element-l-i">
+                  <ul>
+                    <li data-val="14799996" >维修项目</li>
+                    <li data-val="14799997" >维修师傅</li>
+                    <li data-val="14799998" >维修保障</li>
+                    <li data-val="14800000" >联系我们</li>
+                    <li data-val="14801086" >在线留言</li>
+                    <li data-val="14802551" >关于我们</li>
+                    <li data-val="14829257" >test</li>
+                    <li data-val="14846068" >场地预订</li>
+                    <li data-val="14876508" >家电清洗</li>
+                    <li data-val="14801087" >企业位置</li>
+                  </ul>
+                </div>
+              </div>
+            </div></div>
+            <p class="text-prompt-orange">小V提示：添加下拉菜单前，请先添加和完善该频道的内容！</p>
+            <input type="hidden" name="channel_id" id="channel_id" value="14799996" />
+          </div>
+          <div class="admin-column-list" id="adminColumnList">
+            <dl class="small-column-list">
+              <dt>
+              <ul>
+                <li style="width:240px;">栏目名</li>
+                <li style="width:120px;">打开方式</li>
+                <li style="width:366px;">连接</li>
+                <li style="width:120px;">排序</li>
+              </ul>
+              </dt>
+              <dd>
+                <div class="ul-list" id="xiala_list">
+                  <ul>
+                    <li style="width:230px;">
+                      <strong style="float:left; padding-right:10px; line-height:27px;">下拉项1：</strong>
+                      <div class="text-element-o t-27-gray column-name">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" size="20" maxlength="50" id="item_name_0" name="xiala[]"  value="ef" onblur="check_name(0)" /></div>
+                      </div>
+                      <input type=hidden name="row_no_0" id="row_no_0" value="0">
+                      <input type=hidden name=ids[] id=ids value="0">
+                    </li>
+                    <li style="width:110px; text-align: center;">
+                      <select class="selectObj" name="target_type[]">
+                        <option value="0" selected="selected">本窗口</option>
+                        <option value="1" >新窗口</option>
+                      </select>
+                    </li>
+                    <li style="width:356px;">
+                      <div class="text-element-o t-27-gray column-href">
+                        <div class="text-element-i">
+                          <input type="text" size="20"id="item_url_0" name="xlurl[]" value=""   readonly="readonly" onclick="w.showDefineIframe(3,0)" type="text" ></div>
+                      </div>
+                      <span data-key="0" class="but-element-o b-26-blue find_link">
+                          <em class="but-element-i">
+                            <i class="but">查找连接</i>
+                          </em>
+                        </span>
+                      <span data-key="0" class="but-element-o b-26-orange clear_link">
+                          <em class="but-element-i">
+                            <i class="but">清除</i>
+                          </em>
+                        </span>
+                    </li>
+                    <li style="width:110px; text-align:center;">
+                      <small class="e-icon e-icon-upmove" title="前移"></small>
+                      <small class="e-icon e-icon-downmove" title="后移"></small>
+                    </li>
+                  </ul>
+                  <ul>
+                    <li style="width:230px;">
+                      <strong style="float:left; padding-right:10px; line-height:27px;">下拉项2：</strong>
+                      <div class="text-element-o t-27-gray column-name">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" size="20" maxlength="50" id="item_name_1" name="xiala[]"  value="adsf" onblur="check_name(1)" /></div>
+                      </div>
+                      <input type=hidden name="row_no_1" id="row_no_1" value="1">
+                      <input type=hidden name=ids[] id=ids value="1">
+                    </li>
+                    <li style="width:110px; text-align: center;">
+                      <select class="selectObj" name="target_type[]">
+                        <option value="0" selected="selected">本窗口</option>
+                        <option value="1" >新窗口</option>
+                      </select>
+                    </li>
+                    <li style="width:356px;">
+                      <div class="text-element-o t-27-gray column-href">
+                        <div class="text-element-i">
+                          <input type="text" size="20"id="item_url_1" name="xlurl[]" value=""   readonly="readonly" onclick="w.showDefineIframe(3,1)" type="text" ></div>
+                      </div>
+                      <span data-key="1" class="but-element-o b-26-blue find_link">
+                          <em class="but-element-i">
+                            <i class="but">查找连接</i>
+                          </em>
+                        </span>
+                      <span data-key="1" class="but-element-o b-26-orange clear_link">
+                          <em class="but-element-i">
+                            <i class="but">清除</i>
+                          </em>
+                        </span>
+                    </li>
+                    <li style="width:110px; text-align:center;">
+                      <small class="e-icon e-icon-upmove" title="前移"></small>
+                      <small class="e-icon e-icon-downmove" title="后移"></small>
+                    </li>
+                  </ul>
+                  <ul>
+                    <li style="width:230px;">
+                      <strong style="float:left; padding-right:10px; line-height:27px;">下拉项3：</strong>
+                      <div class="text-element-o t-27-gray column-name">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" size="20" maxlength="50" id="item_name_2" name="xiala[]"  value="adf" onblur="check_name(2)" /></div>
+                      </div>
+                      <input type=hidden name="row_no_2" id="row_no_2" value="2">
+                      <input type=hidden name=ids[] id=ids value="2">
+                    </li>
+                    <li style="width:110px; text-align: center;">
+                      <select class="selectObj" name="target_type[]">
+                        <option value="0" selected="selected">本窗口</option>
+                        <option value="1" >新窗口</option>
+                      </select>
+                    </li>
+                    <li style="width:356px;">
+                      <div class="text-element-o t-27-gray column-href">
+                        <div class="text-element-i">
+                          <input type="text" size="20"id="item_url_2" name="xlurl[]" value=""   readonly="readonly" onclick="w.showDefineIframe(3,2)" type="text" ></div>
+                      </div>
+                      <span data-key="2" class="but-element-o b-26-blue find_link">
+                          <em class="but-element-i">
+                            <i class="but">查找连接</i>
+                          </em>
+                        </span>
+                      <span data-key="2" class="but-element-o b-26-orange clear_link">
+                          <em class="but-element-i">
+                            <i class="but">清除</i>
+                          </em>
+                        </span>
+                    </li>
+                    <li style="width:110px; text-align:center;">
+                      <small class="e-icon e-icon-upmove" title="前移"></small>
+                      <small class="e-icon e-icon-downmove" title="后移"></small>
+                    </li>
+                  </ul>
+                  <ul>
+                    <li style="width:230px;">
+                      <strong style="float:left; padding-right:10px; line-height:27px;">下拉项4：</strong>
+                      <div class="text-element-o t-27-gray column-name">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" size="20" maxlength="50" id="item_name_3" name="xiala[]"  value="adsf" onblur="check_name(3)" /></div>
+                      </div>
+                      <input type=hidden name="row_no_3" id="row_no_3" value="3">
+                      <input type=hidden name=ids[] id=ids value="3">
+                    </li>
+                    <li style="width:110px; text-align: center;">
+                      <select class="selectObj" name="target_type[]">
+                        <option value="0" selected="selected">本窗口</option>
+                        <option value="1" >新窗口</option>
+                      </select>
+                    </li>
+                    <li style="width:356px;">
+                      <div class="text-element-o t-27-gray column-href">
+                        <div class="text-element-i">
+                          <input type="text" size="20"id="item_url_3" name="xlurl[]" value=""   readonly="readonly" onclick="w.showDefineIframe(3,3)" type="text" ></div>
+                      </div>
+                      <span data-key="3" class="but-element-o b-26-blue find_link">
+                          <em class="but-element-i">
+                            <i class="but">查找连接</i>
+                          </em>
+                        </span>
+                      <span data-key="3" class="but-element-o b-26-orange clear_link">
+                          <em class="but-element-i">
+                            <i class="but">清除</i>
+                          </em>
+                        </span>
+                    </li>
+                    <li style="width:110px; text-align:center;">
+                      <small class="e-icon e-icon-upmove" title="前移"></small>
+                      <small class="e-icon e-icon-downmove" title="后移"></small>
+                    </li>
+                  </ul>
+                  <ul>
+                    <li style="width:230px;">
+                      <strong style="float:left; padding-right:10px; line-height:27px;">下拉项5：</strong>
+                      <div class="text-element-o t-27-gray column-name">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" size="20" maxlength="50" id="item_name_4" name="xiala[]"  value="asdf" onblur="check_name(4)" /></div>
+                      </div>
+                      <input type=hidden name="row_no_4" id="row_no_4" value="4">
+                      <input type=hidden name=ids[] id=ids value="4">
+                    </li>
+                    <li style="width:110px; text-align: center;">
+                      <select class="selectObj" name="target_type[]">
+                        <option value="0" selected="selected">本窗口</option>
+                        <option value="1" >新窗口</option>
+                      </select>
+                    </li>
+                    <li style="width:356px;">
+                      <div class="text-element-o t-27-gray column-href">
+                        <div class="text-element-i">
+                          <input type="text" size="20"id="item_url_4" name="xlurl[]" value=""   readonly="readonly" onclick="w.showDefineIframe(3,4)" type="text" ></div>
+                      </div>
+                      <span data-key="4" class="but-element-o b-26-blue find_link">
+                          <em class="but-element-i">
+                            <i class="but">查找连接</i>
+                          </em>
+                        </span>
+                      <span data-key="4" class="but-element-o b-26-orange clear_link">
+                          <em class="but-element-i">
+                            <i class="but">清除</i>
+                          </em>
+                        </span>
+                    </li>
+                    <li style="width:110px; text-align:center;">
+                      <small class="e-icon e-icon-upmove" title="前移"></small>
+                      <small class="e-icon e-icon-downmove" title="后移"></small>
+                    </li>
+                  </ul>
+                  <ul>
+                    <li style="width:230px;">
+                      <strong style="float:left; padding-right:10px; line-height:27px;">下拉项6：</strong>
+                      <div class="text-element-o t-27-gray column-name">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" size="20" maxlength="50" id="item_name_5" name="xiala[]"  value="fdf" onblur="check_name(5)" /></div>
+                      </div>
+                      <input type=hidden name="row_no_5" id="row_no_5" value="5">
+                      <input type=hidden name=ids[] id=ids value="5">
+                    </li>
+                    <li style="width:110px; text-align: center;">
+                      <select class="selectObj" name="target_type[]">
+                        <option value="0" selected="selected">本窗口</option>
+                        <option value="1" >新窗口</option>
+                      </select>
+                    </li>
+                    <li style="width:356px;">
+                      <div class="text-element-o t-27-gray column-href">
+                        <div class="text-element-i">
+                          <input type="text" size="20"id="item_url_5" name="xlurl[]" value=""   readonly="readonly" onclick="w.showDefineIframe(3,5)" type="text" ></div>
+                      </div>
+                      <span data-key="5" class="but-element-o b-26-blue find_link">
+                          <em class="but-element-i">
+                            <i class="but">查找连接</i>
+                          </em>
+                        </span>
+                      <span data-key="5" class="but-element-o b-26-orange clear_link">
+                          <em class="but-element-i">
+                            <i class="but">清除</i>
+                          </em>
+                        </span>
+                    </li>
+                    <li style="width:110px; text-align:center;">
+                      <small class="e-icon e-icon-upmove" title="前移"></small>
+                      <small class="e-icon e-icon-downmove" title="后移"></small>
+                    </li>
+                  </ul>
+                  <ul>
+                    <li style="width:230px;">
+                      <strong style="float:left; padding-right:10px; line-height:27px;">下拉项7：</strong>
+                      <div class="text-element-o t-27-gray column-name">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" size="20" name="xiala[]"  id="item_name_6"  onblur="check_name(6)" /></div>
+                      </div>
+                      <input type=hidden name="row_no_6" id="row_no_6" value="6">
+                      <input type=hidden name=ids[] id=ids value="6" >
+                    </li>
+                    <li style="width:110px; text-align: center;">
+                      <select class="selectObj" name="target_type[]">
+                        <option value="0">本窗口</option>
+                        <option value="1">新窗口</option>
+                      </select>
+                    </li>
+                    <li style="width:356px;">
+                      <div class="text-element-o t-27-gray column-href">
+                        <div class="text-element-i">
+                          <input type="text" size="20" name="xlurl[]"  id="item_url_6"   readonly="readonly" onclick="w.showDefineIframe(3,6)" ></div>
+                      </div>
+                      <span data-key="6" class="but-element-o b-26-blue find_link">
+                          <em class="but-element-i">
+                            <i class="but">查找连接</i>
+                          </em>
+                        </span>
+                      <span data-key="6" class="but-element-o b-26-orange clear_link">
+                          <em class="but-element-i">
+                            <i class="but">清除</i>
+                          </em>
+                        </span>
+                    </li>
+                    <li style="width:110px; text-align:center;">
+                      <small class="e-icon e-icon-upmove" title="前移"></small>
+                      <small class="e-icon e-icon-downmove" title="后移"></small>
+                    </li>
+                  </ul>
+                  <ul>
+                    <li style="width:230px;">
+                      <strong style="float:left; padding-right:10px; line-height:27px;">下拉项8：</strong>
+                      <div class="text-element-o t-27-gray column-name">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" size="20" name="xiala[]"  id="item_name_7"  onblur="check_name(7)" /></div>
+                      </div>
+                      <input type=hidden name="row_no_7" id="row_no_7" value="7">
+                      <input type=hidden name=ids[] id=ids value="7" >
+                    </li>
+                    <li style="width:110px; text-align: center;">
+                      <select class="selectObj" name="target_type[]">
+                        <option value="0">本窗口</option>
+                        <option value="1">新窗口</option>
+                      </select>
+                    </li>
+                    <li style="width:356px;">
+                      <div class="text-element-o t-27-gray column-href">
+                        <div class="text-element-i">
+                          <input type="text" size="20" name="xlurl[]"  id="item_url_7"   readonly="readonly" onclick="w.showDefineIframe(3,7)" ></div>
+                      </div>
+                      <span data-key="7" class="but-element-o b-26-blue find_link">
+                          <em class="but-element-i">
+                            <i class="but">查找连接</i>
+                          </em>
+                        </span>
+                      <span data-key="7" class="but-element-o b-26-orange clear_link">
+                          <em class="but-element-i">
+                            <i class="but">清除</i>
+                          </em>
+                        </span>
+                    </li>
+                    <li style="width:110px; text-align:center;">
+                      <small class="e-icon e-icon-upmove" title="前移"></small>
+                      <small class="e-icon e-icon-downmove" title="后移"></small>
+                    </li>
+                  </ul>
+                  <ul>
+                    <li style="width:230px;">
+                      <strong style="float:left; padding-right:10px; line-height:27px;">下拉项9：</strong>
+                      <div class="text-element-o t-27-gray column-name">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" size="20" name="xiala[]"  id="item_name_8"  onblur="check_name(8)" /></div>
+                      </div>
+                      <input type=hidden name="row_no_8" id="row_no_8" value="8">
+                      <input type=hidden name=ids[] id=ids value="8" >
+                    </li>
+                    <li style="width:110px; text-align: center;">
+                      <select class="selectObj" name="target_type[]">
+                        <option value="0">本窗口</option>
+                        <option value="1">新窗口</option>
+                      </select>
+                    </li>
+                    <li style="width:356px;">
+                      <div class="text-element-o t-27-gray column-href">
+                        <div class="text-element-i">
+                          <input type="text" size="20" name="xlurl[]"  id="item_url_8"   readonly="readonly" onclick="w.showDefineIframe(3,8)" ></div>
+                      </div>
+                      <span data-key="8" class="but-element-o b-26-blue find_link">
+                          <em class="but-element-i">
+                            <i class="but">查找连接</i>
+                          </em>
+                        </span>
+                      <span data-key="8" class="but-element-o b-26-orange clear_link">
+                          <em class="but-element-i">
+                            <i class="but">清除</i>
+                          </em>
+                        </span>
+                    </li>
+                    <li style="width:110px; text-align:center;">
+                      <small class="e-icon e-icon-upmove" title="前移"></small>
+                      <small class="e-icon e-icon-downmove" title="后移"></small>
+                    </li>
+                  </ul>
+                  <ul>
+                    <li style="width:230px;">
+                      <strong style="float:left; padding-right:10px; line-height:27px;">下拉项10：</strong>
+                      <div class="text-element-o t-27-gray column-name">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" size="20" name="xiala[]"  id="item_name_9"  onblur="check_name(9)" /></div>
+                      </div>
+                      <input type=hidden name="row_no_9" id="row_no_9" value="9">
+                      <input type=hidden name=ids[] id=ids value="9" >
+                    </li>
+                    <li style="width:110px; text-align: center;">
+                      <select class="selectObj" name="target_type[]">
+                        <option value="0">本窗口</option>
+                        <option value="1">新窗口</option>
+                      </select>
+                    </li>
+                    <li style="width:356px;">
+                      <div class="text-element-o t-27-gray column-href">
+                        <div class="text-element-i">
+                          <input type="text" size="20" name="xlurl[]"  id="item_url_9"   readonly="readonly" onclick="w.showDefineIframe(3,9)" ></div>
+                      </div>
+                      <span data-key="9" class="but-element-o b-26-blue find_link">
+                          <em class="but-element-i">
+                            <i class="but">查找连接</i>
+                          </em>
+                        </span>
+                      <span data-key="9" class="but-element-o b-26-orange clear_link">
+                          <em class="but-element-i">
+                            <i class="but">清除</i>
+                          </em>
+                        </span>
+                    </li>
+                    <li style="width:110px; text-align:center;">
+                      <small class="e-icon e-icon-upmove" title="前移"></small>
+                      <small class="e-icon e-icon-downmove" title="后移"></small>
+                    </li>
+                  </ul>
+                  <ul>
+                    <li style="width:230px;">
+                      <strong style="float:left; padding-right:10px; line-height:27px;">下拉项11：</strong>
+                      <div class="text-element-o t-27-gray column-name">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" size="20" name="xiala[]"  id="item_name_10"  onblur="check_name(10)" /></div>
+                      </div>
+                      <input type=hidden name="row_no_10" id="row_no_10" value="10">
+                      <input type=hidden name=ids[] id=ids value="10" >
+                    </li>
+                    <li style="width:110px; text-align: center;">
+                      <select class="selectObj" name="target_type[]">
+                        <option value="0">本窗口</option>
+                        <option value="1">新窗口</option>
+                      </select>
+                    </li>
+                    <li style="width:356px;">
+                      <div class="text-element-o t-27-gray column-href">
+                        <div class="text-element-i">
+                          <input type="text" size="20" name="xlurl[]"  id="item_url_10"   readonly="readonly" onclick="w.showDefineIframe(3,10)" ></div>
+                      </div>
+                      <span data-key="10" class="but-element-o b-26-blue find_link">
+                          <em class="but-element-i">
+                            <i class="but">查找连接</i>
+                          </em>
+                        </span>
+                      <span data-key="10" class="but-element-o b-26-orange clear_link">
+                          <em class="but-element-i">
+                            <i class="but">清除</i>
+                          </em>
+                        </span>
+                    </li>
+                    <li style="width:110px; text-align:center;">
+                      <small class="e-icon e-icon-upmove" title="前移"></small>
+                      <small class="e-icon e-icon-downmove" title="后移"></small>
+                    </li>
+                  </ul>
+                  <ul>
+                    <li style="width:230px;">
+                      <strong style="float:left; padding-right:10px; line-height:27px;">下拉项12：</strong>
+                      <div class="text-element-o t-27-gray column-name">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" size="20" name="xiala[]"  id="item_name_11"  onblur="check_name(11)" /></div>
+                      </div>
+                      <input type=hidden name="row_no_11" id="row_no_11" value="11">
+                      <input type=hidden name=ids[] id=ids value="11" >
+                    </li>
+                    <li style="width:110px; text-align: center;">
+                      <select class="selectObj" name="target_type[]">
+                        <option value="0">本窗口</option>
+                        <option value="1">新窗口</option>
+                      </select>
+                    </li>
+                    <li style="width:356px;">
+                      <div class="text-element-o t-27-gray column-href">
+                        <div class="text-element-i">
+                          <input type="text" size="20" name="xlurl[]"  id="item_url_11"   readonly="readonly" onclick="w.showDefineIframe(3,11)" ></div>
+                      </div>
+                      <span data-key="11" class="but-element-o b-26-blue find_link">
+                          <em class="but-element-i">
+                            <i class="but">查找连接</i>
+                          </em>
+                        </span>
+                      <span data-key="11" class="but-element-o b-26-orange clear_link">
+                          <em class="but-element-i">
+                            <i class="but">清除</i>
+                          </em>
+                        </span>
+                    </li>
+                    <li style="width:110px; text-align:center;">
+                      <small class="e-icon e-icon-upmove" title="前移"></small>
+                      <small class="e-icon e-icon-downmove" title="后移"></small>
+                    </li>
+                  </ul>
+                  <ul>
+                    <li style="width:230px;">
+                      <strong style="float:left; padding-right:10px; line-height:27px;">下拉项13：</strong>
+                      <div class="text-element-o t-27-gray column-name">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" size="20" name="xiala[]"  id="item_name_12"  onblur="check_name(12)" /></div>
+                      </div>
+                      <input type=hidden name="row_no_12" id="row_no_12" value="12">
+                      <input type=hidden name=ids[] id=ids value="12" >
+                    </li>
+                    <li style="width:110px; text-align: center;">
+                      <select class="selectObj" name="target_type[]">
+                        <option value="0">本窗口</option>
+                        <option value="1">新窗口</option>
+                      </select>
+                    </li>
+                    <li style="width:356px;">
+                      <div class="text-element-o t-27-gray column-href">
+                        <div class="text-element-i">
+                          <input type="text" size="20" name="xlurl[]"  id="item_url_12"   readonly="readonly" onclick="w.showDefineIframe(3,12)" ></div>
+                      </div>
+                      <span data-key="12" class="but-element-o b-26-blue find_link">
+                          <em class="but-element-i">
+                            <i class="but">查找连接</i>
+                          </em>
+                        </span>
+                      <span data-key="12" class="but-element-o b-26-orange clear_link">
+                          <em class="but-element-i">
+                            <i class="but">清除</i>
+                          </em>
+                        </span>
+                    </li>
+                    <li style="width:110px; text-align:center;">
+                      <small class="e-icon e-icon-upmove" title="前移"></small>
+                      <small class="e-icon e-icon-downmove" title="后移"></small>
+                    </li>
+                  </ul>
+                  <ul>
+                    <li style="width:230px;">
+                      <strong style="float:left; padding-right:10px; line-height:27px;">下拉项14：</strong>
+                      <div class="text-element-o t-27-gray column-name">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" size="20" name="xiala[]"  id="item_name_13"  onblur="check_name(13)" /></div>
+                      </div>
+                      <input type=hidden name="row_no_13" id="row_no_13" value="13">
+                      <input type=hidden name=ids[] id=ids value="13" >
+                    </li>
+                    <li style="width:110px; text-align: center;">
+                      <select class="selectObj" name="target_type[]">
+                        <option value="0">本窗口</option>
+                        <option value="1">新窗口</option>
+                      </select>
+                    </li>
+                    <li style="width:356px;">
+                      <div class="text-element-o t-27-gray column-href">
+                        <div class="text-element-i">
+                          <input type="text" size="20" name="xlurl[]"  id="item_url_13"   readonly="readonly" onclick="w.showDefineIframe(3,13)" ></div>
+                      </div>
+                      <span data-key="13" class="but-element-o b-26-blue find_link">
+                          <em class="but-element-i">
+                            <i class="but">查找连接</i>
+                          </em>
+                        </span>
+                      <span data-key="13" class="but-element-o b-26-orange clear_link">
+                          <em class="but-element-i">
+                            <i class="but">清除</i>
+                          </em>
+                        </span>
+                    </li>
+                    <li style="width:110px; text-align:center;">
+                      <small class="e-icon e-icon-upmove" title="前移"></small>
+                      <small class="e-icon e-icon-downmove" title="后移"></small>
+                    </li>
+                  </ul>
+                  <ul>
+                    <li style="width:230px;">
+                      <strong style="float:left; padding-right:10px; line-height:27px;">下拉项15：</strong>
+                      <div class="text-element-o t-27-gray column-name">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" size="20" name="xiala[]"  id="item_name_14"  onblur="check_name(14)" /></div>
+                      </div>
+                      <input type=hidden name="row_no_14" id="row_no_14" value="14">
+                      <input type=hidden name=ids[] id=ids value="14" >
+                    </li>
+                    <li style="width:110px; text-align: center;">
+                      <select class="selectObj" name="target_type[]">
+                        <option value="0">本窗口</option>
+                        <option value="1">新窗口</option>
+                      </select>
+                    </li>
+                    <li style="width:356px;">
+                      <div class="text-element-o t-27-gray column-href">
+                        <div class="text-element-i">
+                          <input type="text" size="20" name="xlurl[]"  id="item_url_14"   readonly="readonly" onclick="w.showDefineIframe(3,14)" ></div>
+                      </div>
+                      <span data-key="14" class="but-element-o b-26-blue find_link">
+                          <em class="but-element-i">
+                            <i class="but">查找连接</i>
+                          </em>
+                        </span>
+                      <span data-key="14" class="but-element-o b-26-orange clear_link">
+                          <em class="but-element-i">
+                            <i class="but">清除</i>
+                          </em>
+                        </span>
+                    </li>
+                    <li style="width:110px; text-align:center;">
+                      <small class="e-icon e-icon-upmove" title="前移"></small>
+                      <small class="e-icon e-icon-downmove" title="后移"></small>
+                    </li>
+                  </ul>
+                  <ul>
+                    <li style="width:230px;">
+                      <strong style="float:left; padding-right:10px; line-height:27px;">下拉项16：</strong>
+                      <div class="text-element-o t-27-gray column-name">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" size="20" name="xiala[]"  id="item_name_15"  onblur="check_name(15)" /></div>
+                      </div>
+                      <input type=hidden name="row_no_15" id="row_no_15" value="15">
+                      <input type=hidden name=ids[] id=ids value="15" >
+                    </li>
+                    <li style="width:110px; text-align: center;">
+                      <select class="selectObj" name="target_type[]">
+                        <option value="0">本窗口</option>
+                        <option value="1">新窗口</option>
+                      </select>
+                    </li>
+                    <li style="width:356px;">
+                      <div class="text-element-o t-27-gray column-href">
+                        <div class="text-element-i">
+                          <input type="text" size="20" name="xlurl[]"  id="item_url_15"   readonly="readonly" onclick="w.showDefineIframe(3,15)" ></div>
+                      </div>
+                      <span data-key="15" class="but-element-o b-26-blue find_link">
+                          <em class="but-element-i">
+                            <i class="but">查找连接</i>
+                          </em>
+                        </span>
+                      <span data-key="15" class="but-element-o b-26-orange clear_link">
+                          <em class="but-element-i">
+                            <i class="but">清除</i>
+                          </em>
+                        </span>
+                    </li>
+                    <li style="width:110px; text-align:center;">
+                      <small class="e-icon e-icon-upmove" title="前移"></small>
+                      <small class="e-icon e-icon-downmove" title="后移"></small>
+                    </li>
+                  </ul>
+                  <ul>
+                    <li style="width:230px;">
+                      <strong style="float:left; padding-right:10px; line-height:27px;">下拉项17：</strong>
+                      <div class="text-element-o t-27-gray column-name">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" size="20" name="xiala[]"  id="item_name_16"  onblur="check_name(16)" /></div>
+                      </div>
+                      <input type=hidden name="row_no_16" id="row_no_16" value="16">
+                      <input type=hidden name=ids[] id=ids value="16" >
+                    </li>
+                    <li style="width:110px; text-align: center;">
+                      <select class="selectObj" name="target_type[]">
+                        <option value="0">本窗口</option>
+                        <option value="1">新窗口</option>
+                      </select>
+                    </li>
+                    <li style="width:356px;">
+                      <div class="text-element-o t-27-gray column-href">
+                        <div class="text-element-i">
+                          <input type="text" size="20" name="xlurl[]"  id="item_url_16"   readonly="readonly" onclick="w.showDefineIframe(3,16)" ></div>
+                      </div>
+                      <span data-key="16" class="but-element-o b-26-blue find_link">
+                          <em class="but-element-i">
+                            <i class="but">查找连接</i>
+                          </em>
+                        </span>
+                      <span data-key="16" class="but-element-o b-26-orange clear_link">
+                          <em class="but-element-i">
+                            <i class="but">清除</i>
+                          </em>
+                        </span>
+                    </li>
+                    <li style="width:110px; text-align:center;">
+                      <small class="e-icon e-icon-upmove" title="前移"></small>
+                      <small class="e-icon e-icon-downmove" title="后移"></small>
+                    </li>
+                  </ul>
+                  <ul>
+                    <li style="width:230px;">
+                      <strong style="float:left; padding-right:10px; line-height:27px;">下拉项18：</strong>
+                      <div class="text-element-o t-27-gray column-name">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" size="20" name="xiala[]"  id="item_name_17"  onblur="check_name(17)" /></div>
+                      </div>
+                      <input type=hidden name="row_no_17" id="row_no_17" value="17">
+                      <input type=hidden name=ids[] id=ids value="17" >
+                    </li>
+                    <li style="width:110px; text-align: center;">
+                      <select class="selectObj" name="target_type[]">
+                        <option value="0">本窗口</option>
+                        <option value="1">新窗口</option>
+                      </select>
+                    </li>
+                    <li style="width:356px;">
+                      <div class="text-element-o t-27-gray column-href">
+                        <div class="text-element-i">
+                          <input type="text" size="20" name="xlurl[]"  id="item_url_17"   readonly="readonly" onclick="w.showDefineIframe(3,17)" ></div>
+                      </div>
+                      <span data-key="17" class="but-element-o b-26-blue find_link">
+                          <em class="but-element-i">
+                            <i class="but">查找连接</i>
+                          </em>
+                        </span>
+                      <span data-key="17" class="but-element-o b-26-orange clear_link">
+                          <em class="but-element-i">
+                            <i class="but">清除</i>
+                          </em>
+                        </span>
+                    </li>
+                    <li style="width:110px; text-align:center;">
+                      <small class="e-icon e-icon-upmove" title="前移"></small>
+                      <small class="e-icon e-icon-downmove" title="后移"></small>
+                    </li>
+                  </ul>
+                  <ul>
+                    <li style="width:230px;">
+                      <strong style="float:left; padding-right:10px; line-height:27px;">下拉项19：</strong>
+                      <div class="text-element-o t-27-gray column-name">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" size="20" name="xiala[]"  id="item_name_18"  onblur="check_name(18)" /></div>
+                      </div>
+                      <input type=hidden name="row_no_18" id="row_no_18" value="18">
+                      <input type=hidden name=ids[] id=ids value="18" >
+                    </li>
+                    <li style="width:110px; text-align: center;">
+                      <select class="selectObj" name="target_type[]">
+                        <option value="0">本窗口</option>
+                        <option value="1">新窗口</option>
+                      </select>
+                    </li>
+                    <li style="width:356px;">
+                      <div class="text-element-o t-27-gray column-href">
+                        <div class="text-element-i">
+                          <input type="text" size="20" name="xlurl[]"  id="item_url_18"   readonly="readonly" onclick="w.showDefineIframe(3,18)" ></div>
+                      </div>
+                      <span data-key="18" class="but-element-o b-26-blue find_link">
+                          <em class="but-element-i">
+                            <i class="but">查找连接</i>
+                          </em>
+                        </span>
+                      <span data-key="18" class="but-element-o b-26-orange clear_link">
+                          <em class="but-element-i">
+                            <i class="but">清除</i>
+                          </em>
+                        </span>
+                    </li>
+                    <li style="width:110px; text-align:center;">
+                      <small class="e-icon e-icon-upmove" title="前移"></small>
+                      <small class="e-icon e-icon-downmove" title="后移"></small>
+                    </li>
+                  </ul>
+                  <ul>
+                    <li style="width:230px;">
+                      <strong style="float:left; padding-right:10px; line-height:27px;">下拉项20：</strong>
+                      <div class="text-element-o t-27-gray column-name">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" size="20" name="xiala[]"  id="item_name_19"  onblur="check_name(19)" /></div>
+                      </div>
+                      <input type=hidden name="row_no_19" id="row_no_19" value="19">
+                      <input type=hidden name=ids[] id=ids value="19" >
+                    </li>
+                    <li style="width:110px; text-align: center;">
+                      <select class="selectObj" name="target_type[]">
+                        <option value="0">本窗口</option>
+                        <option value="1">新窗口</option>
+                      </select>
+                    </li>
+                    <li style="width:356px;">
+                      <div class="text-element-o t-27-gray column-href">
+                        <div class="text-element-i">
+                          <input type="text" size="20" name="xlurl[]"  id="item_url_19"   readonly="readonly" onclick="w.showDefineIframe(3,19)" ></div>
+                      </div>
+                      <span data-key="19" class="but-element-o b-26-blue find_link">
+                          <em class="but-element-i">
+                            <i class="but">查找连接</i>
+                          </em>
+                        </span>
+                      <span data-key="19" class="but-element-o b-26-orange clear_link">
+                          <em class="but-element-i">
+                            <i class="but">清除</i>
+                          </em>
+                        </span>
+                    </li>
+                    <li style="width:110px; text-align:center;">
+                      <small class="e-icon e-icon-upmove" title="前移"></small>
+                      <small class="e-icon e-icon-downmove" title="后移"></small>
+                    </li>
+                  </ul>
+                </div>
+              </dd>
+            </dl>
+            <div class="admin-column-but">
+              <div class="but-element-o b-33-blue">
+                <div class="but-element-i" id="my_submit_div">
+                  <input onclick="submit_form()"  type="button" value="保存设置" class="but"></div>
+              </div>
+            </div>
+          </div>
+          <input type="hidden" id="set_channel" name="set_channel" value="0" >
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script language="javascript">
+  $("#xiala_list").on("click", '.find_link, .clear_link', function(){
+    var nKey = $(this).data("key");
+    if ($(this).hasClass("find_link")) {
+      w.showDefineIframe(3, nKey);
+    } else {
+      clear_item(nKey);
+    }
+  });
+
+  var row_num=9;
+  function check_form(){
+    $('#form1').submit();
+  }
+  function submit_form(){
+    $("#my_submit_div").html('<input type="button" value="保存中..." class="but">');
+    $('#set_channel').val(1);
+    $('#form1').submit();
+  }
+
+  function clear_item(item_id){
+    $('#item_name_'+item_id).val('');
+    $('#item_url_'+item_id).val('');
+  }
+
+
+  function check_name(id){
+    var tmp_name=$('#item_name_'+id).val();
+    tmp_name=$.trim(tmp_name);
+    if(tmp_name){
+      var len=w.strLen(tmp_name);
+      if(len>40){
+        $('#item_name_'+id).focus();
+        w.sysDefine.webMsg(2, '导航名称不能超过20个汉字或40个字母！');
+      }
+    }
+  }
+  // $("input[readonly*='readonly']").css("border", "1px solid #cccccc");
+
+  // w.resize_window('w1','栏目管理',796,520);
+</script>
+</body>
+</html>

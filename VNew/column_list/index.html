@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>栏目管理</title>
+  <link href="/css/VNew/admin_20140730.css" rel="stylesheet" type="text/css" />
+  <link href="/css/VNew/style_editcss.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript">
+    //document.domain = "ev123.net";
+  </script>
+  <script type="text/javascript" src="/include/cookies.js"></script>
+  <script type="text/javascript" src="/js/VNew/jquery-1.8.3.min.js"></script>
+  <script type="text/javascript" src="/js/VNew/public_plugins.js"></script>
+  <script type="text/javascript">
+    var w = window.parent;
+    var winNum = window.name.substr(12);
+    $(function(){
+      var adminColumnList = $("#adminColumnList"),ulList = $("#ulList");
+      ulList.find("ul:first").find("small.e-icon-upmove").hide();
+      ulList.find("ul:last").find("small.e-icon-downmove").hide();
+      //给列表添加滚动条
+      adminColumnList.find("dd").cScroll({
+        w:10,
+        tbB :true
+      });
+      ulList.on({
+        click : function(){
+          var t = $(this),action = t.data('action'),
+            channelId = t.parents('ul').data('id');
+          switch(action){
+            case 'webView' :
+              var sUrl = $.trim(t.data("url"));
+              sUrl && window.open(sUrl);
+              break;
+            case 'webDesign' :
+              w.$("#web-edit-channelid-"+ channelId + " a").trigger('click');
+              w.$.popupClose(winNum);
+              break;
+            case 'upCon' :
+              var sUrl = $.trim(t.data("url")),
+                sName = $.trim(t.data("name")),
+                iType = $.trim(t.data("type"));
+              if(!sUrl || !iType){ return false;}
+              if (w.Ev.pubVar.saveVar) {
+                var confirmJson = {
+                  but_1 : {
+                    text:"确定",
+                    fun:function(){
+                      w.Ev.pubVar.saveVar=false;
+                      w.Ev.admin.tj.fun.locationWIframe(sUrl);
+                      w.$.popupClose(winNum);
+                    }
+                  },
+                  but_2 : {text:"取消", fun:function(){ }}
+                };
+                w.sysDefine.manage('您的页面有更改，您确定不保存并离开吗？', 3, confirmJson, 270);
+              }else{
+                w.Ev.admin.pageModeSwitch(iType, sUrl, function() {
+                  if (iType == 2) {
+                    var sButArea = w.$("#switchoverButArea"),
+                      editdd = w.$("#web-edit-channelid-"+ channelId),
+                      editA = editdd.find("a");
+                    if(editdd.length == 0){
+                      editdd = w.$("#channel_manage").find('dd:first');
+                    }
+                    sButArea.find('.conadmin-a b').html(sName);
+                    editdd.addClass('curedit').siblings().removeClass('curedit');
+                  } else {
+                    w.$("#switchoverButArea").find('.advancedfunadmin-a b').html(sName);
+                  }
+                });
+                w.$.popupClose(winNum);
+              }
+              break;
+            case 'del' :
+              var tmp_url="/VNew/column_list.php?del_id="+channelId,
+                confirmJson = {
+                  but_1 : {text:"确定", fun:function(){ location.href=tmp_url; }},
+                  but_2 : {text:"取消", fun:function(){ }}
+                };
+              w.sysDefine.manage('确定删除该栏目吗？删除后可在回收站中恢复！', 3, confirmJson, 270);
+              break;
+            case 'funAdmin' :
+              var sButArea = w.$("#switchoverButArea"),
+                editdd = w.$("#web-edit-channelid-"+ channelId),
+                editA = editdd.find("a");
+              if(editdd.length == 0){
+                editdd = w.$("#channel_manage").find('dd:first');
+              }
+              editdd.addClass('curedit').siblings().removeClass('curedit');
+              var iType = t.data('type'),sUrl = t.data('url');
+              w.Ev.admin.pageModeSwitch(iType, sUrl, function(){
+                w.$.popupClose(winNum);
+              });
+              break;
+          }
+        }
+      },".but-element-o");
+      ulList.on({
+        change : function(){
+          var that = $(this),id = that.parents('ul').data('id');
+          if (!id) { return false; }
+          var right = 1,sInputId = $.trim(that.attr("name"));
+          if (sInputId == "class_name_"+ id) {
+            var value = $.trim(that.val());
+            if (!value) {
+              w.sysDefine.webMsg(2, "栏目名称不能为空！");
+              setTimeout(function(){that.focus()},10);
+              right = 0;
+            } else if (w.strLen(value) > 50) {
+              w.sysDefine.webMsg(2, "栏目名称不能超过25个汉字或50个字母！");
+              setTimeout(function(){that.select()},10);
+              right = 0;
+            }
+
+            $("#row_change_"+ id).val(right);
+          } else if (sInputId == "class_sort_"+ id) {
+            var value = $.trim(that.val());
+
+            if (w.check_number(value) === false) {
+              w.sysDefine.webMsg(2, "排序必须为数字！");
+              setTimeout(function(){that.focus()}, 10);
+              right = 0;
+            }
+
+            $("#row_change_"+ id).val(right);
+          } else if (sInputId == "link_"+ id) {
+            $("#row_change_"+ id).val(right);
+          } else {
+            $("#class_name_"+ id).trigger("change");
+            if ($("#row_change_"+ id).val() == 1) {
+              $("#class_sort_"+ id).trigger("change");
+            }
+          }
+        }
+      },'select, input');
+    });
+
+  </script>
+</head>
+
+<body>
+<div class="website-column">
+  <div class="alertTab column-tab">
+    <div class="alertTabT column-tab-t" id="alert_tab_t">
+      <ul class="q">
+        <li >
+          <span><a href="/VNew/tj/copyChannel/c_id_1">一键加栏目</a></span>
+        </li>
+        <li class="cur">
+          <span><a href="/VNew/column_list">栏目管理</a></span>
+        </li>
+        <li >
+          <span><a href="/VNew/column_xiala">下拉菜单</a></span>
+        </li>
+        <li><span><a id="uploadColumnContent" href="###">上传栏目内容</a></span></li>
+        <li >
+          <span><a href="/VNew/column_recycleBin">回收站</a></span>
+        </li>
+      </ul>
+      <div class="show-line"></div>
+    </div>
+    <script type="text/javascript">
+      $(function(){
+        $("#uploadColumnContent").on("click", function(){
+          w.$("#toolUpcon").trigger("click");
+          w.$.popupClose(winNum);
+        });
+      });
+    </script>
+    <div class="alertTabC column-tab-c">
+      <div class="alertTabCIn admin-create-column" style="display: block;">
+        <div class="website-column-h q">
+          <div class="column-explain q">
+            <div class="explain-pic"><img src="/images/VNew/column_explain_pic_1.jpg" /></div>
+            <div class="explain-text">
+              <h5>什么是网站栏目？</h5>
+              <p>就是在网页的顶部导航条，也可以称为网站频道。</p>
+            </div>
+          </div>
+        </div>
+        <div class="admin-column-list" id="adminColumnList">
+          <dl class="big-column-list">
+            <dt>
+            <ul>
+              <li style="width:195px;">栏目名</li>
+              <li style="width:90px;">栏目</li>
+              <li style="width:80px;">打开方式</li>
+              <li style="width:190px;">编辑/预览内容</li>
+              <li style="width:90px;">导航栏显示</li>
+              <li style="width:90px;">排序(从大到小)</li>
+              <li style="width:110px;">操作</li>
+            </ul>
+            </dt>
+            <dd>
+              <form action="/VNew/column_list.php" method="post" enctype="multipart/form-data" id="form1" name="form1">
+                <div  id="ulList" class="ul-list">
+                  <ul data-id="1">
+                    <li style="width:185px;">
+                      <input type=hidden name=ids[] id=ids value="1">
+                      <input type=hidden name="row_no_1" id="row_no_1" value="0">
+                      <input type=hidden name="row_change_1" id="row_change_1" value="0">
+                      <div class="text-element-o t-27-gray column-name">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" name='class_name_1' id='class_name_1' size="20" maxlength="50" value="首页">
+                        </div>
+                      </div>
+                    </li>
+                    <li class="align-l" style="width:80px;">
+                      [系统]首页
+                    </li>
+                    <li style="width:70px;">
+                      -
+                    </li>
+                    <li style="width:180px;">
+                        <span data-url="http://a2889617.pc.ev123.com.cn" class="but-element-o b-26-blue" data-action="webView">
+                          <em class="but-element-i">
+                            <i class="but">预览</i>
+                          </em>
+                        </span>
+                      <span data-channelid="1" class="but-element-o b-26-blue" data-action="webDesign">
+                            <em class="but-element-i">
+                              <i class="but">设计</i>
+                            </em>
+                          </span>
+                    </li>
+                    <li style="width:80px;">
+                      -
+                    </li>
+                    <li style="width:80px; text-align:center;">
+                      -
+                    </li>
+                    <li style="width:100px; text-align: center;">
+                      -
+                    </li>
+                  </ul>
+                  <ul data-id="14799996">
+                    <li style="width:185px;">
+                      <input type=hidden name=ids[] id=ids value="14799996">
+                      <input type=hidden name="row_no_14799996" id="row_no_14799996" value="1">
+                      <input type=hidden name="row_change_14799996" id="row_change_14799996" value="0">
+                      <div class="text-element-o t-27-gray column-name">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" name='class_name_14799996' id='class_name_14799996' size="20" maxlength="50" value="维修项目"></div>
+                      </div>
+                    </li>
+                    <li class="align-l" style="width:80px;">
+                      <input name="ty_14799996" id="ty_14799996" type="hidden"  readonly="readonly" value="15" >
+                      无分类文章
+                    </li>
+                    <li style="width:70px;">
+                      <select class="selectObj" name="target_14799996" id="target_14799996">
+                        <option value="0">本窗口</option>
+                        <option value="1" >新窗口</option>
+                      </select>
+                    </li>
+                    <li style="width:180px;">
+                      <!-- 4 -->
+                      <!-- 3 -->
+
+                      <!-- 5 -->
+
+                      <!-- 6 -->
+                      <span data-url="/own_item_doc.php?channel_id=14799996&is_frame=2&u=1488789177" data-name="维修项目" data-type="2" class="but-element-o b-26-blue" data-action="upCon">
+                                      <em class="but-element-i">
+                                        <i class="but">发布内容</i>
+                                      </em>
+                                    </span>
+                      <!-- 6 -->
+
+                      <!-- 5 -->
+                      <!-- 3 -->
+                      <!-- 4 -->
+
+                      <span data-url="http://a2889617.pc.ev123.com.cn/a2889617/item_14799996_0.html" class="but-element-o b-26-blue" data-action="webView">
+                            <em class="but-element-i">
+                              <i class="but">预览</i>
+                            </em>
+                          </span>
+
+                      <span data-channelid="14799996" class="but-element-o b-26-blue" data-action="webDesign">
+                          <em class="but-element-i">
+                            <i class="but">设计</i>
+                          </em>
+                        </span>
+                    </li>
+                    <li style="width:80px;">
+                      <select class="selectObj" data-id="14799996" name="show_14799996" id="show_14799996">
+                        <option value="0">不显示</option>
+                        <option value="1" selected >显示</option>
+                      </select>
+                    </li>
+                    <li style="width:80px; text-align:center;">
+                      <div class="text-element-o t-27-gray column-name" style="width:60px;">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" name='class_sort_14799996' id='class_sort_14799996' maxlength="5" size="10" value="5" style="width:50px;">
+                        </div>
+                      </div>
+                    </li>
+                    <li style="width:100px; text-align: center;">
+                                                     <span class="but-element-o b-26-red" data-action="del" data-delid="14799996">
+                            <em class="but-element-i">
+                             <i class="but">删除</i>
+                            </em>
+                            </span>
+                    </li>
+                  </ul>
+                  <ul data-id="14799997">
+                    <li style="width:185px;">
+                      <input type=hidden name=ids[] id=ids value="14799997">
+                      <input type=hidden name="row_no_14799997" id="row_no_14799997" value="2">
+                      <input type=hidden name="row_change_14799997" id="row_change_14799997" value="0">
+                      <div class="text-element-o t-27-gray column-name">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" name='class_name_14799997' id='class_name_14799997' size="20" maxlength="50" value="维修师傅"></div>
+                      </div>
+                    </li>
+                    <li class="align-l" style="width:80px;">
+                      <input name="ty_14799997" id="ty_14799997" type="hidden"  readonly="readonly" value="15" >
+                      无分类文章
+                    </li>
+                    <li style="width:70px;">
+                      <select class="selectObj" name="target_14799997" id="target_14799997">
+                        <option value="0">本窗口</option>
+                        <option value="1" >新窗口</option>
+                      </select>
+                    </li>
+                    <li style="width:180px;">
+                      <!-- 4 -->
+                      <!-- 3 -->
+
+                      <!-- 5 -->
+
+                      <!-- 6 -->
+                      <span data-url="/own_item_doc.php?channel_id=14799997&is_frame=2&u=1488789177" data-name="维修师傅" data-type="2" class="but-element-o b-26-blue" data-action="upCon">
+                                      <em class="but-element-i">
+                                        <i class="but">发布内容</i>
+                                      </em>
+                                    </span>
+                      <!-- 6 -->
+
+                      <!-- 5 -->
+                      <!-- 3 -->
+                      <!-- 4 -->
+
+                      <span data-url="http://a2889617.pc.ev123.com.cn/a2889617/item_14799997_0.html" class="but-element-o b-26-blue" data-action="webView">
+                            <em class="but-element-i">
+                              <i class="but">预览</i>
+                            </em>
+                          </span>
+
+                      <span data-channelid="14799997" class="but-element-o b-26-blue" data-action="webDesign">
+                          <em class="but-element-i">
+                            <i class="but">设计</i>
+                          </em>
+                        </span>
+                    </li>
+                    <li style="width:80px;">
+                      <select class="selectObj" data-id="14799997" name="show_14799997" id="show_14799997">
+                        <option value="0">不显示</option>
+                        <option value="1" selected >显示</option>
+                      </select>
+                    </li>
+                    <li style="width:80px; text-align:center;">
+                      <div class="text-element-o t-27-gray column-name" style="width:60px;">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" name='class_sort_14799997' id='class_sort_14799997' maxlength="5" size="10" value="4" style="width:50px;">
+                        </div>
+                      </div>
+                    </li>
+                    <li style="width:100px; text-align: center;">
+                                                     <span class="but-element-o b-26-red" data-action="del" data-delid="14799997">
+                            <em class="but-element-i">
+                             <i class="but">删除</i>
+                            </em>
+                            </span>
+                    </li>
+                  </ul>
+                  <ul data-id="14799998">
+                    <li style="width:185px;">
+                      <input type=hidden name=ids[] id=ids value="14799998">
+                      <input type=hidden name="row_no_14799998" id="row_no_14799998" value="3">
+                      <input type=hidden name="row_change_14799998" id="row_change_14799998" value="0">
+                      <div class="text-element-o t-27-gray column-name">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" name='class_name_14799998' id='class_name_14799998' size="20" maxlength="50" value="维修保障"></div>
+                      </div>
+                    </li>
+                    <li class="align-l" style="width:80px;">
+                      <input name="ty_14799998" id="ty_14799998" type="hidden"  readonly="readonly" value="76" style="width:30px;">空白页
+                    </li>
+                    <li style="width:70px;">
+                      <select class="selectObj" name="target_14799998" id="target_14799998">
+                        <option value="0">本窗口</option>
+                        <option value="1" >新窗口</option>
+                      </select>
+                    </li>
+                    <li style="width:180px;">
+                      <!-- 4 -->
+
+                      <span data-url="http://a2889617.pc.ev123.com.cn/a2889617/bk_14799998.html" class="but-element-o b-26-blue" data-action="webView">
+                            <em class="but-element-i">
+                              <i class="but">预览</i>
+                            </em>
+                          </span>
+
+                      <span data-channelid="14799998" class="but-element-o b-26-blue" data-action="webDesign">
+                          <em class="but-element-i">
+                            <i class="but">设计</i>
+                          </em>
+                        </span>
+                    </li>
+                    <li style="width:80px;">
+                      <select class="selectObj" data-id="14799998" name="show_14799998" id="show_14799998">
+                        <option value="0">不显示</option>
+                        <option value="1" selected >显示</option>
+                      </select>
+                    </li>
+                    <li style="width:80px; text-align:center;">
+                      <div class="text-element-o t-27-gray column-name" style="width:60px;">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" name='class_sort_14799998' id='class_sort_14799998' maxlength="5" size="10" value="3" style="width:50px;">
+                        </div>
+                      </div>
+                    </li>
+                    <li style="width:100px; text-align: center;">
+                                                     <span class="but-element-o b-26-red" data-action="del">
+                            <em class="but-element-i">
+                             <i class="but">删除</i>
+                            </em>
+                            </span>
+                    </li>
+                  </ul>
+                  <ul data-id="14800000">
+                    <li style="width:185px;">
+                      <input type=hidden name=ids[] id=ids value="14800000">
+                      <input type=hidden name="row_no_14800000" id="row_no_14800000" value="4">
+                      <input type=hidden name="row_change_14800000" id="row_change_14800000" value="0">
+                      <div class="text-element-o t-27-gray column-name">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" name='class_name_14800000' id='class_name_14800000' size="20" maxlength="50" value="联系我们"></div>
+                      </div>
+                    </li>
+                    <li class="align-l" style="width:80px;">
+                      <input name="ty_14800000" id="ty_14800000" type="hidden"  readonly="readonly" value="76" style="width:30px;">空白页
+                    </li>
+                    <li style="width:70px;">
+                      <select class="selectObj" name="target_14800000" id="target_14800000">
+                        <option value="0">本窗口</option>
+                        <option value="1" >新窗口</option>
+                      </select>
+                    </li>
+                    <li style="width:180px;">
+                      <!-- 4 -->
+
+                      <span data-url="http://a2889617.pc.ev123.com.cn/a2889617/bk_14800000.html" class="but-element-o b-26-blue" data-action="webView">
+                            <em class="but-element-i">
+                              <i class="but">预览</i>
+                            </em>
+                          </span>
+
+                      <span data-channelid="14800000" class="but-element-o b-26-blue" data-action="webDesign">
+                          <em class="but-element-i">
+                            <i class="but">设计</i>
+                          </em>
+                        </span>
+                    </li>
+                    <li style="width:80px;">
+                      <select class="selectObj" data-id="14800000" name="show_14800000" id="show_14800000">
+                        <option value="0">不显示</option>
+                        <option value="1" selected >显示</option>
+                      </select>
+                    </li>
+                    <li style="width:80px; text-align:center;">
+                      <div class="text-element-o t-27-gray column-name" style="width:60px;">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" name='class_sort_14800000' id='class_sort_14800000' maxlength="5" size="10" value="1" style="width:50px;">
+                        </div>
+                      </div>
+                    </li>
+                    <li style="width:100px; text-align: center;">
+                                                     <span class="but-element-o b-26-red" data-action="del">
+                            <em class="but-element-i">
+                             <i class="but">删除</i>
+                            </em>
+                            </span>
+                    </li>
+                  </ul>
+                  <ul data-id="14801086">
+                    <li style="width:185px;">
+                      <input type=hidden name=ids[] id=ids value="14801086">
+                      <input type=hidden name="row_no_14801086" id="row_no_14801086" value="5">
+                      <input type=hidden name="row_change_14801086" id="row_change_14801086" value="0">
+                      <div class="text-element-o t-27-gray column-name">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" name='class_name_14801086' id='class_name_14801086' size="20" maxlength="50" value="在线留言"></div>
+                      </div>
+                    </li>
+                    <li class="align-l" style="width:80px;">
+                      <input name="ty_14801086" id="ty_14801086" type="hidden"  readonly="readonly" value="3" style="width:30px;">[系统]留言板
+                    </li>
+                    <li style="width:70px;">
+                      <select class="selectObj" name="target_14801086" id="target_14801086">
+                        <option value="0">本窗口</option>
+                        <option value="1" >新窗口</option>
+                      </select>
+                    </li>
+                    <li style="width:180px;">
+                      <!-- 4 -->
+                      <!-- 3 -->
+
+                      <!-- 2 -->
+
+                      <!-- 1 -->
+                      <span data-url="/new_guest_set.php?channel_id=14801086&dom_id=&is_frame=2&u=1488789177" data-name="在线留言" data-type="3" class="but-element-o b-26-blue" data-action="funAdmin">
+                                  <em class="but-element-i">
+                                    <i class="but">功能管理</i>
+                                  </em>
+                                </span>
+                      <!-- 1 -->
+
+                      <!-- 2 -->
+                      <!-- 3 -->
+                      <!-- 4 -->
+
+                      <span data-url="http://a2889617.pc.ev123.com.cn/self_define/guest_book.php?username=a2889617" class="but-element-o b-26-blue" data-action="webView">
+                            <em class="but-element-i">
+                              <i class="but">预览</i>
+                            </em>
+                          </span>
+
+                      <span data-channelid="14801086" class="but-element-o b-26-blue" data-action="webDesign">
+                          <em class="but-element-i">
+                            <i class="but">设计</i>
+                          </em>
+                        </span>
+                    </li>
+                    <li style="width:80px;">
+                      <select class="selectObj" data-id="14801086" name="show_14801086" id="show_14801086">
+                        <option value="0">不显示</option>
+                        <option value="1" selected >显示</option>
+                      </select>
+                    </li>
+                    <li style="width:80px; text-align:center;">
+                      <div class="text-element-o t-27-gray column-name" style="width:60px;">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" name='class_sort_14801086' id='class_sort_14801086' maxlength="5" size="10" value="0" style="width:50px;">
+                        </div>
+                      </div>
+                    </li>
+                    <li style="width:100px; text-align: center;">
+                      -
+                    </li>
+                  </ul>
+                  <ul data-id="14802551">
+                    <li style="width:185px;">
+                      <input type=hidden name=ids[] id=ids value="14802551">
+                      <input type=hidden name="row_no_14802551" id="row_no_14802551" value="6">
+                      <input type=hidden name="row_change_14802551" id="row_change_14802551" value="0">
+                      <div class="text-element-o t-27-gray column-name">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" name='class_name_14802551' id='class_name_14802551' size="20" maxlength="50" value="关于我们"></div>
+                      </div>
+                    </li>
+                    <li class="align-l" style="width:80px;">
+                      <input name="ty_14802551" id="ty_14802551" type="hidden"  readonly="readonly" value="76" style="width:30px;">空白页
+                    </li>
+                    <li style="width:70px;">
+                      <select class="selectObj" name="target_14802551" id="target_14802551">
+                        <option value="0">本窗口</option>
+                        <option value="1" >新窗口</option>
+                      </select>
+                    </li>
+                    <li style="width:180px;">
+                      <!-- 4 -->
+
+                      <span data-url="http://a2889617.pc.ev123.com.cn/a2889617/bk_14802551.html" class="but-element-o b-26-blue" data-action="webView">
+                            <em class="but-element-i">
+                              <i class="but">预览</i>
+                            </em>
+                          </span>
+
+                      <span data-channelid="14802551" class="but-element-o b-26-blue" data-action="webDesign">
+                          <em class="but-element-i">
+                            <i class="but">设计</i>
+                          </em>
+                        </span>
+                    </li>
+                    <li style="width:80px;">
+                      <select class="selectObj" data-id="14802551" name="show_14802551" id="show_14802551">
+                        <option value="0">不显示</option>
+                        <option value="1" selected >显示</option>
+                      </select>
+                    </li>
+                    <li style="width:80px; text-align:center;">
+                      <div class="text-element-o t-27-gray column-name" style="width:60px;">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" name='class_sort_14802551' id='class_sort_14802551' maxlength="5" size="10" value="0" style="width:50px;">
+                        </div>
+                      </div>
+                    </li>
+                    <li style="width:100px; text-align: center;">
+                                                     <span class="but-element-o b-26-red" data-action="del">
+                            <em class="but-element-i">
+                             <i class="but">删除</i>
+                            </em>
+                            </span>
+                    </li>
+                  </ul>
+                  <ul data-id="14829257">
+                    <li style="width:185px;">
+                      <input type=hidden name=ids[] id=ids value="14829257">
+                      <input type=hidden name="row_no_14829257" id="row_no_14829257" value="7">
+                      <input type=hidden name="row_change_14829257" id="row_change_14829257" value="0">
+                      <div class="text-element-o t-27-gray column-name">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" name='class_name_14829257' id='class_name_14829257' size="20" maxlength="50" value="test"></div>
+                      </div>
+                    </li>
+                    <li class="align-l" style="width:80px;">
+                      <input name="ty_14829257" id="ty_14829257" type="hidden"  readonly="readonly" value="20" >
+                      自定义表单
+                    </li>
+                    <li style="width:70px;">
+                      <select class="selectObj" name="target_14829257" id="target_14829257">
+                        <option value="0">本窗口</option>
+                        <option value="1" >新窗口</option>
+                      </select>
+                    </li>
+                    <li style="width:180px;">
+                      <!-- 4 -->
+                      <!-- 3 -->
+
+                      <!-- 2 -->
+
+                      <!-- 1 -->
+                      <span data-url="/own_form_set.php?channel_id=14829257&dom_id=1886&is_frame=2&u=1488789177" data-name="test" data-type="3" class="but-element-o b-26-blue" data-action="funAdmin">
+                                  <em class="but-element-i">
+                                    <i class="but">功能管理</i>
+                                  </em>
+                                </span>
+                      <!-- 1 -->
+
+                      <!-- 2 -->
+                      <!-- 3 -->
+                      <!-- 4 -->
+
+                      <span data-url="http://a2889617.pc.ev123.com.cn/dom/form.php?channel_id=14829257&username=a2889617" class="but-element-o b-26-blue" data-action="webView">
+                            <em class="but-element-i">
+                              <i class="but">预览</i>
+                            </em>
+                          </span>
+
+                      <span data-channelid="14829257" class="but-element-o b-26-blue" data-action="webDesign">
+                          <em class="but-element-i">
+                            <i class="but">设计</i>
+                          </em>
+                        </span>
+                    </li>
+                    <li style="width:80px;">
+                      <select class="selectObj" data-id="14829257" name="show_14829257" id="show_14829257">
+                        <option value="0">不显示</option>
+                        <option value="1" selected >显示</option>
+                      </select>
+                    </li>
+                    <li style="width:80px; text-align:center;">
+                      <div class="text-element-o t-27-gray column-name" style="width:60px;">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" name='class_sort_14829257' id='class_sort_14829257' maxlength="5" size="10" value="0" style="width:50px;">
+                        </div>
+                      </div>
+                    </li>
+                    <li style="width:100px; text-align: center;">
+                                                     <span class="but-element-o b-26-red" data-action="del" data-delid="14829257">
+                            <em class="but-element-i">
+                             <i class="but">删除</i>
+                            </em>
+                            </span>
+                    </li>
+                  </ul>
+                  <ul data-id="14846068">
+                    <li style="width:185px;">
+                      <input type=hidden name=ids[] id=ids value="14846068">
+                      <input type=hidden name="row_no_14846068" id="row_no_14846068" value="8">
+                      <input type=hidden name="row_change_14846068" id="row_change_14846068" value="0">
+                      <div class="text-element-o t-27-gray column-name">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" name='class_name_14846068' id='class_name_14846068' size="20" maxlength="50" value="场地预订"></div>
+                      </div>
+                    </li>
+                    <li class="align-l" style="width:80px;">
+                      <input name="ty_14846068" id="ty_14846068" type="hidden"  readonly="readonly" value="49" style="width:30px;">[系统]场地预定
+                    </li>
+                    <li style="width:70px;">
+                      <select class="selectObj" name="target_14846068" id="target_14846068">
+                        <option value="0">本窗口</option>
+                        <option value="1" >新窗口</option>
+                      </select>
+                    </li>
+                    <li style="width:180px;">
+                      <!-- 4 -->
+                      <!-- 3 -->
+
+                      <!-- 2 -->
+
+                      <!-- 1 -->
+                      <span data-url="/area/area_class.php?channel_id=14846068&dom_id=2043&is_frame=2&u=1488789177" data-name="场地预订" data-type="3" class="but-element-o b-26-blue" data-action="funAdmin">
+                                  <em class="but-element-i">
+                                    <i class="but">功能管理</i>
+                                  </em>
+                                </span>
+                      <!-- 1 -->
+
+                      <!-- 2 -->
+                      <!-- 3 -->
+                      <!-- 4 -->
+
+                      <span data-url="http://a2889617.pc.ev123.com.cn/dom/area/area_list.php?username=a2889617&channel_id=14846068" class="but-element-o b-26-blue" data-action="webView">
+                            <em class="but-element-i">
+                              <i class="but">预览</i>
+                            </em>
+                          </span>
+
+                    </li>
+                    <li style="width:80px;">
+                      <select class="selectObj" data-id="14846068" name="show_14846068" id="show_14846068">
+                        <option value="0">不显示</option>
+                        <option value="1" selected >显示</option>
+                      </select>
+                    </li>
+                    <li style="width:80px; text-align:center;">
+                      <div class="text-element-o t-27-gray column-name" style="width:60px;">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" name='class_sort_14846068' id='class_sort_14846068' maxlength="5" size="10" value="0" style="width:50px;">
+                        </div>
+                      </div>
+                    </li>
+                    <li style="width:100px; text-align: center;">
+                      -
+                    </li>
+                  </ul>
+                  <ul data-id="14876508">
+                    <li style="width:185px;">
+                      <input type=hidden name=ids[] id=ids value="14876508">
+                      <input type=hidden name="row_no_14876508" id="row_no_14876508" value="9">
+                      <input type=hidden name="row_change_14876508" id="row_change_14876508" value="0">
+                      <div class="text-element-o t-27-gray column-name">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" name='class_name_14876508' id='class_name_14876508' size="20" maxlength="50" value="家电清洗"></div>
+                      </div>
+                    </li>
+                    <li class="align-l" style="width:80px;">
+                      <input name="ty_14876508" id="ty_14876508" type="hidden"  readonly="readonly" value="11" >
+                      家电清洗
+                    </li>
+                    <li style="width:70px;">
+                      <select class="selectObj" name="target_14876508" id="target_14876508">
+                        <option value="0">本窗口</option>
+                        <option value="1" >新窗口</option>
+                      </select>
+                    </li>
+                    <li style="width:180px;">
+                      <!-- 4 -->
+                      <!-- 3 -->
+
+                      <!-- 5 -->
+
+                      <!-- 6 -->
+                      <span data-url="/own_add_doc.php?channel_id=14876508&is_frame=2&u=1488789177" data-name="家电清洗" data-type="2" class="but-element-o b-26-blue" data-action="upCon">
+                                      <em class="but-element-i">
+                                        <i class="but">发布内容</i>
+                                      </em>
+                                    </span>
+                      <!-- 6 -->
+
+                      <!-- 5 -->
+                      <!-- 3 -->
+                      <!-- 4 -->
+
+                      <span data-url="http://a2889617.pc.ev123.com.cn/a2889617/vip_doc/14876508_0_0_1.html" class="but-element-o b-26-blue" data-action="webView">
+                            <em class="but-element-i">
+                              <i class="but">预览</i>
+                            </em>
+                          </span>
+
+                      <span data-channelid="14876508" class="but-element-o b-26-blue" data-action="webDesign">
+                          <em class="but-element-i">
+                            <i class="but">设计</i>
+                          </em>
+                        </span>
+                    </li>
+                    <li style="width:80px;">
+                      <select class="selectObj" data-id="14876508" name="show_14876508" id="show_14876508">
+                        <option value="0">不显示</option>
+                        <option value="1" selected >显示</option>
+                      </select>
+                    </li>
+                    <li style="width:80px; text-align:center;">
+                      <div class="text-element-o t-27-gray column-name" style="width:60px;">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" name='class_sort_14876508' id='class_sort_14876508' maxlength="5" size="10" value="0" style="width:50px;">
+                        </div>
+                      </div>
+                    </li>
+                    <li style="width:100px; text-align: center;">
+                                                     <span class="but-element-o b-26-red" data-action="del" data-delid="14876508">
+                            <em class="but-element-i">
+                             <i class="but">删除</i>
+                            </em>
+                            </span>
+                    </li>
+                  </ul>
+                  <ul data-id="14801087">
+                    <li style="width:185px;">
+                      <input type=hidden name=ids[] id=ids value="14801087">
+                      <input type=hidden name="row_no_14801087" id="row_no_14801087" value="10">
+                      <input type=hidden name="row_change_14801087" id="row_change_14801087" value="0">
+                      <div class="text-element-o t-27-gray column-name">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" name='class_name_14801087' id='class_name_14801087' size="20" maxlength="50" value="企业位置"></div>
+                      </div>
+                    </li>
+                    <li class="align-l" style="width:80px;">
+                      <input name="ty_14801087" id="ty_14801087" type="hidden"  readonly="readonly" value="34" style="width:30px;">[系统]地图
+                    </li>
+                    <li style="width:70px;">
+                      <select class="selectObj" name="target_14801087" id="target_14801087">
+                        <option value="0">本窗口</option>
+                        <option value="1" >新窗口</option>
+                      </select>
+                    </li>
+                    <li style="width:180px;">
+                      <!-- 4 -->
+                      <!-- 3 -->
+
+                      <!-- 2 -->
+
+                      <!-- 1 -->
+                      <span data-url="/map.php?channel_id=14801087&dom_id=19&is_frame=2&u=1488789177" data-name="企业位置" data-type="3" class="but-element-o b-26-blue" data-action="funAdmin">
+                                  <em class="but-element-i">
+                                    <i class="but">功能管理</i>
+                                  </em>
+                                </span>
+                      <!-- 1 -->
+
+                      <!-- 2 -->
+                      <!-- 3 -->
+                      <!-- 4 -->
+
+                      <span data-url="http://a2889617.pc.ev123.com.cn/self_define/map.php?username=a2889617&channel_id=14801087" class="but-element-o b-26-blue" data-action="webView">
+                            <em class="but-element-i">
+                              <i class="but">预览</i>
+                            </em>
+                          </span>
+
+                      <span data-channelid="14801087" class="but-element-o b-26-blue" data-action="webDesign">
+                          <em class="but-element-i">
+                            <i class="but">设计</i>
+                          </em>
+                        </span>
+                    </li>
+                    <li style="width:80px;">
+                      <select class="selectObj" data-id="14801087" name="show_14801087" id="show_14801087">
+                        <option value="0">不显示</option>
+                        <option value="1"  >显示</option>
+                      </select>
+                    </li>
+                    <li style="width:80px; text-align:center;">
+                      <div class="text-element-o t-27-gray column-name" style="width:60px;">
+                        <div class="text-element-i">
+                          <input class="input-w-100" type="text" name='class_sort_14801087' id='class_sort_14801087' maxlength="5" size="10" value="0" style="width:50px;">
+                        </div>
+                      </div>
+                    </li>
+                    <li style="width:100px; text-align: center;">
+                      -
+                    </li>
+                  </ul>
+                </div>
+              </form>
+            </dd>
+          </dl>
+          <div class="admin-column-but"><div class="but-element-o b-33-blue"><div class="but-element-i" id="my_submit_div"><input type="button" onclick="submit_form()" value="保存设置" class="but"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  var row_num=9;
+
+  function submit_form(){
+    $("#my_submit_div").html('<input type="button" value="保存中..." class="but">');
+    $('#form1').submit();
+  }
+  var tmp_title='栏目管理&nbsp;&nbsp;<font style="color:#666;font-size:12px;font-weight:normal">不会做或有问题，找客服！</font>';
+  // w.resize_window('w1',tmp_title,796,520);
+</script>
+</body>
+</html>

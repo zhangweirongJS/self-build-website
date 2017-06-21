@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+    <meta http-equiv="x-ua-compatible" content="ie=7" />
+    <title>搜索设置</title>
+    <link type="text/css" rel="stylesheet" href="/css/VNew/admin_20140730.css" />
+    <link type="text/css" rel="stylesheet" href="/css/VNew/style_editcss.css" />
+    <script type="text/javascript" src="/include/cookies.js"></script>
+    <script type="text/javascript" src="/js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/include/public.js"></script>
+    <script type="text/javascript" src="/js/VNew/public_plugins.js"></script>
+    <script type="text/javascript" src="/include/link2.js"></script>
+    <script type="text/javascript" src="/js/tj/tj_public.js"></script>
+</head>
+<body>
+<div class="tabArea search-tab-area">
+    <div class="alertTab" id="alert_tab">
+        <div class="TabCLoading" id="tabc_loading"></div>
+        <div class="alertTabT" id="alert_tab_t">
+            <ul>
+                <li data-id="searchSet" id="searchSet_tab" class="cur">
+                    <a href="javascript:;">搜索功能设置</a>
+                </li>
+            </ul>
+        </div>
+        <div class="alertTabC" id="alert_tab_c">
+            <div class="alertTabCIn search-set" id="searchSet">
+                <form action="/tj_index_module_search_action" method="post" enctype="multipart/form-data" id="myform" name="myform">
+                    <input type="hidden" name="module_id" value="" />
+                    <div class="tableDiv">
+                        <table>
+                            <tr class="tr-show-page">
+                                <th class="v-a-m">显示位置：</th>
+                                <td>
+                                    <label class='labelObj'>
+                                        <input class="radioObj" type="radio" checked="checked" value="0" name="search_show">
+                                        所有页面显示
+                                    </label>
+                                    <label class='labelObj'>
+                                        <input class="radioObj" type="radio"  value="1" name="search_show">
+                                        仅在首页显示
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr class="tr-key-word">
+                                <th class="v-a-m">默认关键词：</th>
+                                <td>
+                                    <input id="name" name="name"  value="搜索设置"  type="hidden">
+                                    <span class="text-element-o t-27-gray">
+                                        <span class="text-element-i">
+                                            <input id="default_keyword" type="text" name="search_default_keyword"  value=""  size="20" >
+                                        </span>
+                                      </span>
+                                    <span id='default_keyword_error'></span>
+                                </td>
+                            </tr>
+                            <tr class="tr-search-type">
+                                <th class="v-a-m">搜索类型：<em class="starred">*</em></th>
+                                <td>
+                                    <select name="search_type" id="search_site" class="selectObj">
+                                        <option value="1">站内搜索</option>
+                                        <option value="2" >站外搜索</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="tr-search-column">
+                                <th class="v-a-m">默认搜索栏目：<em class="starred">*</em></th>
+                                <td>
+                                    <select name="search_column_type" id="search_type" class="selectObj">
+                                        <option  value="11">文章</option>
+                                        <option  value="15">其它</option>
+                                        <option  value="10">产品</option>
+                                        <option  value="14">服务</option>
+                                        <option  value="7">论坛</option>
+                                        <option  value="32">知道</option>
+                                        <option  value="31">百科</option>
+                                        <option  value="4">博客</option>
+                                    </select>
+                                    <span id='search_type_error' class="redPoint">选择默认栏目时，请先确认是否已添加了相关栏目！</span>
+                                </td>
+                            </tr>
+                            <tr class="tr-search-url">
+                                <th class="v-a-m">搜索网址：<em class="starred">*</em></th>
+                                <td>
+                                    <span class="text-element-o t-27-gray">
+                                        <span class="text-element-i">
+                                        <input id="search_out_action" name="search_link" value="#" size="20" >
+                                    </span>
+                                </span>
+                                    <span id='search_out_action_error' class="redPoint"></span>
+                                </td>
+                            </tr>
+                            <tr class="tr-search-arg">
+                                <th class="v-a-m">搜索参数：<em class="starred">*</em></th>
+                                <td>
+                                    <span class="text-element-o t-27-gray">
+                                        <span class="text-element-i">
+                                            <input id="search_out_param" name="search_param" value="" size="20" >
+                                        </span>
+                                    </span>
+                                    <span id='search_out_param_error' class="redPoint"></span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="submitBut" id="my_submit_div">
+                        <b class="but but-blue" data-action="submit">保存</b>
+                        <b class="but but-gray" data-action="reset">取消</b>
+                        <input id="add_tag" name="add_tag" value="0" type="hidden">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function(){
+        var my_submit_div = $("#my_submit_div"),form = $("#myform"),
+            outActionObj = $('#search_out_action'),outParamObj = $('#search_out_param'),
+            search_setObj = $('#search_site');
+        search_setObj.on('change',function(){
+            var tval = $(this).val();
+            if (tval == 2) {
+                $('.tr-search-url,.tr-search-arg').show();
+                $('.tr-search-column').hide();
+            } else {
+                $('.tr-search-url,.tr-search-arg').hide();
+                $('.tr-search-column').show();
+            }
+        });
+        search_setObj.trigger('change');
+        my_submit_div.on({
+            click : function(){
+                var t = $(this),action = t.data('action');
+                switch(action){
+                    case 'submit' :
+                        if (search_setObj.val() == 2) {
+                            var fun = function(o,t){
+                                w.Ev.pubFun.alertWindow(t,'warn');
+                                o.focus();
+                                return false;
+                            };
+                            if ($.trim(outActionObj.val()) == '') {
+                                return fun(outActionObj,"请填写搜索网址！");
+                            }
+                            if ($.trim(outParamObj.val()) == '') {
+                                return fun(outParamObj,"请填写搜索参数！");
+                            }
+                        }
+                        t.removeClass('but-blue').addClass('but-gray').text('保存中...');
+                        $('#add_tag').val(1);
+                        form.submit();
+                        break;
+                    case 'reset':
+                        w.close_window();
+                        break;
+                }
+            }
+        },'.but');
+    });
+</script>
+</body>
+</html>

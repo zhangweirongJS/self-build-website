@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+    <title>banner样式编辑</title>
+    <link rel="stylesheet" type="text/css" href="/css/VNew/spectrum.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/VNew/style_editcss.css" />
+    <script type="text/javascript" src="/js/VNew/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="/js/VNew/spectrum.js"></script>
+    <script type="text/javascript" src="/js/VNew/tj/edit_public.js"></script>
+    <script type="text/javascript" src="/js/VNew/tj/basic_module_style/banner_style_edit.js"></script>
+</head>
+<body>
+<div class="tabArea">
+    <div class="alertTab">
+        <div class="alertTabT">
+            <ul>
+                <li class="cur" onclick="pf.fT(this,'F_rule_set');" id="M_rule_set_tab">
+                    <a href="javascript:;">全局设计</a>
+                </li>
+            </ul>
+        </div>
+        <div class="alertTabC" id="alert_tab_c">
+            <!--banner全局设置 start-->
+            <div class="FruleSet" id="F_rule_set">
+                <div class="tableDiv">
+                    <table>
+                        <!--<tr>
+                        <th>是否隐藏：</th>
+                        <td>
+                          <input type="radio" class="radioObj" name="HVisible" id="H_visible_no" onclick="Hset.HVisible(0)">
+                          <label class="labelObj" for="H_visible_no">否</label>
+                          <input type="radio" class="radioObj" name="HVisible" id="H_visible_yes" onclick="Hset.HVisible(1)">
+                          <label class="labelObj" for="H_visible_yes">是</label>
+                        </td>
+                      </tr>
+                      -->
+                        <tr>
+                            <th>是否通栏：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="HFullToggle" id="H_full_auto" onclick="Hset.HFullToggle(0)">
+                                <label class="labelObj" for="H_full_auto">默认</label>
+                                <input type="radio" class="radioObj" name="HFullToggle" id="H_full_no" onclick="Hset.HFullToggle(1)">
+                                <label class="labelObj" for="H_full_no">否</label>
+                                <input type="radio" class="radioObj" name="HFullToggle" id="H_full_yes" onclick="Hset.HFullToggle(2)">
+                                <label class="labelObj" for="H_full_yes">是</label>
+                            </td>
+                        </tr>
+                        <!--<tr>
+                        <th>背景：</th>
+                        <td>
+                          <input type="radio" class="radioObj" name="HBgToggle" id="H_bg_auto" onclick="Hset.HBgToggle(0)">
+                          <label class="labelObj" for="H_bg_auto">默认</label>
+                          <input type="radio" class="radioObj" name="HBgToggle" id="H_bg_hide" onclick="Hset.HBgToggle(1)">
+                          <label class="labelObj" for="H_bg_hide">隐藏</label>
+                          <input type="radio" class="radioObj" name="HBgToggle" id="H_bg_cus" onclick="Hset.HBgToggle(2)">
+                          <label class="labelObj" for="H_bg_cus">自定义</label>
+                          <ul class="attrSetingList" id="H_bg_attrlist">
+                            <li>
+                              <span class="labelspan">背景颜色：</span>
+                              <input class="colorObj" name="colorInput" id="H_bg_color" value="#000000" onchange="Hset.HBgColor(this.value)"></li>
+                            <li>
+                              <span class="labelspan">背景图片：</span>
+                              <input type="text" name="HBgImage" id="H_bg_image" onchange="Hset.HBgImage(this.value)" class="bgObj" value="none" disabled="disabled">
+                              <input type="button" class="bgButObj" id="H_bg_image_but" value="上传" onclick="pf.upBgImg('H_bg_image');" />
+                              <a href="#" class="bgLookObj" title="查看当前使用图片" id="H_bg_image_look" target="_blank">查看图片</a>
+                              <a href="javascript:;" class="bgNoneObj" id="H_bg_image_none" onclick="pf.noBgImg('H_bg_image');" title="取消背景图片">取消背景图片</a>
+                            </li>
+                            <li>
+                              <span class="labelspan">背景位置：</span>
+                              <select class="selectObj" name="HBgPosition" id="H_bg_position" onchange="Hset.HBgPosition(this.value)">
+                                <option value="left top" selected="selected">左上</option>
+                                <option value="left center">左中</option>
+                                <option value="left bottom">左下</option>
+                                <option value="center top">中上</option>
+                                <option value="center center">居中</option>
+                                <option value="center bottom">中下</option>
+                                <option value="right top">右上</option>
+                                <option value="right center">右中</option>
+                                <option value="right bottom">右下</option>
+                              </select>
+                            </li>
+                            <li>
+                              <span class="labelspan">平铺：</span>
+                              <select class="selectObj" name="HBgRepeat" id="H_bg_repeat" onchange="Hset.HBgRepeat(this.value)">
+                                <option value="no-repeat" selected="selected">不平铺</option>
+                                <option value="repeat">平铺</option>
+                                <option value="repeat-x">横向平铺</option>
+                                <option value="repeat-y">纵向平铺</option>
+                              </select>
+                            </li>
+                          </ul>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class="labelspan">背景透明度：</th>
+                        <td>
+                          <input type="text" class="opacityObj" id="H_opacity" value='100' onchange="Hset.HOpacity(this.value)" name="opacityObj" />
+                          <span class="pah">%</span>
+                        </td>
+                      </tr>
+                      -->
+                        <tr>
+                            <th>高度设置：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="HHeightToggle" id="H_height_auto" onclick="Hset.HHeightToggle(0)" />
+                                <label class='labelObj' for="H_height_auto">默认</label>
+                                <input type='radio' class="radioObj" name="HHeightToggle" id="H_height_cus" onclick="Hset.HHeightToggle(1)">
+                                <label class='labelObj' for="H_height_cus">自定义</label>
+                                <ul class="attrSetingList" id="H_height_attrlist">
+                                    <li>
+                                        <span class="labelspan">高度值：</span>
+                                        <input type="text" class="inputObj" style="width:50px;" id="H_height" onchange="Hset.HHeight(this)" />
+                                        <span class="px">像素</span>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>边框：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="HBorderToggle" id="H_border_auto" onclick="Hset.HBorderToggle(0);" />
+                                <label class="labelObj" for="H_border_auto">默认</label>
+                                <input type="radio" class="radioObj" name="HBorderToggle" id="H_border_hide" onclick="Hset.HBorderToggle(1);" />
+                                <label class="labelObj" for="H_border_hide">隐藏</label>
+                                <input type="radio" class="radioObj" name="HBorderToggle" id="H_border_cus" onclick="Hset.HBorderToggle(2);" />
+                                <label class="labelObj" for="H_border_cus">自定义</label>
+                                <ul class="attrSetingList" id="H_border_attrlist">
+                                    <li>
+                                        <span class="labelspan">颜色：</span>
+                                        <input class="colorObj" name="colorInput" id="H_border_c" value="#000000" onchange="Hset.HBorderColor(this.value);" />
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">宽度：</span>
+                                        <select class="selectObj" id="H_border_w" name="HBorderWidth" onchange="Hset.HBorderWidth(this.value);">
+                                            <option value="1" selected="selected">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">样式：</span>
+                                        <select class="selectObj" id="H_border_s" name="HBorderStyle" onchange="Hset.HBorderStyle(this.value);">
+                                            <option value="solid" selected="selected">实线</option>
+                                            <option value="dashed">虚线</option>
+                                            <option value="dotted">点状</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>上下距离：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="HMarginToggle" id="H_margin_auto" onclick="Hset.HMarginToggle(0)">
+                                <label class="labelObj" for="H_margin_auto">默认</label>
+                                <input type="radio" class="radioObj" name="HMarginToggle" id="H_margin_cus" onclick="Hset.HMarginToggle(1)">
+                                <label class="labelObj" for="H_margin_cus">自定义</label>
+                                <ul class="attrSetingList" id="h_margin_attrlist">
+                                    <li>
+                                        <span class="labelspan">上：</span>
+                                        <input class="inputObj" name="HMarginT" id="H_margin_t" style="width:40px;" onchange="Hset.HMarginT(this)" />
+                                        <span class="px">像素</span>&nbsp;&nbsp;&nbsp;
+                                        <span class="labelspan">下：</span>
+                                        <input class="inputObj" name="HMarginB" id="H_margin_b" style="width:40px;" onchange="Hset.HMarginB(this)"  />
+                                        <span class="px">像素</span>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="submitBut">
+                    <b class="but but-blue" id="H_rule_set_enter" onclick="Hset.Henter(this)">确定</b>
+                    <b class="but but-blue" id="M_rule_set_reset" onclick="Hset.HRuleReset()">恢复本项默认</b>
+                </div>
+            </div>
+            <!--banner全局设置 end--> </div>
+    </div>
+</div>
+</body>
+</html>

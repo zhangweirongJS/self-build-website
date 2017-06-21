@@ -1,0 +1,132 @@
+@charset "UTF-8";
+/* CSS Document */
+@keyframes shake {
+  0%, 100% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  10%, 30%, 50%, 70%, 90% {
+    -webkit-transform: translate3d(-10px, 0, 0);
+    transform: translate3d(-10px, 0, 0);
+  }
+
+  20%, 40%, 60%, 80% {
+    -webkit-transform: translate3d(10px, 0, 0);
+    transform: translate3d(10px, 0, 0);
+  }
+}
+.shakeDom{
+  -webkit-animation-name: shake;
+  animation-name: shake;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+.wrapper{ position: relative; z-index: 2;}
+/*--??澶?灞?瀹瑰?ㄦ?峰?--*/
+#ruler_y{position:absolute; left:0px; top:0px; height:100%; width:100%; z-index:1;}
+	#ruler_y div{/*width:18px; background:url(/images/VNew/ruler_y.png) left top no-repeat;*/ height:100%; width:960px; margin:0px auto; border-width:0 2px; border-style: dashed; border-color: orange;}
+.webSite-guides{position:absolute; height:100%; width:0; border-width:0 2px 0 0; border-style:dashed; border-color:orange; top:0; z-index:100; display:none;}
+#move_guides_x{position:absolute; width:100%; height:0px; border-top:1px solid #c00; left:0px; top:600px; z-index:91;}
+#move_guides_y{position:fixed; width:0; height:600px; border-left:1px solid #c00; left:440px; top:40px; z-index:91;}
+#show_PX{font-family:arial; background-color:rgb(45,115,254); background-color:rgba(45,115,254,0.8); *background-color:#578FFE; border-width:2px; border-style:solid; border-color:rgb(0,72,216); border-color:rgba(0,72,216,0.4); *border-color:#3473EE; color:#fff; line-height:20px; position:absolute; z-index:1000; font-size:14px; box-shadow:2px 2px 2px #333; border-radius:5px;}
+#show_PX p{padding:2px 5px;}
+#show_PX p.tiship{color:#eee; font-weight:bold; line-height:30px; border-width:1px 0 0; border-style:solid; border-color:rgb(240,240,240); border-color:rgba(240,240,240,0.4); *border-color:#F4F4F4;}
+.hideShade{position:absolute; z-index:8; left:0px; top:0px; background-color:#fff; opacity:0.5; filter:alpha(opacity:50); width:100%;}
+.wire{position:absolute; border-style:dotted; border-color:#63A4FC; height:0px; width:0px; overflow:hidden; z-index:11;}
+.wireL,.wireR{top:0px; width:0px;}
+.wireT,.wireB{left:0px; height:0px;}
+.wireT{border-width:2px 0 0 0;top:0px;}
+.wireL{border-width:0 2px 0 0; left:0px;}
+.wireB{border-width:0 0 2px 0; bottom:0px;}
+.wireR{border-width:0 0 0 2px; right:0px;}
+.moveBtn{display:none; position:absolute; left:50%; top: 50%; margin:-15px 0 0 -15px; z-index:10; background:#E8F5FD url(../../images/VNew/remove_module_cur.png) no-repeat 0px -60px; width:30px; height:30px; border:1px solid #6DA4CD; text-indent:-999px; overflow:hidden; cursor:move; z-index: 100;}
+.moveBtn:hover{background-position:-30px -60px;background-color:#4492FB; border-color:#006cff;}
+.absolute-menu-catalog .moveBtn{top: 40px; left:auto; right: 0;}
+.shop-cart .moveBtn{left:auto; right: 10px;}
+/*.mainContainer{width:980px; margin:0px auto; border-width:0px; border-style:dotted; border-color:#f00; position:relative; z-index:10;}*/
+.addContainer{ height:auto; position:relative; z-index:0;}
+.addIndexDetail{text-align:center; line-height:0px; font-weight:bold; color:#666; height:0px; width:956px; overflow:hidden; font-size:0px; *margin-bottom:-2px;}
+  .ui-state-default {height:40px; line-height:40px; border:2px dashed #FF9B2E; background-color:#FCDE64; margin-bottom:10px; font-size:14px;}
+  .ui-state-hover {background-color:#FAD348; border-color:#FF8600; display:block;}
+.moveShade{border:#FF9B2E dashed 1px;background-color:#FCDE64; opacity:0.5; filter:alpha(opacity:50); position:absolute; left:-1px; top:-1px; z-index:2;}
+/*.footer{background:#fff url(/images/VNew/remove_module_cur.png) no-repeat;}*/
+/*--娣诲??妯″?????剁骇妗?--*/
+.customModuleRow{position:relative; zoom:1;}
+.customModuleRow .hideShade{z-index:5; left:0; top:-5px;}
+.customModuleRow .ModuleRowZZ{left:-5px; top:-5px;}
+.customModuleRow .wire{border-color:#F60; border-style:solid;}
+  .customModuleRow .wireL,.customModuleRow .wireR{top:0px; width:5px;}
+  .customModuleRow .wireT,.customModuleRow .wireB{left:0px; height:5px;}
+  .customModuleRow .wireL{left:0px;border-width:0 0 0 1px;}
+  .customModuleRow .wireR{right:0px;border-width:0 1px 0 0;}
+  .customModuleRow .wireT{top:0px;border-width:1px 0 0 0;}
+  .customModuleRow .wireB{bottom:0px;border-width:0px 0 1px 0; }
+  .customModuleRow .rowOperate{display:block; position:absolute; width:auto; margin-top:-35px; right:10px; z-index:20; background:url(about:blank); padding-bottom:10px;}
+  .customModuleRow .rowOperate-right{width:34px; top:-7px; right:-30px; padding-left:10px; margin-top: 0;}
+  .customModuleRow .rowOperate-right small{margin:5px 0 0;}
+  .rowOperate small{background:#E8F5FD url(../../images/VNew/remove_module_cur.png) no-repeat; float: left; width:30px; height:30px; border:1px solid #6DA4CD; margin:0 0 0 5px; cursor:pointer; text-indent:-999px; overflow:hidden;}
+	.rowOperate small.cur{background-color:#4492FB; border-color:#006cff;}
+  .rowOperate .typeLayout{background-position:-30px 0px;  border-color: #F00; background-color: #F00; }
+	  .rowOperate .typeLayout.cur{background-position:-30px 0px; background-color: #F00; border-color:#F00;}
+  .rowOperate .raddMoBut{background-position:0px -30px;}
+	  .rowOperate .raddMoBut.cur{background-position:-30px -30px;}
+  .rowOperate .rowMove{background-position:0px -60px; cursor:move;}
+	  .rowOperate .rowMove.cur{background-position:-30px -60px;}
+  .rowOperate .rowDelete{background-position:0px -90px;}
+	  .rowOperate .rowDelete.cur{background-position:-30px -90px;}
+  .rowOperate .upMove{background-position:0px -120px;}
+	  .rowOperate .upMove.cur{background-position:-30px -120px;}
+  .rowOperate .downMove{background-position:0 -150px;}
+	  .rowOperate .downMove.cur{background-position:-30px -150px;}
+  .rowOperate .hides{background-position:0 -180px;}
+	  .rowOperate .hides.cur{background-position:-30px -180px;}
+  .rowOperate .shows{background-position:0 -210px;}
+	  .rowOperate .shows.cur{background-position:-30px -210px;}
+  .rowOperate .styleEdit{background-position:0 -240px;}
+    .rowOperate .styleEdit.cur{background-position:-30px -240px;}
+  .rowOperate .rowCopy{background-position:0px -270px;}
+    .rowOperate .rowCopy.cur{background-position:-30px -270px;}
+  .rowOperate .rowNextAdd{background-position:0px -300px;}
+    .rowOperate .rowNextAdd.cur{background-position:-30px -300px;}
+.customModule .wire{z-index:0; border-color:#63A4FC; border-style:dotted;}
+  .customModule .wireL,.customModule .wireR{top:-2px; width:0px;}
+  .customModule .wireT,.customModule .wireB{left:-2px; height:0px;}
+	 .customModule .wireT{border-width:2px 0 0 0;top:-2px;}
+	 .customModule .wireL{border-width:0 2px 0 0; left:-2px;}
+	 .customModule .wireB{border-width:0 0 2px 0; bottom:-2px;}
+	 .customModule .wireR{border-width:0 0 0 2px; right:-2px;}
+   .operate-wire{border-width: 2px;}
+.customModule	.hideShade{z-index:5; left:0px; top:0px;}
+.operateEdit{position:absolute; top:0px; left:0px; z-index:80;}
+  .operateEdit small{float: left; height:20px; line-height:20px; padding:0px 5px; border:1px solid #6DA4CD; background-color:#E8F5FD; color:#6DA4CD; margin:0px 5px 5px 0; font-size:12px; cursor:pointer;}
+  .operateEdit .deletes{color:#c00;}
+  .operateEdit .deletes.cur{background-color:#c00; border-color:#c00;}
+  .operateEdit small.cur{background-color:#4492FB; border-color:#006cff; color:#fff;}
+  .operateEdit small.upLayer,.operateEdit small.downLayer{background-image: url(../../images/VNew/Mo_move_layer_icon.png); width: 10px; overflow: hidden; text-indent:2em;}
+  .operateEdit small.upLayer.cur,.operateEdit small.downLayer.cur{background-color: #B2DEF7;}
+  .operateEdit small.upLayer{background-position: 0 0;}
+  .operateEdit small.downLayer{background-position: 0 -20px;}
+  .customModule-helper{border:#FF9B2E dashed 1px;background-color:#FCDE64; opacity:0.5; filter:alpha(opacity:50);}
+	.ui-resizable-e,.ui-resizable-w{background:url(../../images/VNew/ui-resizable-e.png) left center no-repeat;}
+	.ui-resizable-s,.ui-resizable-n{background:url(../../images/VNew/ui-resizable-s.png) center center no-repeat;}
+  .customModule .ui-resizable-s{bottom:2px;}
+  .logo .ui-resizable-e{right:0px;}
+  .logo .ui-resizable-s{bottom:0px;}
+  .logo .wireL,.logo .wireR,.logo .moveShade{height: 100% !important;}
+  .logo .wireT,.logo .wireB,.logo .moveShade{width: 100% !important;}
+  .addMoBut{display:block; margin:0px 10px 10px 0px; border:1px solid #5f91aa; text-align:center; line-height:32px; color:#09F; font-weight:bold; font-size:14px; clear:both; background:url(../../images/VNew/add_Mo_bg.png) repeat-x;}
+  .addMoBut:hover{color:#06F;background-position:0 -33px;}
+  .add-pmb-btn{display:block; border:1px solid #F0F0F0; background-color: #F5F5F5; text-align:center; line-height:50px; height: 50px; overflow: hidden; color:#09F; font-weight:400; font-size:14px; white-space: pre; cursor: pointer; display: none;}
+.setMoConBut,.editMoConBut{width:163px; height:43px; text-align:center;  color:#fff; font:400 14px/40px "寰?杞???榛?"; position:absolute; left:50%; top:50%; margin:-21px 0 0 -82px;cursor:pointer; background-image:url(../../images/VNew/setMoConBut_bg.png);}
+.header .operateEdit{width: 68px;}
+/*.setMoConBut,.editMoConBut{ background-image:-webkit-gradient(linear,center top,center bottom,from(#1d7ee8),to(#1d7ee8)); background-image:-webkit-linear-gradient(top, #1d7ee8, #1d7ee8); background-image: -moz-linear-gradient(top, #1d7ee8, #1d7ee8); background-image:-o-linear-gradient(top, #1d7ee8, #1d7ee8); background-image:-ms-linear-gradient(top, #1d7ee8, #1d7ee8); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1d7ee8',endColorstr='#1d7ee8',GradientType=0 ); box-shadow:1px 1px 0px #004b9c; border-radius:3px; }*/
+
+.page-header-but{position: absolute; right:100px; top:0px; z-index:60; border:solid #6DA4CD 1px; background-color: #E8F5FD; display: none; cursor: pointer;}
+.page-header-but em{margin:0px 5px 0; display: block; width: 30px; height: 30px; background:url(../../images/VNew/remove_module_cur.png) 0 -30px;}
+.page-header-but b{margin:0 10px 10px; display: block; width: 20px; font-size:14px; text-align: center; color: #3199FF; font-weight: 400; color: #6DA4CD;}
+.title-hint{position: absolute; z-index:100000; padding: 5px; background-color: #FFF; border:1px solid #CCC; box-shadow:2px 2px 2px rgba(0, 0, 0, 0.9); color: #444; font-size:12px;}

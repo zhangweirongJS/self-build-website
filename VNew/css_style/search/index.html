@@ -1,0 +1,908 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>搜索样式编辑</title>
+    <link rel="stylesheet" type="text/css" href="/css/VNew/spectrum.css" />
+    <link rel="stylesheet" type="text/css" href="/css/VNew/style_editcss.css" />
+    <script type="text/javascript" src="/js/VNew/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="/js/VNew/spectrum.js"></script>
+    <script type="text/javascript" src="/js/VNew/tj/edit_public.js"></script>
+    <script type="text/javascript" src="/js/VNew/tj/basic_module_style/searchs_style_edit.js"></script>
+</head>
+
+<body>
+<div class="tabArea">
+    <div class="alertTab" id="alert_tab">
+        <div class="TabCLoading" id="tabc_loading"></div>
+        <div class="alertTabT" id="alert_tab_t">
+            <ul>
+                <!-- <li data-id="skinSelect" id="skinSelect_tab">
+                  <a href="javascript:;">搜索样式选择</a>
+                </li> -->
+                <li data-id="skinSet" id="skinSet_tab">
+                    <a href="javascript:;">外观设计</a>
+                </li>
+                <li data-id="sKeySet" id="sKeySet_tab">
+                    <a href="javascript:;">搜索框设计</a>
+                </li>
+                <li data-id="sBtnSet" id="sBtnSet_tab">
+                    <a href="javascript:;">搜索按钮设计</a>
+                </li>
+            </ul>
+        </div>
+        <div class="alertTabC" id="alert_tab_c">
+            <!--皮肤选择 start-->
+            <div class="alertTabCIn" id="skinSelect">
+            </div>
+            <!--皮肤选择 end-->
+            <!--外观设置 start-->
+            <div class="alertTabCIn" id="skinSet">
+                <div class="tableDiv">
+                    <table>
+                        <tr>
+                            <th>背景：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="sInnerBgToggle" id="S_sInnerBgAuto" onclick="Sset.sInnerBgToggle(0)">
+                                <label class="labelObj" for="S_sInnerBgAuto">默认</label>
+                                <input type="radio" class="radioObj" name="sInnerBgToggle" id="S_sInnerBgHide" onclick="Sset.sInnerBgToggle(1)">
+                                <label class="labelObj" for="S_sInnerBgHide">隐藏</label>
+                                <input type="radio" class="radioObj" name="sInnerBgToggle" id="S_sInnerBgCus" onclick="Sset.sInnerBgToggle(2)">
+                                <label class="labelObj" for="S_sInnerBgCus">自定义</label>
+                                <ul class="attrSetingList" id="S_sInnerBgAttrlist">
+                                    <li>
+                                        <span class="labelspan">背景颜色：</span>
+                                        <input class="colorObj" name="colorInput" id="S_sInnerBgColor" value="#FFFFFF" onchange="Sset.sInnerBgColor(this.value)">
+                                        <a title="取消背景颜色" onclick="Sset.sInnerNoBgColor();" id="S_sInnerNoBgColor" class="noBgColorObj" href="javascript:;">取消背景颜色</a>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">背景图片：</span>
+                                        <input type="text" name="sInnerBgImage" id="S_sInnerBgImage" onchange="Sset.sInnerBgImage(this.value)" class="bgObj" value="none" disabled="disabled">
+                                        <input type="button" class="bgButObj" id="S_sInnerBgImageBut" value="上传" onclick="pf.upBgImg('S_sInnerBgImage');" />
+                                        <a href="#" class="bgLookObj" title="查看当前使用图片" id="S_sInnerBgImageLook" target="_blank">查看图片</a>
+                                        <a href="javascript:;" class="bgNoneObj" id="S_sInnerBgImageNone" onclick="pf.noBgImg('S_sInnerBgImage');" title="取消背景图片">取消背景图片</a>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">背景位置：</span>
+                                        <select class="selectObj" name="sInnerPosition" id="S_sInnerBgPosition" onchange="Sset.sInnerBgPosition(this.value)">
+                                            <option value="left top" selected="selected">左上</option>
+                                            <option value="left center">左中</option>
+                                            <option value="left bottom">左下</option>
+                                            <option value="center top">中上</option>
+                                            <option value="center center">居中</option>
+                                            <option value="center bottom">中下</option>
+                                            <option value="right top">右上</option>
+                                            <option value="right center">右中</option>
+                                            <option value="right bottom">右下</option>
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">平铺：</span>
+                                        <select class="selectObj" name="sInnerRepeat" id="S_sInnerBgRepeat" onchange="Sset.sInnerBgRepeat(this.value)">
+                                            <option value="no-repeat" selected="selected">不平铺</option>
+                                            <option value="repeat">平铺</option>
+                                            <option value="repeat-x">横向平铺</option>
+                                            <option value="repeat-y">纵向平铺</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>宽度：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="sInnerWidthToggle" id="S_sInnerWidthAuto" onclick="Sset.sInnerWidthToggle(0)" />
+                                <label class='labelObj' for="S_sInnerWidthAuto">默认</label>
+                                <input type='radio' class="radioObj" name="sInnerWidthToggle" id="S_sInnerWidthCus" onclick="Sset.sInnerWidthToggle(2)">
+                                <label class='labelObj' for="S_sInnerWidthCus">自定义</label>
+                                <span class="redPoint">注：搜索框和搜索按钮所在的整体区域的宽度</span>
+                                <ul class="attrSetingList" id="S_sInnerWidthAttrlist">
+                                    <li>
+                                        <span class="labelspan">宽度值：</span>
+                                        <input type="text" name="sInnerWidth" class="inputObj" style="width:50px;" id="S_sInnerWidth" onblur="Sset.sInnerWidth(this)" />
+                                        <span class="px">像素</span>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>内间距：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="sInnerPaddingToggle" id="S_sInnerPaddingAuto" onclick="Sset.sInnerPaddingToggle(0)">
+                                <label class="labelObj" for="S_sInnerPaddingAuto">默认</label>
+                                <input type="radio" class="radioObj" name="sInnerPaddingToggle" id="S_sInnerPaddingCus" onclick="Sset.sInnerPaddingToggle(1)">
+                                <label class="labelObj" for="S_sInnerPaddingCus">自定义</label>
+                                <ul class="attrSetingList" id="S_sInnerPaddingAttrlist">
+                                    <li>
+                                        <span class="labelspan">上：</span>
+                                        <input class="inputObj" name="sInnerPaddingTop" id="S_sInnerPaddingTop" style="width:40px;" onchange="Sset.sInnerPaddingTop(this)" />
+                                        <span class="px">像素</span>
+                                        <span class="labelspan">下：</span>
+                                        <input class="inputObj" name="sInnerPaddingBottom" id="S_sInnerPaddingBottom" style="width:40px;" onchange="Sset.sInnerPaddingBottom(this)"  />
+                                        <span class="px">像素</span>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">左：</span>
+                                        <input class="inputObj" name="sInnerPaddingLeft" id="S_sInnerPaddingLeft" style="width:40px;" onchange="Sset.sInnerPaddingLeft(this)" />
+                                        <span class="px">像素</span>
+                                        <span class="labelspan">右：</span>
+                                        <input class="inputObj" name="sInnerPaddingRight" id="S_sInnerPaddingRight" style="width:40px;" onchange="Sset.sInnerPaddingRight(this)"  />
+                                        <span class="px">像素</span>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="submitBut">
+                    <b class="but but-blue" id="S_skinSetEnter" onclick="Sset.skinSetEnter()">确定</b>
+                    <b class="but but-blue" id="S_skinSetReset" onclick="Sset.skinSetReset()">恢复本项默认</b>
+                </div>
+            </div>
+            <!--外观设置 end-->
+            <!--输入框设置 start-->
+            <div class="alertTabCIn" id="sKeySet">
+                <div class="tableDiv">
+                    <table>
+                        <tr>
+                            <th>宽度：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="sKeyWidthToggle" id="S_sKeyWidthAuto" onclick="Sset.sKeyWidthToggle(0)" />
+                                <label class='labelObj' for="S_sKeyWidthAuto">默认</label>
+                                <input type='radio' class="radioObj" name="sKeyWidthToggle" id="S_sKeyWidthCus" onclick="Sset.sKeyWidthToggle(2)">
+                                <label class='labelObj' for="S_sKeyWidthCus">自定义</label>
+                                <span class="redPoint">注：如果发现折行，请加大外观宽度的设置</span>
+                                <ul class="attrSetingList" id="S_sKeyWidthAttrlist">
+                                    <li>
+                                        <span class="labelspan">宽度值：</span>
+                                        <input type="text" name="sKeyWidth" class="inputObj" style="width:50px;" id="S_sKeyWidth" onblur="Sset.sKeyWidth(this)" />
+                                        <span class="px">像素</span>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>高度：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="sKeyHeightToggle" id="S_sKeyHeightAuto" onclick="Sset.sKeyHeightToggle(0)" />
+                                <label class='labelObj' for="S_sKeyHeightAuto">默认</label>
+                                <input type='radio' class="radioObj" name="sKeyHeightToggle" id="S_sKeyHeightCus" onclick="Sset.sKeyHeightToggle(2)">
+                                <label class='labelObj' for="S_sKeyHeightCus">自定义</label>
+                                <ul class="attrSetingList" id="S_sKeyHeightAttrlist">
+                                    <li>
+                                        <span class="labelspan">高度值：</span>
+                                        <input type="text" name="sKeyHeight" class="inputObj" style="width:50px;" id="S_sKeyHeight" onblur="Sset.sKeyHeight(this)" />
+                                        <span class="px">像素</span>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>背景：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="sKeyBgToggle" id="S_sKeyBgAuto" onclick="Sset.sKeyBgToggle(0)">
+                                <label class="labelObj" for="S_sKeyBgAuto">默认</label>
+                                <input type="radio" class="radioObj" name="sKeyBgToggle" id="S_sKeyBgHide" onclick="Sset.sKeyBgToggle(1)">
+                                <label class="labelObj" for="S_sKeyBgHide">隐藏</label>
+                                <input type="radio" class="radioObj" name="sKeyBgToggle" id="S_sKeyBgCus" onclick="Sset.sKeyBgToggle(2)">
+                                <label class="labelObj" for="S_sKeyBgCus">自定义</label>
+                                <ul class="attrSetingList" id="S_sKeyBgAttrlist">
+                                    <li>
+                                        <span class="labelspan">背景颜色：</span>
+                                        <input class="colorObj" name="colorInput" id="S_sKeyBgColor" value="#FFFFFF" onchange="Sset.sKeyBgColor(this.value)">
+                                        <a title="取消背景颜色" onclick="Sset.sKeyNoBgColor();" id="S_sKeyNoBgColor" class="noBgColorObj" href="javascript:;">取消背景颜色</a>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">背景图片：</span>
+                                        <input type="text" name="sKeyBgImage" id="S_sKeyBgImage" onchange="Sset.sKeyBgImage(this.value)" class="bgObj" value="none" disabled="disabled">
+                                        <input type="button" class="bgButObj" id="S_sKeyBgImageBut" value="上传" onclick="pf.upBgImg('S_sKeyBgImage');" />
+                                        <a href="#" class="bgLookObj" title="查看当前使用图片" id="S_sKeyBgImageLook" target="_blank">查看图片</a>
+                                        <a href="javascript:;" class="bgNoneObj" id="S_sKeyBgImageNone" onclick="pf.noBgImg('S_sKeyBgImage');" title="取消背景图片">取消背景图片</a>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">背景位置：</span>
+                                        <select class="selectObj" name="sKeyPosition" id="S_sKeyBgPosition" onchange="Sset.sKeyBgPosition(this.value)">
+                                            <option value="left top" selected="selected">左上</option>
+                                            <option value="left center">左中</option>
+                                            <option value="left bottom">左下</option>
+                                            <option value="center top">中上</option>
+                                            <option value="center center">居中</option>
+                                            <option value="center bottom">中下</option>
+                                            <option value="right top">右上</option>
+                                            <option value="right center">右中</option>
+                                            <option value="right bottom">右下</option>
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">平铺：</span>
+                                        <select class="selectObj" name="sKeyRepeat" id="S_sKeyBgRepeat" onchange="Sset.sKeyBgRepeat(this.value)">
+                                            <option value="no-repeat" selected="selected">不平铺</option>
+                                            <option value="repeat">平铺</option>
+                                            <option value="repeat-x">横向平铺</option>
+                                            <option value="repeat-y">纵向平铺</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>文字样式：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="sKeyTxtFontToggle" id="S_sKeyTxtFontAuto" onclick="Sset.sKeyTxtFontToggle(0);" />
+                                <label class="labelObj" for="S_sKeyTxtFontAuto">默认</label>
+                                <input type="radio" class="radioObj" name="sKeyTxtFontToggle" id="S_sKeyTxtFontCus" onclick="Sset.sKeyTxtFontToggle(2);" />
+                                <label class="labelObj" for="S_sKeyTxtFontCus">自定义</label>
+                                <ul class="attrSetingList" id="S_sKeyTxtFontAttrlist">
+                                    <li><span class="labelspan">颜色：</span>
+                                        <input class="colorObj" name="colorInput" id="S_sKeyTxtFontColor" value="#000000" onchange="Sset.sKeyTxtFontColor(this.value);">
+                                    </li>
+                                    <li><span class="labelspan">文字大小：</span>
+                                        <select class="selectObj" name="sKeyTxtFontSize" id="S_sKeyTxtFontSize" onchange="Sset.sKeyTxtFontSize(this.value)">
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14" selected="selected">14</option>
+                                            <option value="15">15</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>
+                                            <option value="22">22</option>
+                                            <option value="23">23</option>
+                                            <option value="24">24</option>
+                                            <option value="25">25</option>
+                                            <option value="26">26</option>
+                                            <option value="27">27</option>
+                                            <option value="28">28</option>
+                                            <option value="29">29</option>
+                                            <option value="30">30</option>
+                                        </select>
+                                    </li>
+                                    <li><span class="labelspan">文字样式：</span>
+                                        <input class="checkboxObj" name="sKeyTxtFontStyle" type="checkbox" id="S_sKeyTxtFontBold" onclick="Sset.sKeyTxtFontBold(this)" value="bold" />
+                                        <label class="labelObj" for="S_sKeyTxtFontBold">加粗</label>
+                                        <input class="checkboxObj" type="checkbox" name="sKeyTxtFontStyle" id="S_sKeyTxtFontItalic" value="italic" onclick="Sset.sKeyTxtFontItalic(this)" />
+                                        <label for="S_sKeyTxtFontItalic" class="labelObj">斜体</label>
+                                        <input class="checkboxObj" name="sKeyTxtFontStyle" type="checkbox" id="S_sKeyTxtFontUnderline" value="underline" onclick="Sset.sKeyTxtFontUnderline(this)" />
+                                        <label class="labelObj" for="S_sKeyTxtFontUnderline">下划线</label>
+                                    </li>
+                                    <li><span class="labelspan">文字字体：</span>
+                                        <select id="S_sKeyTxtFontFamily" name="sKeyTxtFontFamily" onchange="Sset.sKeyTxtFontFamily(this.value)">
+                                            <option value="SimSun">宋体</option>
+                                            <option value="PMingLiU">新细明体</option>
+                                            <option value="FangSong_GB2312">仿宋_GB2312</option>
+                                            <option value="微软雅黑" selected="selected">微软雅黑</option>
+                                            <option value="隶书">隶书</option>
+                                            <option value="幼圆">幼圆</option>
+                                            <option value="STKaiti">华文楷体</option>
+                                            <option value="方正舒体">方正舒体</option>
+                                            <option value="华文彩云">华文彩云</option>
+                                            <option value="华文行楷">华文行楷</option>
+                                            <option value="华文宋体">华文宋体</option>
+                                            <option value="Arial">Arial</option>
+                                            <option value="Tahoma">Tahoma</option>
+                                        </select><span class="redPoint">“该项设置取决于客户电脑字体库而生效”</span>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>上边线：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="sKeyBorderTopToggle" id="S_sKeyBorderTopAuto" onclick="Sset.sKeyBorderTopToggle(0);" />
+                                <label class="labelObj" for="S_sKeyBorderTopAuto">默认</label>
+                                <input type="radio" class="radioObj" name="sKeyBorderTopToggle" id="S_sKeyBorderTopHide" onclick="Sset.sKeyBorderTopToggle(1)">
+                                <label class="labelObj" for="S_sKeyBorderTopHide">隐藏</label>
+                                <input type="radio" class="radioObj" name="sKeyBorderTopToggle" id="S_sKeyBorderTopCus" onclick="Sset.sKeyBorderTopToggle(2);" />
+                                <label class="labelObj" for="S_sKeyBorderTopCus">自定义</label>
+                                <ul class="attrSetingList" id="S_sKeyBorderTopAttrlist">
+                                    <li>
+                                        <span class="labelspan">颜色：</span>
+                                        <input class="colorObj" name="colorInput" id="S_sKeyBorderTopColor" value="#cccccc" onchange="Sset.sKeyBorderTopColor(this.value);" />
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">高度：</span>
+                                        <select class="selectObj" name="sKeyBorderTopWidth" id="S_sKeyBorderTopWidth" onchange="Sset.sKeyBorderTopWidth(this.value);">
+                                            <option value="1" selected="selected">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                        <span class="px">像素</span>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">样式：</span>
+                                        <select class="selectObj" name="sKeyBorderTopStyle" id="S_sKeyBorderTopStyle" onchange="Sset.sKeyBorderTopStyle(this.value);">
+                                            <option value="solid" selected="selected">实线</option>
+                                            <option value="dashed">虚线</option>
+                                            <option value="dotted">点状</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>下边线：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="sKeyBorderBottomToggle" id="S_sKeyBorderBottomAuto" onclick="Sset.sKeyBorderBottomToggle(0);" />
+                                <label class="labelObj" for="S_sKeyBorderBottomAuto">默认</label>
+                                <input type="radio" class="radioObj" name="sKeyBorderBottomToggle" id="S_sKeyBorderBottomHide" onclick="Sset.sKeyBorderBottomToggle(1)">
+                                <label class="labelObj" for="S_sKeyBorderBottomHide">隐藏</label>
+                                <input type="radio" class="radioObj" name="sKeyBorderBottomToggle" id="S_sKeyBorderBottomCus" onclick="Sset.sKeyBorderBottomToggle(2);" />
+                                <label class="labelObj" for="S_sKeyBorderBottomCus">自定义</label>
+                                <ul class="attrSetingList" id="S_sKeyBorderBottomAttrlist">
+                                    <li>
+                                        <span class="labelspan">颜色：</span>
+                                        <input class="colorObj" name="colorInput" id="S_sKeyBorderBottomColor" value="#cccccc" onchange="Sset.sKeyBorderBottomColor(this.value);" />
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">高度：</span>
+                                        <select class="selectObj" name="sKeyBorderBottomWidth" id="S_sKeyBorderBottomWidth" onchange="Sset.sKeyBorderBottomWidth(this.value);">
+                                            <option value="1" selected="selected">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                        <span class="px">像素</span>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">样式：</span>
+                                        <select class="selectObj" name="sKeyBorderBottomStyle" id="S_sKeyBorderBottomStyle" onchange="Sset.sKeyBorderBottomStyle(this.value);">
+                                            <option value="solid" selected="selected">实线</option>
+                                            <option value="dashed">虚线</option>
+                                            <option value="dotted">点状</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>左边线：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="sKeyBorderLeftToggle" id="S_sKeyBorderLeftAuto" onclick="Sset.sKeyBorderLeftToggle(0);" />
+                                <label class="labelObj" for="S_sKeyBorderLeftAuto">默认</label>
+                                <input type="radio" class="radioObj" name="sKeyBorderLeftToggle" id="S_sKeyBorderLeftHide" onclick="Sset.sKeyBorderLeftToggle(1)">
+                                <label class="labelObj" for="S_sKeyBorderLeftHide">隐藏</label>
+                                <input type="radio" class="radioObj" name="sKeyBorderLeftToggle" id="S_sKeyBorderLeftCus" onclick="Sset.sKeyBorderLeftToggle(2);" />
+                                <label class="labelObj" for="S_sKeyBorderLeftCus">自定义</label>
+                                <ul class="attrSetingList" id="S_sKeyBorderLeftAttrlist">
+                                    <li>
+                                        <span class="labelspan">颜色：</span>
+                                        <input class="colorObj" name="colorInput" id="S_sKeyBorderLeftColor" value="#cccccc" onchange="Sset.sKeyBorderLeftColor(this.value);" />
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">宽度：</span>
+                                        <select class="selectObj" name="sKeyBorderLeftWidth" id="S_sKeyBorderLeftWidth" onchange="Sset.sKeyBorderLeftWidth(this.value);">
+                                            <option value="1" selected="selected">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                        <span class="px">像素</span>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">样式：</span>
+                                        <select class="selectObj" name="sKeyBorderLeftStyle" id="S_sKeyBorderLeftStyle" onchange="Sset.sKeyBorderLeftStyle(this.value);">
+                                            <option value="solid" selected="selected">实线</option>
+                                            <option value="dashed">虚线</option>
+                                            <option value="dotted">点状</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>右边线：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="sKeyBorderRightToggle" id="S_sKeyBorderRightAuto" onclick="Sset.sKeyBorderRightToggle(0);" />
+                                <label class="labelObj" for="S_sKeyBorderRightAuto">默认</label>
+                                <input type="radio" class="radioObj" name="sKeyBorderRightToggle" id="S_sKeyBorderRightHide" onclick="Sset.sKeyBorderRightToggle(1)">
+                                <label class="labelObj" for="S_sKeyBorderRightHide">隐藏</label>
+                                <input type="radio" class="radioObj" name="sKeyBorderRightToggle" id="S_sKeyBorderRightCus" onclick="Sset.sKeyBorderRightToggle(2);" />
+                                <label class="labelObj" for="S_sKeyBorderRightCus">自定义</label>
+                                <ul class="attrSetingList" id="S_sKeyBorderRightAttrlist">
+                                    <li>
+                                        <span class="labelspan">颜色：</span>
+                                        <input class="colorObj" name="colorInput" id="S_sKeyBorderRightColor" value="#cccccc" onchange="Sset.sKeyBorderRightColor(this.value);" />
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">宽度：</span>
+                                        <select class="selectObj" name="sKeyBorderRightWidth" id="S_sKeyBorderRightWidth" onchange="Sset.sKeyBorderRightWidth(this.value);">
+                                            <option value="1" selected="selected">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                        <span class="px">像素</span>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">样式：</span>
+                                        <select class="selectObj" name="sKeyBorderRightStyle" id="S_sKeyBorderRightStyle" onchange="Sset.sKeyBorderRightStyle(this.value);">
+                                            <option value="solid" selected="selected">实线</option>
+                                            <option value="dashed">虚线</option>
+                                            <option value="dotted">点状</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>外间距：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="sKeyMarginToggle" id="S_sKeyMarginAuto" onclick="Sset.sKeyMarginToggle(0)">
+                                <label class="labelObj" for="S_sKeyMarginAuto">默认</label>
+                                <input type="radio" class="radioObj" name="sKeyMarginToggle" id="S_sKeyMarginCus" onclick="Sset.sKeyMarginToggle(1)">
+                                <label class="labelObj" for="S_sKeyMarginCus">自定义</label>
+                                <ul class="attrSetingList" id="S_sKeyMarginAttrlist">
+                                    <li>
+                                        <span class="labelspan">上：</span>
+                                        <input class="inputObj" name="sKeyMarginTop" id="S_sKeyMarginTop" style="width:40px;" onchange="Sset.sKeyMarginTop(this)" />
+                                        <span class="px">像素</span>
+                                        <span class="labelspan">下：</span>
+                                        <input class="inputObj" name="sKeyMarginBottom" id="S_sKeyMarginBottom" style="width:40px;" onchange="Sset.sKeyMarginBottom(this)"  />
+                                        <span class="px">像素</span>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">左：</span>
+                                        <input class="inputObj" name="sKeyMarginLeft" id="S_sKeyMarginLeft" style="width:40px;" onchange="Sset.sKeyMarginLeft(this)" />
+                                        <span class="px">像素</span>
+                                        <span class="labelspan">右：</span>
+                                        <input class="inputObj" name="sKeyMarginRight" id="S_sKeyMarginRight" style="width:40px;" onchange="Sset.sKeyMarginRight(this)"  />
+                                        <span class="px">像素</span>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>内间距：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="sKeyPaddingToggle" id="S_sKeyPaddingAuto" onclick="Sset.sKeyPaddingToggle(0)">
+                                <label class="labelObj" for="S_sKeyPaddingAuto">默认</label>
+                                <input type="radio" class="radioObj" name="sKeyPaddingToggle" id="S_sKeyPaddingCus" onclick="Sset.sKeyPaddingToggle(1)">
+                                <label class="labelObj" for="S_sKeyPaddingCus">自定义</label>
+                                <ul class="attrSetingList" id="S_sKeyPaddingAttrlist">
+                                    <li>
+                                        <span class="labelspan">上：</span>
+                                        <input class="inputObj" name="sKeyPaddingTop" id="S_sKeyPaddingTop" style="width:40px;" onchange="Sset.sKeyPaddingTop(this)" />
+                                        <span class="px">像素</span>
+                                        <span class="labelspan">下：</span>
+                                        <input class="inputObj" name="sKeyPaddingBottom" id="S_sKeyPaddingBottom" style="width:40px;" onchange="Sset.sKeyPaddingBottom(this)"  />
+                                        <span class="px">像素</span>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">左：</span>
+                                        <input class="inputObj" name="sKeyPaddingLeft" id="S_sKeyPaddingLeft" style="width:40px;" onchange="Sset.sKeyPaddingLeft(this)" />
+                                        <span class="px">像素</span>
+                                        <span class="labelspan">右：</span>
+                                        <input class="inputObj" name="sKeyPaddingRight" id="S_sKeyPaddingRight" style="width:40px;" onchange="Sset.sKeyPaddingRight(this)"  />
+                                        <span class="px">像素</span>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="submitBut">
+                    <b class="but but-blue" id="S_skinSetEnter" onclick="Sset.sKeySetEnter()">确定</b>
+                    <b class="but but-blue" id="S_skinSetReset" onclick="Sset.sKeySetReset()">恢复本项默认</b>
+                </div>
+            </div>
+            <!--输入框设置 end-->
+            <!--按钮设置 start-->
+            <div class="alertTabCIn" id="sBtnSet">
+                <div class="tableDiv">
+                    <table>
+                        <tr>
+                            <th>宽度：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="sBtnWidthToggle" id="S_sBtnWidthAuto" onclick="Sset.sBtnWidthToggle(0)" />
+                                <label class='labelObj' for="S_sBtnWidthAuto">默认</label>
+                                <input type='radio' class="radioObj" name="sBtnWidthToggle" id="S_sBtnWidthCus" onclick="Sset.sBtnWidthToggle(2)">
+                                <label class='labelObj' for="S_sBtnWidthCus">自定义</label>
+                                <span class="redPoint">注：如果发现折行，请加大外观宽度的设置</span>
+                                <ul class="attrSetingList" id="S_sBtnWidthAttrlist">
+                                    <li>
+                                        <span class="labelspan">宽度值：</span>
+                                        <input type="text" name="sBtnWidth" class="inputObj" style="width:50px;" id="S_sBtnWidth" onblur="Sset.sBtnWidth(this)" />
+                                        <span class="px">像素</span>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>高度：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="sBtnHeightToggle" id="S_sBtnHeightAuto" onclick="Sset.sBtnHeightToggle(0)" />
+                                <label class='labelObj' for="S_sBtnHeightAuto">默认</label>
+                                <input type='radio' class="radioObj" name="sBtnHeightToggle" id="S_sBtnHeightCus" onclick="Sset.sBtnHeightToggle(2)">
+                                <label class='labelObj' for="S_sBtnHeightCus">自定义</label>
+                                <ul class="attrSetingList" id="S_sBtnHeightAttrlist">
+                                    <li>
+                                        <span class="labelspan">高度值：</span>
+                                        <input type="text" name="sBtnHeight" class="inputObj" style="width:50px;" id="S_sBtnHeight" onblur="Sset.sBtnHeight(this)" />
+                                        <span class="px">像素</span>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>背景：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="sBtnBgToggle" id="S_sBtnBgAuto" onclick="Sset.sBtnBgToggle(0)">
+                                <label class="labelObj" for="S_sBtnBgAuto">默认</label>
+                                <input type="radio" class="radioObj" name="sBtnBgToggle" id="S_sBtnBgHide" onclick="Sset.sBtnBgToggle(1)">
+                                <label class="labelObj" for="S_sBtnBgHide">隐藏</label>
+                                <input type="radio" class="radioObj" name="sBtnBgToggle" id="S_sBtnBgCus" onclick="Sset.sBtnBgToggle(2)">
+                                <label class="labelObj" for="S_sBtnBgCus">自定义</label>
+                                <ul class="attrSetingList" id="S_sBtnBgAttrlist">
+                                    <li>
+                                        <span class="labelspan">背景颜色：</span>
+                                        <input class="colorObj" name="colorInput" id="S_sBtnBgColor" value="#FFFFFF" onchange="Sset.sBtnBgColor(this.value)">
+                                        <a title="取消背景颜色" onclick="Sset.sBtnNoBgColor();" id="S_sBtnNoBgColor" class="noBgColorObj" href="javascript:;">取消背景颜色</a>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">背景图片：</span>
+                                        <input type="text" name="sBtnBgImage" id="S_sBtnBgImage" onchange="Sset.sBtnBgImage(this.value)" class="bgObj" value="none" disabled="disabled">
+                                        <input type="button" class="bgButObj" id="S_sBtnBgImageBut" value="上传" onclick="pf.upBgImg('S_sBtnBgImage');" />
+                                        <a href="#" class="bgLookObj" title="查看当前使用图片" id="S_sBtnBgImageLook" target="_blank">查看图片</a>
+                                        <a href="javascript:;" class="bgNoneObj" id="S_sBtnBgImageNone" onclick="pf.noBgImg('S_sBtnBgImage');" title="取消背景图片">取消背景图片</a>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">背景位置：</span>
+                                        <select class="selectObj" name="sBtnPosition" id="S_sBtnBgPosition" onchange="Sset.sBtnBgPosition(this.value)">
+                                            <option value="left top" selected="selected">左上</option>
+                                            <option value="left center">左中</option>
+                                            <option value="left bottom">左下</option>
+                                            <option value="center top">中上</option>
+                                            <option value="center center">居中</option>
+                                            <option value="center bottom">中下</option>
+                                            <option value="right top">右上</option>
+                                            <option value="right center">右中</option>
+                                            <option value="right bottom">右下</option>
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">平铺：</span>
+                                        <select class="selectObj" name="sBtnRepeat" id="S_sBtnBgRepeat" onchange="Sset.sBtnBgRepeat(this.value)">
+                                            <option value="no-repeat" selected="selected">不平铺</option>
+                                            <option value="repeat">平铺</option>
+                                            <option value="repeat-x">横向平铺</option>
+                                            <option value="repeat-y">纵向平铺</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>文字隐藏：</th>
+                            <td>
+                                <input type='radio' class="radioObj" name="sBtnBShowToggle" id="S_sBtnBDefault" onclick="Sset.sBtnBShowToggle(0)">
+                                <label class='labelObj' for="S_sBtnBDefault">默认</label>
+                                <input type="radio" class="radioObj" name="sBtnBShowToggle" id="S_sBtnBHide" onclick="Sset.sBtnBShowToggle(1)">
+                                <label class='labelObj' for="S_sBtnBHide">隐藏</label>
+                                <input type="radio" class="radioObj" name="sBtnBShowToggle" id="S_sBtnBShow" onclick="Sset.sBtnBShowToggle(2)">
+                                <label class='labelObj' for="S_sBtnBShow">显示</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>文字样式：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="sBtnTxtFontToggle" id="S_sBtnTxtFontAuto" onclick="Sset.sBtnTxtFontToggle(0);" />
+                                <label class="labelObj" for="S_sBtnTxtFontAuto">默认</label>
+                                <input type="radio" class="radioObj" name="sBtnTxtFontToggle" id="S_sBtnTxtFontCus" onclick="Sset.sBtnTxtFontToggle(2);" />
+                                <label class="labelObj" for="S_sBtnTxtFontCus">自定义</label>
+                                <ul class="attrSetingList" id="S_sBtnTxtFontAttrlist">
+                                    <li><span class="labelspan">颜色：</span>
+                                        <input class="colorObj" name="colorInput" id="S_sBtnTxtFontColor" value="#000000" onchange="Sset.sBtnTxtFontColor(this.value);">
+                                    </li>
+                                    <li><span class="labelspan">文字大小：</span>
+                                        <select class="selectObj" name="sBtnTxtFontSize" id="S_sBtnTxtFontSize" onchange="Sset.sBtnTxtFontSize(this.value)">
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14" selected="selected">14</option>
+                                            <option value="15">15</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>
+                                            <option value="22">22</option>
+                                            <option value="23">23</option>
+                                            <option value="24">24</option>
+                                            <option value="25">25</option>
+                                            <option value="26">26</option>
+                                            <option value="27">27</option>
+                                            <option value="28">28</option>
+                                            <option value="29">29</option>
+                                            <option value="30">30</option>
+                                        </select>
+                                    </li>
+                                    <li><span class="labelspan">文字样式：</span>
+                                        <input class="checkboxObj" name="sBtnTxtFontStyle" type="checkbox" id="S_sBtnTxtFontBold" onclick="Sset.sBtnTxtFontBold(this)" value="bold" />
+                                        <label class="labelObj" for="S_sBtnTxtFontBold">加粗</label>
+                                        <input class="checkboxObj" type="checkbox" name="sBtnTxtFontStyle" id="S_sBtnTxtFontItalic" value="italic" onclick="Sset.sBtnTxtFontItalic(this)" />
+                                        <label for="S_sBtnTxtFontItalic" class="labelObj">斜体</label>
+                                        <input class="checkboxObj" name="sBtnTxtFontStyle" type="checkbox" id="S_sBtnTxtFontUnderline" value="underline" onclick="Sset.sBtnTxtFontUnderline(this)" />
+                                        <label class="labelObj" for="S_sBtnTxtFontUnderline">下划线</label>
+                                    </li>
+                                    <li><span class="labelspan">文字字体：</span>
+                                        <select id="S_sBtnTxtFontFamily" name="sBtnTxtFontFamily" onchange="Sset.sBtnTxtFontFamily(this.value)">
+                                            <option value="SimSun">宋体</option>
+                                            <option value="PMingLiU">新细明体</option>
+                                            <option value="FangSong_GB2312">仿宋_GB2312</option>
+                                            <option value="微软雅黑" selected="selected">微软雅黑</option>
+                                            <option value="隶书">隶书</option>
+                                            <option value="幼圆">幼圆</option>
+                                            <option value="STKaiti">华文楷体</option>
+                                            <option value="方正舒体">方正舒体</option>
+                                            <option value="华文彩云">华文彩云</option>
+                                            <option value="华文行楷">华文行楷</option>
+                                            <option value="华文宋体">华文宋体</option>
+                                            <option value="Arial">Arial</option>
+                                            <option value="Tahoma">Tahoma</option>
+                                        </select><span class="redPoint">“该项设置取决于客户电脑字体库而生效”</span>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>上边线：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="sBtnBorderTopToggle" id="S_sBtnBorderTopAuto" onclick="Sset.sBtnBorderTopToggle(0);" />
+                                <label class="labelObj" for="S_sBtnBorderTopAuto">默认</label>
+                                <input type="radio" class="radioObj" name="sBtnBorderTopToggle" id="S_sBtnBorderTopHide" onclick="Sset.sBtnBorderTopToggle(1)">
+                                <label class="labelObj" for="S_sBtnBorderTopHide">隐藏</label>
+                                <input type="radio" class="radioObj" name="sBtnBorderTopToggle" id="S_sBtnBorderTopCus" onclick="Sset.sBtnBorderTopToggle(2);" />
+                                <label class="labelObj" for="S_sBtnBorderTopCus">自定义</label>
+                                <ul class="attrSetingList" id="S_sBtnBorderTopAttrlist">
+                                    <li>
+                                        <span class="labelspan">颜色：</span>
+                                        <input class="colorObj" name="colorInput" id="S_sBtnBorderTopColor" value="#cccccc" onchange="Sset.sBtnBorderTopColor(this.value);" />
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">高度：</span>
+                                        <select class="selectObj" name="sBtnBorderTopWidth" id="S_sBtnBorderTopWidth" onchange="Sset.sBtnBorderTopWidth(this.value);">
+                                            <option value="1" selected="selected">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                        <span class="px">像素</span>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">样式：</span>
+                                        <select class="selectObj" name="sBtnBorderTopStyle" id="S_sBtnBorderTopStyle" onchange="Sset.sBtnBorderTopStyle(this.value);">
+                                            <option value="solid" selected="selected">实线</option>
+                                            <option value="dashed">虚线</option>
+                                            <option value="dotted">点状</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>下边线：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="sBtnBorderBottomToggle" id="S_sBtnBorderBottomAuto" onclick="Sset.sBtnBorderBottomToggle(0);" />
+                                <label class="labelObj" for="S_sBtnBorderBottomAuto">默认</label>
+                                <input type="radio" class="radioObj" name="sBtnBorderBottomToggle" id="S_sBtnBorderBottomHide" onclick="Sset.sBtnBorderBottomToggle(1)">
+                                <label class="labelObj" for="S_sBtnBorderBottomHide">隐藏</label>
+                                <input type="radio" class="radioObj" name="sBtnBorderBottomToggle" id="S_sBtnBorderBottomCus" onclick="Sset.sBtnBorderBottomToggle(2);" />
+                                <label class="labelObj" for="S_sBtnBorderBottomCus">自定义</label>
+                                <ul class="attrSetingList" id="S_sBtnBorderBottomAttrlist">
+                                    <li>
+                                        <span class="labelspan">颜色：</span>
+                                        <input class="colorObj" name="colorInput" id="S_sBtnBorderBottomColor" value="#cccccc" onchange="Sset.sBtnBorderBottomColor(this.value);" />
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">高度：</span>
+                                        <select class="selectObj" name="sBtnBorderBottomWidth" id="S_sBtnBorderBottomWidth" onchange="Sset.sBtnBorderBottomWidth(this.value);">
+                                            <option value="1" selected="selected">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                        <span class="px">像素</span>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">样式：</span>
+                                        <select class="selectObj" name="sBtnBorderBottomStyle" id="S_sBtnBorderBottomStyle" onchange="Sset.sBtnBorderBottomStyle(this.value);">
+                                            <option value="solid" selected="selected">实线</option>
+                                            <option value="dashed">虚线</option>
+                                            <option value="dotted">点状</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>左边线：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="sBtnBorderLeftToggle" id="S_sBtnBorderLeftAuto" onclick="Sset.sBtnBorderLeftToggle(0);" />
+                                <label class="labelObj" for="S_sBtnBorderLeftAuto">默认</label>
+                                <input type="radio" class="radioObj" name="sBtnBorderLeftToggle" id="S_sBtnBorderLeftHide" onclick="Sset.sBtnBorderLeftToggle(1)">
+                                <label class="labelObj" for="S_sBtnBorderLeftHide">隐藏</label>
+                                <input type="radio" class="radioObj" name="sBtnBorderLeftToggle" id="S_sBtnBorderLeftCus" onclick="Sset.sBtnBorderLeftToggle(2);" />
+                                <label class="labelObj" for="S_sBtnBorderLeftCus">自定义</label>
+                                <ul class="attrSetingList" id="S_sBtnBorderLeftAttrlist">
+                                    <li>
+                                        <span class="labelspan">颜色：</span>
+                                        <input class="colorObj" name="colorInput" id="S_sBtnBorderLeftColor" value="#cccccc" onchange="Sset.sBtnBorderLeftColor(this.value);" />
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">宽度：</span>
+                                        <select class="selectObj" name="sBtnBorderLeftWidth" id="S_sBtnBorderLeftWidth" onchange="Sset.sBtnBorderLeftWidth(this.value);">
+                                            <option value="1" selected="selected">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                        <span class="px">像素</span>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">样式：</span>
+                                        <select class="selectObj" name="sBtnBorderLeftStyle" id="S_sBtnBorderLeftStyle" onchange="Sset.sBtnBorderLeftStyle(this.value);">
+                                            <option value="solid" selected="selected">实线</option>
+                                            <option value="dashed">虚线</option>
+                                            <option value="dotted">点状</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>右边线：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="sBtnBorderRightToggle" id="S_sBtnBorderRightAuto" onclick="Sset.sBtnBorderRightToggle(0);" />
+                                <label class="labelObj" for="S_sBtnBorderRightAuto">默认</label>
+                                <input type="radio" class="radioObj" name="sBtnBorderRightToggle" id="S_sBtnBorderRightHide" onclick="Sset.sBtnBorderRightToggle(1)">
+                                <label class="labelObj" for="S_sBtnBorderRightHide">隐藏</label>
+                                <input type="radio" class="radioObj" name="sBtnBorderRightToggle" id="S_sBtnBorderRightCus" onclick="Sset.sBtnBorderRightToggle(2);" />
+                                <label class="labelObj" for="S_sBtnBorderRightCus">自定义</label>
+                                <ul class="attrSetingList" id="S_sBtnBorderRightAttrlist">
+                                    <li>
+                                        <span class="labelspan">颜色：</span>
+                                        <input class="colorObj" name="colorInput" id="S_sBtnBorderRightColor" value="#cccccc" onchange="Sset.sBtnBorderRightColor(this.value);" />
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">宽度：</span>
+                                        <select class="selectObj" name="sBtnBorderRightWidth" id="S_sBtnBorderRightWidth" onchange="Sset.sBtnBorderRightWidth(this.value);">
+                                            <option value="1" selected="selected">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                        <span class="px">像素</span>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">样式：</span>
+                                        <select class="selectObj" name="sBtnBorderRightStyle" id="S_sBtnBorderRightStyle" onchange="Sset.sBtnBorderRightStyle(this.value);">
+                                            <option value="solid" selected="selected">实线</option>
+                                            <option value="dashed">虚线</option>
+                                            <option value="dotted">点状</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>外间距：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="sBtnMarginToggle" id="S_sBtnMarginAuto" onclick="Sset.sBtnMarginToggle(0)">
+                                <label class="labelObj" for="S_sBtnMarginAuto">默认</label>
+                                <input type="radio" class="radioObj" name="sBtnMarginToggle" id="S_sBtnMarginCus" onclick="Sset.sBtnMarginToggle(1)">
+                                <label class="labelObj" for="S_sBtnMarginCus">自定义</label>
+                                <ul class="attrSetingList" id="S_sBtnMarginAttrlist">
+                                    <li>
+                                        <span class="labelspan">上：</span>
+                                        <input class="inputObj" name="sBtnMarginTop" id="S_sBtnMarginTop" style="width:40px;" onchange="Sset.sBtnMarginTop(this)" />
+                                        <span class="px">像素</span>
+                                        <span class="labelspan">下：</span>
+                                        <input class="inputObj" name="sBtnMarginBottom" id="S_sBtnMarginBottom" style="width:40px;" onchange="Sset.sBtnMarginBottom(this)"  />
+                                        <span class="px">像素</span>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">左：</span>
+                                        <input class="inputObj" name="sBtnMarginLeft" id="S_sBtnMarginLeft" style="width:40px;" onchange="Sset.sBtnMarginLeft(this)" />
+                                        <span class="px">像素</span>
+                                        <span class="labelspan">右：</span>
+                                        <input class="inputObj" name="sBtnMarginRight" id="S_sBtnMarginRight" style="width:40px;" onchange="Sset.sBtnMarginRight(this)"  />
+                                        <span class="px">像素</span>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>内间距：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="sBtnPaddingToggle" id="S_sBtnPaddingAuto" onclick="Sset.sBtnPaddingToggle(0)">
+                                <label class="labelObj" for="S_sBtnPaddingAuto">默认</label>
+                                <input type="radio" class="radioObj" name="sBtnPaddingToggle" id="S_sBtnPaddingCus" onclick="Sset.sBtnPaddingToggle(1)">
+                                <label class="labelObj" for="S_sBtnPaddingCus">自定义</label>
+                                <ul class="attrSetingList" id="S_sBtnPaddingAttrlist">
+                                    <li>
+                                        <span class="labelspan">上：</span>
+                                        <input class="inputObj" name="sBtnPaddingTop" id="S_sBtnPaddingTop" style="width:40px;" onchange="Sset.sBtnPaddingTop(this)" />
+                                        <span class="px">像素</span>
+                                        <span class="labelspan">下：</span>
+                                        <input class="inputObj" name="sBtnPaddingBottom" id="S_sBtnPaddingBottom" style="width:40px;" onchange="Sset.sBtnPaddingBottom(this)"  />
+                                        <span class="px">像素</span>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">左：</span>
+                                        <input class="inputObj" name="sBtnPaddingLeft" id="S_sBtnPaddingLeft" style="width:40px;" onchange="Sset.sBtnPaddingLeft(this)" />
+                                        <span class="px">像素</span>
+                                        <span class="labelspan">右：</span>
+                                        <input class="inputObj" name="sBtnPaddingRight" id="S_sBtnPaddingRight" style="width:40px;" onchange="Sset.sBtnPaddingRight(this)"  />
+                                        <span class="px">像素</span>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="submitBut">
+                    <b class="but but-blue" id="S_skinSetEnter" onclick="Sset.sBtnSetEnter()">确定</b>
+                    <b class="but but-blue" id="S_skinSetReset" onclick="Sset.sBtnSetReset()">恢复本项默认</b>
+                </div>
+            </div>
+            <!--按钮设置 end-->
+        </div>
+    </div>
+</div>
+</body>
+</html>

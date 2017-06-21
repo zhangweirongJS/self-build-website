@@ -1,0 +1,284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="/css/VNew/admin_20140730.css" />
+    <link type="text/css" rel="stylesheet" href="/css/VNew/style_editcss.css" />
+    <script type="text/javascript" src="/include/cookies.js"></script>
+    <script type="text/javascript" src="/js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/include/public.js"></script>
+    <script type="text/javascript" src="/js/VNew/public_plugins.js"></script>
+    <script type="text/javascript" src="/js/VNew/link.js"></script>
+    <script type="text/javascript" src="/js/uploadify/jquery.uploadify.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="/js/uploadify/uploadify.css">
+    <script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.all.min.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript">
+        var body_height=400;
+//        var user_name='zwr123456';
+//        document.domain = "ev123.net";
+        var w = window.parent;
+        $(function() {
+            // logo上传flash
+            $('#file_upload_falsh').uploadify({
+                'fileObjName' : 'falsh',
+                'swf'      : 'js/uploadify/uploadify.swf',
+                'uploader' : 'fileUpload.php',
+                'fileTypeDesc':'支持的格式：',
+                'fileTypeExts':'*.swf',
+                'fileSizeLimit':'3MB',
+                'queueSizeLimit' : 3,
+                'hideButton' : false,
+                'buttonImage'   : 'js/uploadify/UP.jpg',
+                'width'       : 117,
+                'height'       : 32,
+
+                // 关闭系统默认
+                'overrideEvents': ['onSelectError', 'onDialogClose'],
+                // 返回一个错误，选择文件的时候触发
+                'onSelectError':function(file, errorCode, errorMsg){
+                    switch(errorCode) {
+                        case -100:
+                            alert("上传的文件数量已经超出系统限制的"+$('#file_upload_falsh').uploadify('settings','queueSizeLimit')+"个文件！");
+                            break;
+                        case -110:
+                            alert("文件 ["+file.name+"] 大小超出系统限制的"+$('#file_upload_falsh').uploadify('settings','fileSizeLimit')+"大小！");
+                            break;
+                        case -120:
+                            alert("文件 ["+file.name+"] 大小异常！");
+                            break;
+                        case -130:
+                            alert("文件 ["+file.name+"] 类型不正确！");
+                            break;
+                    }
+                },
+                //检测FLASH失败调用
+                'onFallback':function(){
+                    alert("您未安装FLASH控件，无法上传图片！请安装FLASH控件后再试。");
+                },
+                //上传到服务器，服务器返回相应信息到data里
+                'onUploadSuccess' : function(file, data, response) {
+                    if ($.trim(data.substring(0, 7)) == "FILEID:") {
+                        var file_url = data.substring(7);
+                        $('#content_fash_msg').html("上传成功！");
+                        $('#falsh').val(file_url);
+                        var embed = '<embed src="'+file_url+'" type="application/x-shockwave-flash" width="100%" height="100%" quality="high" wmode="transparent">'
+                        $("#logo_flash_div").html(embed);
+                    }
+                }
+            });
+            // logo编辑器
+            UE.getEditor('content_t_editor',{
+                //这里可以选择自己需要的工具按钮名称,此处仅选择如下五个
+                toolbars:[[ 'source','Undo', 'Redo',  'fontfamily', 'fontsize','forecolor','bold', 'italic', 'underline', 'fontborder', 'strikethrough','|','justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|','insertorderedlist', 'insertunorderedlist','|', 'link', 'unlink', 'anchor','|','rowspacingtop', 'rowspacingbottom', 'lineheight','|', 'insertimage', 'imagenone', 'imageleft', 'imageright', 'imagecenter','|','insertvideo', 'music']],
+                autoHeightEnabled: false,
+                autoFloatEnabled: true,
+                initialFrameWidth: 658,
+                initialFrameHeight:250
+            });
+        });
+        $(function(){
+            var logo_type = $('#logo_type'),
+                innerTabT = $("#innerTabT"),
+                my_submit_div = $("#my_submit_div"),
+                nameObj = $('#name'),linkObj = $('#link'),
+                form = $("#myform");
+            /*标签单击事件*/
+            innerTabT.on({
+                click : function(){
+                    var t = $(this),dataId = t.data('id'),type = t.data('type');
+                    t.addClass('cur').siblings().removeClass('cur');
+                    $("#innerTabC").find('#'+dataId).show().siblings().hide();
+                    logo_type.val(type);
+                    if(type == 2){
+                        if(!$("#logo_flash_div").find('embed').length){
+                            $("#logo_flash_div").html('<embed src="" type="application/x-shockwave-flash" width="100%" height="100%" quality="high" wmode="transparent">');
+                        }
+                    }
+                }
+            },'li');
+            innerTabT.find('li').each(function(){
+                if($(this).data('type') == logo_type.val()){
+                    $(this).click();
+                }
+            });
+            /*logo图片的上传尺寸*/
+            var iPicWidth = window.parent.Ev.pubVar.wIframe.contents().find('#header').width();
+            iPicWidth = parseInt(iPicWidth);
+            iPicWidth > 960 ? $('#pic_width').html(1440) : $('#pic_width').html(960);
+            /*提交按钮绑定事件*/
+            my_submit_div.on({
+                click : function() {
+                    var t = $(this),action = t.data('action');
+                    switch(action){
+                        case 'submit':
+                            var name = $.trim(nameObj.val()),link = $.trim(linkObj.val()),
+                                fun = function(o,t){
+                                    w.Ev.pubFun.alertWindow(t,'warn');
+                                    o.focus();
+                                    return false;
+                                };
+                            if(name == ''){
+                                return fun(nameObj,"请填写标题！");
+                            }
+                            if(link == ''){
+                                return fun(linkObj,"链接不能为空！");
+                            };
+                            if(logo_type.val() == 3) {
+                                var content_t = $.trim(UE.getEditor('content_t_editor').getContent());
+                                $('#logo_text').val(content_t);
+                                if(content_t==''){
+                                    w.Ev.pubFun.alertWindow('请填写内容！','warn');
+                                    UE.getEditor('content_t_editor').focus();
+                                    return false;
+                                }
+                            }
+                            if(logo_type.val() == 4){
+                                var content_adObj = $('#content_ad');
+                                if(content_adObj.val() == ''){
+                                    return fun(content_adObj,"请填写您的代码！");
+                                }
+                            }
+                            t.removeClass('but-blue').addClass('but-gray').text('保存中...');
+                            $('#add_tag').val(1);
+                            form.submit();
+                            break;
+                        case 'reset':
+                            w.close_window();
+                            break;
+                    }
+                }
+            },'.but');
+        });
+    </script>
+</head>
+<body>
+<div class="tabArea logo-tab-area">
+    <div class="alertTab" id="alert_tab">
+        <div class="alertTabC" id="alert_tab_c">
+            <div class="alertTabCIn logo-admin" id="logoAdmin">
+                <form action="/tj_logo_set" method="post" enctype="multipart/form-data" id="myform" name="myform">
+                    <input type="hidden" name="logo_type" id="logo_type" value="1" >
+                    <div class="tableDiv">
+                        <table>
+                            <tr class="tr-logo-name">
+                                <th class="v-a-m">标 题：<em class="starred">*</em></th>
+                                <td>
+                                    <span class="text-element-o t-27-gray">
+                                        <span class="text-element-i">
+                                            <input id="name" name="name"  value="logo">
+                                        </span>
+                                    </span>
+                                    <span class="but-element-o b-26-blue">
+                                        <em class="but-element-i">
+                                            <a href="javascript:show_iframe(2,0);">查找标题</a>
+                                        </em>
+                                    </span>
+                                    <span id="name_error" class="redPoint"></span>
+                                </td>
+                            </tr>
+                            <tr class="tr-logo-url">
+                                <th class="v-a-m">链 接：<em class="starred">*</em></th>
+                                <td>
+                                    <span class="text-element-o t-27-disabled">
+                                        <span class="text-element-i">
+                                            <input id="link" name="link" value="#" readonly="readonly" onclick="show_iframe('2',0)" />
+                                        </span>
+                                    </span>
+                                    <span class="but-element-o b-26-blue">
+                                        <em class="but-element-i">
+                                            <a href="javascript:show_iframe(2,0);">查找链接</a>
+                                        </em>
+                                    </span>
+                                    <span id="link_error" class="redPoint"></span>
+                                </td>
+                            </tr>
+                            <tr class="tr-logo-target">
+                                <th class="v-a-m">打开方式：<em class="starred">*</em></th>
+                                <td>
+                                    <select name="target_type" class="selectObj">
+                                        <option value="0" selected="selected" >本页打开</option>
+                                        <option value="1"  >新页打开</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="tr-logo-content">
+                                <th>内 容：<font color='red'>*</font></th>
+                                <td>
+                                    <div class="inner-tab logo-inner-tab" id="innerTab">
+                                        <div class="inner-tab-t" id="innerTabT">
+                                            <ul class="q">
+                                                <li data-type="1" data-id="logoImg" id="logoImg_tab">图片</li>
+                                                <li data-type="2" data-id="logoFlash" id="logoFlash_tab">FLASH</li>
+                                                <li data-type="3" data-id="logoTxt" id="logoTxt_tab">文本</li>
+                                                <li data-type="4" data-id="logoAdd" id="logoAdd_tab">广告代码</li>
+                                            </ul>
+                                        </div>
+                                        <div class="inner-tab-c" id="innerTabC">
+                                            <div class="inner-tab-c-in logo-img" id="logoImg" style="display:block;">
+                                                <div class="img-show-area" id="show_pic" >
+                                                    <img src="http://aimg8.dlszywz.com/ev_user_module_content_tmp/2017_02_15/tmp1487151697_1380917_s.png"  />                                                </div>
+                                                <div class="logo-img-but-group">
+                                                    <span class="but-element-o b-26-blue">
+                                                        <em class="but-element-i">
+                                                            <a href="javascript:tj_show_selector(1);">上传图片</a>
+                                                        </em>
+                                                    </span>
+                                                    <span class="but-element-o b-26-orange" style="">
+                                                        <em class="but-element-i">
+                                                            <a href="javascript:tj_show_editor(1);" id="edit_pic" >美化图片</a>
+                                                        </em>
+                                                    </span>
+                                                    <span class="but-element-o b-26-red" id="del_pic">
+                                                            <em class="but-element-i">
+                                                                <a href="javascript:;">清除图片</a>
+                                                            </em>
+                                                        </span>
+                                                    <a target="_blank" href="/VNew/down.php?pic=http://aimg8.dlszywz.com/ev_user_module_content_tmp/2017_02_15/tmp1487151697_1380917_s.png">图片下载</a>
+                                                </div>
+                                                <span id="pic_width" style="display: none;"></span>
+                                                <div class="redPoint">通栏最大尺寸宽 <span>1440</span>px 高 <span>50</span>px 的图片，非通栏最大尺寸宽 <span>960</span>px 高 <span id="pic_height">50</span>px 的图片</div>
+                                                <input type="hidden" name="logo_pic" id="pic" value="http://aimg8.dlszywz.com/ev_user_module_content_tmp/2017_02_15/tmp1487151697_1380917_s.png" />
+                                                <script stye="text/javascript">
+                                                    $("#del_pic").on("click", function(){
+                                                        $("#show_pic").html("");
+                                                        $("#show_pic").hide("");
+                                                        $("#pic").val("");
+                                                        $("#del_pic").remove();
+                                                    })
+                                                </script>
+                                            </div>
+                                            <div class="inner-tab-c-in logo-flash" id="logoFlash">
+                                                <span>您现在是免费用户暂时不能使用该功能，<a target="_parent" href="/user_make_shop.php?type=3">立即升级</a></span>
+                                            </div>
+                                            <div class="inner-tab-c-in logo-txt" id="logoTxt">
+                                                <div class="logo-txt-div">
+                                                    <script id="content_t_editor" type="text/plain">
+
+                                                    </script>
+                                                </div>
+                                                <input type='hidden' name='logo_text' id='logo_text' value="" />
+                                            </div>
+                                            <div class="inner-tab-c-in logo-add" id="logoAdd">
+                                                <span>您现在是免费用户暂时不能使用该功能，<a target="_parent" href="/user_make_shop.php?type=3">立即升级</a></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="submitBut" id="my_submit_div">
+                        <b class="but but-blue" data-action="submit">保存</b>
+                        <b class="but but-gray" data-action="reset">取消</b>
+                    </div>
+                    <input id="add_tag" name="add_tag" value="0" type="hidden">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

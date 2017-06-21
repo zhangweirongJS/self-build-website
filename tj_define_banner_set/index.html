@@ -1,0 +1,186 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gbk">
+    <title>焦点图</title>
+    <link type="text/css" rel="stylesheet" href="/css/VNew/admin_20140730.css">
+    <link type="text/css" rel="stylesheet" href="/css/VNew/style_editcss.css">
+    <script type="text/JavaScript" src="/js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/js/VNew/public_plugins.js"></script>
+    <script type="text/javascript" src="/include/public.js"></script>
+    <script type="text/javascript">
+//        document.domain = "ev123.net";
+        var w = window.parent;
+        $(function(){
+            var my_submit_div = $("#my_submit_div"),form = $('#myform'),
+                bannerColumnList = $("#bannerColumnList"),showPagSet = $("#showPagSet");
+            showPagSet.on({
+                click : function(){
+                    if($(this).val() == 2){
+                        bannerColumnList.css('visibility','visible')
+                    }else{
+                        bannerColumnList.css('visibility','hidden')
+                    }
+                }
+            },'input[type="radio"]');
+            $("#bannerColumnList").cScroll({
+                w:10,
+                tbB :true
+            });
+            $('#admin_banner_type_ul').on({
+                click : function(){
+                    var t = $(this),
+                        tmp_rel = t.data('id');
+                    t.addClass('cur').siblings('li').removeClass('cur');
+                    $('#show_style').val(tmp_rel);
+                }
+            },'li');
+            my_submit_div.on({
+                click : function(){
+                    var t = $(this),action = t.data('action');
+                    switch(action){
+                        case 'submit' :
+                            t.removeClass('but-blue').addClass('but-gray').text('保存中...');
+                            $('#add_tag').val(1);
+                            form.submit();
+                            break;
+                        case 'reset':
+                            w.close_window();
+                            break;
+                    }
+                }
+            },'.but');
+        });
+    </script>
+</head>
+<body>
+<div class="tabArea banner-tab-area">
+    <div class="alertTab" id="alert_tab">
+        <div class="TabCLoading" id="tabc_loading"></div>
+        <div class="alertTabT" id="alert_tab_t">
+            <ul>
+                <li data-id="bannerAdd" id="bannerAdd_tab"><a href="/tj_define_banner">上传焦点图</a></li>
+                <li data-id="bannerAdmin" id="bannerAdmin_tab"><a href="/tj_define_banner_list">管理焦点图</a></li>
+                <li data-id="bannerSet" id="bannerSet_tab" class="cur"><a href="javascript:;">效果设置</a></li>
+            </ul>
+        </div>
+        <div class="alertTabC" id="alert_tab_c">
+            <div class="alertTabCIn banner-set" id="bannerSet">
+                <form action="/tj_define_banner_set" method="post" enctype="multipart/form-data" id="myform" name="myform">
+                    <div class="tableDiv">
+                        <div class="tableWrap">
+                            <table>
+                                <tbody><tr class="tr-banner-style">
+                                    <th class="v-a-m">幻灯片样式：<em class="starred">*</em></th>
+                                    <td>
+                                        <ul class="img-show-list" id="admin_banner_type_ul">
+                                            <li data-id="1" title="点击选择样式" class="cur">
+                                                <a href="javascript:;"><img src="http://img3.ev123.com/set_module/banner02.png"></a>
+                                                <em></em>
+                                            </li>
+                                            <li data-id="2" title="点击选择样式">
+                                                <a href="javascript:;"><img src="http://img3.ev123.com/set_module/banner01.png?asd"></a>
+                                                <em></em>
+                                            </li>
+                                            <li data-id="3" title="点击选择样式">
+                                                <a href="javascript:;"><img src="http://img3.ev123.com/set_module/banner04.jpg"></a>
+                                                <em></em>
+                                            </li>
+                                        </ul>
+                                        <input type="hidden" name="show_style" id="show_style" value="1">
+                                    </td>
+                                </tr>
+                                <tr class="tr-animat-style">
+                                    <th class="v-a-m">切换方式：<em class="starred">*</em></th>
+                                    <td>
+                                        <select name="run_mode" class="selectObj">
+                                            <option value="1" selected="selected">上下切换</option>
+                                            <option value="2">左右切换</option>
+                                            <option value="3">渐隐渐现切换</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr class="move_param">
+                                    <th class="v-a-m">切换速度：<em class="starred"></em></th>
+                                    <td>
+                                        <select name="run_speed" class="selectObj">
+                                            <option value="1">1秒</option>
+                                            <option value="2">2秒</option>
+                                            <option value="3">3秒</option>
+                                            <option value="4">4秒</option>
+                                            <option value="5">5秒</option>
+                                            <option value="6" selected="selected">6秒</option>
+                                            <option value="7">7秒</option>
+                                            <option value="8">8秒</option>
+                                            <option value="9">9秒</option>
+                                            <option value="10">10秒</option>
+                                            <option value="11">11秒</option>
+                                            <option value="12">12秒</option>
+                                            <option value="13">13秒</option>
+                                            <option value="14">14秒</option>
+                                            <option value="15">15秒</option>
+                                            <option value="16">16秒</option>
+                                            <option value="17">17秒</option>
+                                            <option value="18">18秒</option>
+                                            <option value="19">19秒</option>
+                                            <option value="20">20秒</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr class="move_param">
+                                    <th>显示位置：<em class="starred"></em></th>
+                                    <td>
+                                        <div class="radio-area" id="showPagSet">
+                                            <label class="labelObj"><input class="radioObj" data-id="all" type="radio" checked="checked" value="0" name="channel_ids">所有页面显示</label>
+                                            <label class="labelObj"><input class="radioObj" data-id="index" type="radio" value="1" name="channel_ids">仅在首页显示 </label>
+                                            <label class="labelObj"><input class="radioObj" data-id="custom" type="radio" value="2" name="channel_ids">在指定的栏目显示</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <td>
+                                        <div style="visibility:hidden;" class="banner-column-list" id="bannerColumnList">
+                                            <ul class="list-group">
+                                                <li class="l-g-e"><div class="l-g-e-i"><label class="labelObj"><input class="checkboxObj" type="checkbox" value="1" name="ids[]">首页</label></div></li>
+                                                <li class="l-g-e"><div class="l-g-e-i"><label class="labelObj"><input class="checkboxObj" type="checkbox" value="5" name="ids[]">企业位置</label></div></li>
+                                                <li class="l-g-e"><div class="l-g-e-i"><label class="labelObj"><input class="checkboxObj" type="checkbox" value="6" name="ids[]">搜索页</label></div></li>
+                                                <li class="l-g-e"><div class="l-g-e-i"><label class="labelObj"><input class="checkboxObj" type="checkbox" value="7" name="ids[]">在线留言</label></div></li>
+                                                <li class="l-g-e"><div class="l-g-e-i"><label class="labelObj"><input class="checkboxObj" type="checkbox" value="8" name="ids[]">底部文章</label></div></li>
+                                                <li class="l-g-e"><div class="l-g-e-i"><label class="labelObj"><input class="checkboxObj" type="checkbox" value="10" name="ids[]">登录</label></div></li>
+                                                <li class="l-g-e"><div class="l-g-e-i"><label class="labelObj"><input class="checkboxObj" type="checkbox" value="11" name="ids[]">注册</label></div></li>
+                                                <li class="l-g-e"><div class="l-g-e-i"><label class="labelObj"><input class="checkboxObj" type="checkbox" value="14798675" name="ids[]">设计项目</label></div></li>
+                                                <li class="l-g-e"><div class="l-g-e-i"><label class="labelObj"><input class="checkboxObj" type="checkbox" value="14798674" name="ids[]">工程业绩</label></div></li>
+                                                <li class="l-g-e"><div class="l-g-e-i"><label class="labelObj"><input class="checkboxObj" type="checkbox" value="14798676" name="ids[]">关于我们</label></div></li>
+                                                <li class="l-g-e"><div class="l-g-e-i"><label class="labelObj"><input class="checkboxObj" type="checkbox" value="14798677" name="ids[]">联系我们</label></div></li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody></table>
+                        </div>
+                    </div>
+                    <div class="submitBut" id="my_submit_div">
+                        <b class="but but-blue" data-action="submit">保存</b>
+                        <b class="but but-gray" data-action="reset">取消</b>
+                        <input id="add_tag" name="add_tag" value="0" type="hidden">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function friame_kg() {
+        var tmp_title='编辑内容';
+        var body_height2=$('body').height();
+        if(body_height2>360){
+            body_height=body_height2+50;
+            window.parent.resize_window('w1',tmp_title,700,body_height);
+        }else if(body_height2<360){
+            window.parent.resize_window('w1',tmp_title,700,400);
+        }
+    }
+    $(function(){friame_kg();});
+</script>
+
+
+</body></html>

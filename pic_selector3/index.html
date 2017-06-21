@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+    <title>图片选择器</title>
+    <link rel="Stylesheet" type="text/css" href="/css/pic_select/pic_select.css??212320170308wer3" />
+    <link type="text/css" href="/jquery/demos.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/css/VNew/style_editcss.css" />
+    <script src="/js/jquery-1.7.1.min.js" language="JavaScript" ></script>
+
+    <script language="javascript" src="/js/VNew/link.js?asd"></script>
+    <script type="text/javascript" src="/include/public.js"></script>
+</head>
+<body>
+<div class="imgSet">
+    <div class="imgSet_tab">
+        <div class="alertTabT" id="alert_tab_t">
+            <ul>
+                <li><a href="/pic_selector?tj=1&banner=1&t_width=1440&t_height=480">上传</a></li>
+                <li><a href="/pic_selector2?tj=1&banner=1&t_width=1440&t_height=480">素材库</a></li>
+                <li class="cur"><a href="/pic_selector3?tj=1&banner=1&t_width=1440&t_height=480">我的图片</a></li>
+                <li><a href="/pic_selector4?tj=1&banner=1&t_width=1440&t_height=480">图片搬家</a></li>
+            </ul>
+            <a id="addMo_customStyle_btn" class="addMoCustomStyleBtn" style="display: none;">添加自定义样式</a>
+        </div>
+        <div class="imgSet_tab_center">
+            <div class="me_File" id="me_File">
+                <div class="imgSet_tit">
+                    <!-- <span class="fr">
+                        <em>排序：</em>
+                        <select class="in_select me_File_set">
+                            <option>按时间大小</option>
+                            <option>按文件大小</option>
+                            <option>按文件名称</option>
+                        </select>
+                    </span>
+                    <div class="jd">
+                        <label class="jdText">共<em id="total">112</em>张，正在处理第<i id="last">1</i>张</label>
+                        <span class="jdImg">
+                            <em id="process"></em>
+                        </span>
+                    </div>-->
+                    <input type="text" name="pic_name" value="" id="pic_name" placeholder="图片名称" class="in_text margin_r search_text">
+                    <select class="in_select margin_r me_File_set" id="in_select" onchange="changeType()">
+                        <option selected="selected" value="0">产品图</option>
+                        <option  value="1">文章图</option>
+                        <option  value="2">图册</option>
+                        <option  value="3">相册</option>
+                        <!-- <option>图片编辑器</option> -->
+                        <option  value="4">其他</option>
+                    </select>
+                    <a href="javascript:;" class="search_btn" onclick="changeType()">搜索</a>
+                </div>
+                <div class="imgSet_list" id="imgSet_list">
+                    <div style="width:100%;line-height:50px; text-align:center;font-size:12px; font-weight:bold">暂无找到图片</div>
+                    <div class="listMore" id="listMore" style="display:none;">
+                        <a href="javascript:;" style="margin: 0px auto; width: 99%;"></a>
+                    </div>
+                </div>
+                <div class="list_btn" id="list_btn">
+                    <a href="###" class="Btn_ok" data-id="o">确定</a>
+                    <a href="###" class="Btn_disable" data-id="r">取消</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script language="javascript">
+    var PicArr = [],maximum = 1;
+    $(function(){
+        if (!Array.prototype.indexOf){
+            Array.prototype.indexOf = function(elt /*, from*/){
+                var len = this.length >>> 0;
+                var from = Number(arguments[1]) || 0;
+                from = (from < 0)
+                    ? Math.ceil(from)
+                    : Math.floor(from);
+                if (from < 0)
+                    from += len;
+                for (; from < len; from++)
+                {
+                    if (from in this &&
+                        this[from] === elt)
+                        return from;
+                }
+                return -1;
+            };
+        }
+        var img_Date = $("#img_Date"),
+            imgSet_list = $("#imgSet_list"),
+            imgSet = $("#imgSet"),
+            listMore = $("#listMore"),
+            list_btn = $("#list_btn");
+        list_btn.on({
+            click : function(){
+                var t = $(this),
+                    c = t.data('id');
+                if(c == 'o'){
+                    close_div();
+                }else if(c =='r'){
+                    window.parent.close_window('w5');
+                }
+            }
+        },'a');
+        imgSet_list.on({
+            scroll : function(){
+                var t = $(this),only = t.scrollTop() + t.height(),
+                    ul = imgSet;
+                ulH = ul.height() - 800;
+                if(t.data('x') != 1){
+                    if(only > ulH){
+                        listMore.trigger('click');
+                        t.data('x',1);
+                    }
+                }
+            }
+        });
+        // 查看更多
+        listMore.on('click',function() {
+            var time = Date.parse(new Date());
+            var listNum = imgSet.find('li').size();
+            $.ajax({
+                url: '/action/pic_selector/ajax_get_mypic.php?time='+time,
+                type: 'POST',
+                dataType: 'json',
+                data: {'listNum': listNum,'type':0,'pic_name':''},
+                success:function (data) {
+                    var listStr = '';
+                    if ( data ) {
+                        for (var i in data) {
+                            listStr += '<li class="list" id="list_'+i+'" data-id="'+i+'" data-pic="'+data[i]['pic2']+'">';
+                            listStr += '<a href="###">';
+                            listStr += '<span class="pic"><img src="'+data[i]['pic']+'" title="'+data[i]['name']+'"></span>';
+                            listStr += '<p class="pic_name">';
+                            if(data[i]['name'])
+                                listStr += data[i]['name']+'</p>';
+                            else
+                                listStr += '无名称</p>';
+                            listStr += '<a href="###" class="choose"></a>';
+                            listStr += '<a href="###" class="del_img" data-id="'+i+'"></a>';
+                            listStr += '</a></li>';
+                        }
+                        imgSet.append(listStr);
+                        imgSet_list.data('x',0);
+                    }
+                }
+            });
+        });
+        imgSet.on({
+            click : function(){
+                var tmpId = $(this).data('id');
+                if(!PicArr || PicArr.indexOf(tmpId)==-1){
+                    if(maximum>1){
+                        if(PicArr.length+1>maximum){
+                            window.parent.Ev.pubFun.alertWindow('最多可选择'+maximum+'张图片！','error');
+                            return false;
+                        }
+                        PicArr.push(tmpId);
+                        $(this).addClass("cur");//siblings().removeClass("cur");
+                    }else{
+                        PicArr = [tmpId];
+                        $(this).addClass("cur").siblings().removeClass("cur");
+                    }
+                    $(this).find(".choose").first().addClass("cur_img");
+                }else{
+                    PicArr = remove(PicArr,tmpId);
+                    $(this).removeClass("cur");
+                    $(this).find(".choose").first().removeClass("cur_img");
+                }
+            }
+        },'li');
+        imgSet.on({
+            click : function(event){
+                event.stopPropagation();
+                if(confirm('删除文件会影响到所有使用该文件的地方，确定删除吗？')){
+                    var obj = $(this);
+                    var id = obj.data('id');
+                    if(!id){
+                        window.parent.Ev.pubFun.alertWindow('请指定要删除的图片');
+                        return false;
+                    }
+                    var time = Date.parse(new Date());
+                    $.ajax({
+                        url: '/action/pic_selector/ajax_delete_pic.php?time='+time,
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {'pid':id,'type':1,'w':'mypic'},
+                        success:function (data) {
+                            if(data==1){
+                                window.parent.Ev.pubFun.alertWindow('删除成功!');
+                                obj.parents('.list').remove();
+                                var tmpId = obj.parent().data('id');
+                                if(PicArr.indexOf(tmpId)>-1){
+                                    PicArr = remove(PicArr,tmpId);
+                                }
+                            }else{
+                                window.parent.Ev.pubFun.alertWindow('删除失败，请稍后重试！');
+                            }
+                        }
+                    });
+                }
+            }
+        },'li .del_img');
+    });
+    function remove(arr,val){
+        var index = arr.indexOf(val);
+        if(index!=-1) arr.splice(index,1);
+        return arr;
+    }
+    //时间戳
+    function UTCTimeDemo(){
+        var now = new Date().getTime();
+        var datestr=escape(now*1000+Math.round(Math.random()*1000));
+        return datestr;
+    }
+    function close_div(img_source){
+        if(!PicArr.length){
+            window.parent.Ev.pubFun.alertWindow("请先选择图片",'error');
+            return false;
+        }
+        window.parent.Ev.pubFun.alertWindow("请设置图片裁剪压缩方式");
+        var img_source = $('#list_'+PicArr[0]).data('pic');
+        var body_width = '100%';
+        var body_height = '100%';
+        var is_frame='0';
+        var url='/pic_cut.php?from=mypic&type=1&img_source='+img_source+'&tj=1&banner=1&t_width=1440&t_height=480&is_sel2=1&u='+UTCTimeDemo();
+        window.location.href = url;
+        window.parent.Ev.pubFun.addLoadingWindow();
+    }
+
+    function changeType(){
+        var type = $("#in_select option:selected").val();
+        var pic_name = $("#pic_name").val();
+        window.location.href = "/pic_selector3.php?id=0&tj=1&size=0&banner=1&t_width=1440&t_height=480&type="+type+"&pic_name="+pic_name;
+    }
+</script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="renderer" content="webkit|ie-comp|ie-stand">
+  <!-- <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" /> -->
+  <title>网站风格选择-管理后台</title>
+  <link rel="stylesheet" type="text/css" href="js/VNew/msg/codebase/dhtmlxwindows.css">
+  <link rel="stylesheet" type="text/css" href="js/VNew/msg/codebase/skins/dhtmlxwindows_dhx_skyblue.css">
+  <link rel="stylesheet" type="text/css" href="js/VNew/msg/codebase/dhtmlxcolorpicker.css">
+  <script src="js/VNew/msg/codebase/dhtmlxcommon.js"></script>
+  <script src="js/VNew/msg/codebase/dhtmlxwindows.js"></script>
+  <script src="js/VNew/msg/codebase/dhtmlxcontainer.js"></script>
+  <!--  <script src="include/cookies.js" language="JavaScript"></script>-->
+  <script src="js/jquery-1.7.1.min.js" language="JavaScript"></script>
+  <script src="http://open.web.meitu.com/sources/xiuxiu.js" type="text/javascript"></script>
+  <link href="js/ev_popup/skin/black/skin.css" rel="stylesheet">
+  <script type="text/javascript" src="js/ev_popup/ev_popup.js"></script>
+  <script src="js/VNew/public.js" language="JavaScript"></script>
+  <script src="js/VNew/link.js" language="JavaScript"></script>
+  <script language="javascript" src="js/VNew/user_define2.js"></script>
+  <link href="css/VNew/admin_20140730.css" rel="stylesheet">
+  <script type="text/javascript" src="js/VNew/functions.js"></script>
+  <script type="text/javascript" src="js/VNew/jquery-ui.custom.js"></script>
+  <script type="text/javascript" src="js/VNew/public_plugins.js"></script>
+
+  <!-- <script type="text/javascript" src="js/VNew/tj/public_fun.js"></script>-->
+  <script type="text/javascript" src="js/VNew/admin_20140730.js"></script>
+  <script type="text/javascript" src="js/VNew/json2.js"></script>
+  <script type="text/javascript" src="js/laytpl.js"></script>
+  <script type="text/javascript" src="js/VNew/tj/save_index.js"></script>
+
+  <script type="text/javascript">
+    //document.domain = "ev123.net";
+   // var sUsername='a2889617';
+    //var siteDomain='a2889617.v.ev123.net';
+    var siteUserTypeValTag = 1;
+    Ev.pubVar.editStatus = true;
+    Ev.pubVar.adminColumn = true;
+    Ev.pubVar.adminUpcon = true;
+    Ev.pubVar.adminAdvancedfun = true;
+
+    Ev.pubVar.version = "copytj"; //网站的类型，主要分为成品版--->cp,和拖建版--->tj,拷贝拖拽版---->copytj
+    Ev.admin.tj.v.sysROnlyOneSysMTypes = [41,42,43,62,65,82,89,90,96,121,122,123,124,125,126,129,130,140,141,142,143,145,148,149,211,213,212,214,150,151,152,153];
+    Ev.admin.tj.v.navTypes = [18,123,124,125,126,130,140,141,142,143];
+    Ev.pubVar.adList = {"666":"                        &lt;div class=&quot;buy-left&quot; id=&quot;webBuy&quot;&gt;                        &lt;i class=&quot;small-icon icon-c&quot;&gt;&lt;/i&gt;                        &lt;div class=&quot;buy-text&quot;&gt;                        &lt;img src=&quot;/images/VNew/chunjietehui_icon.png&quot; /&gt;电脑网站+手机网站+微信网站+全部模板+5G空间  =                        &lt;span class=&quot;red-color font-21&quot;&gt;200&lt;/span&gt;元/                        &lt;span class=&quot;red-color&quot;&gt;1&lt;/span&gt;年                        &lt;/div&gt;                        &lt;/div&gt;                        &lt;div class=&quot;buy-right&quot;&gt;                        &lt;span class=&quot;buy-but&quot;&gt;                        &lt;a id=&quot;webBuyUrl&quot; href=&quot;/user_make_shop.php?type=116&quot; title=&quot;点击购买&quot; class=&quot;small-icon icon-buy&quot;&gt;我要购买&lt;/a&gt;                        &lt;/span&gt;                        &lt;span class=&quot;buy-zs&quot;&gt;&lt;i class=&quot;small-icon icon-z&quot;&gt;惠&lt;/i&gt;&lt;b&gt;购3年送1年&lt;/b&gt;&lt;/span&gt;                        &lt;span class=&quot;buy-zs&quot;&gt;&lt;i class=&quot;small-icon icon-z&quot;&gt;赠&lt;/i&gt;&lt;b&gt;企业OA&lt;/b&gt;&lt;/span&gt;                        &lt;span class=&quot;buy-zs&quot;&gt;&lt;i class=&quot;small-icon icon-z&quot;&gt;赠&lt;/i&gt;&lt;b&gt;4000电话&lt;/b&gt;&lt;/span&gt;                        &lt;/div&gt;                    ","667":"                        &lt;div class=&quot;buy-left&quot; id=&quot;webBuy&quot;&gt;                        &lt;i class=&quot;small-icon icon-c&quot;&gt;&lt;/i&gt;                        &lt;div class=&quot;buy-text&quot;&gt;                        &lt;img src=&quot;/images/VNew/chunjietehui_icon.png&quot; /&gt;电脑网站+手机网站+微信网站+全部模板+5G空间  =                        &lt;span class=&quot;red-color font-21&quot;&gt;200&lt;/span&gt;元/                        &lt;span class=&quot;red-color&quot;&gt;1&lt;/span&gt;年                        &lt;/div&gt;                        &lt;/div&gt;                        &lt;div class=&quot;buy-right&quot;&gt;                        &lt;span class=&quot;buy-but&quot;&gt;                        &lt;a id=&quot;webBuyUrl&quot; href=&quot;/user_make_shop.php?type=116&quot; title=&quot;点击购买&quot; class=&quot;small-icon icon-buy&quot;&gt;我要购买&lt;/a&gt;                        &lt;/span&gt;                        &lt;span class=&quot;buy-zs&quot;&gt;&lt;i class=&quot;small-icon icon-z&quot;&gt;惠&lt;/i&gt;&lt;b&gt;购3年送1年&lt;/b&gt;&lt;/span&gt;                        &lt;span class=&quot;buy-zs&quot;&gt;&lt;i class=&quot;small-icon icon-z&quot;&gt;赠&lt;/i&gt;&lt;b&gt;企业OA&lt;/b&gt;&lt;/span&gt;                        &lt;span class=&quot;buy-zs&quot;&gt;&lt;i class=&quot;small-icon icon-z&quot;&gt;赠&lt;/i&gt;&lt;b&gt;4000电话&lt;/b&gt;&lt;/span&gt;                        &lt;/div&gt;                    ","668":"                        &lt;div class=&quot;buy-left&quot; id=&quot;webBuy&quot;&gt;                        &lt;i class=&quot;small-icon icon-c&quot;&gt;&lt;/i&gt;                        &lt;div class=&quot;buy-text&quot;&gt;                        &lt;img src=&quot;/images/VNew/chunjietehui_icon.png&quot; /&gt;电脑商城+手机商城+微信商城+全部模板+10G空间 =                        &lt;span class=&quot;red-color font-21&quot;&gt;700元&lt;/span&gt;元/                        &lt;span class=&quot;red-color&quot;&gt;1&lt;/span&gt;年                        &lt;/div&gt;                        &lt;/div&gt;                        &lt;div class=&quot;buy-right&quot;&gt;                        &lt;span class=&quot;buy-but&quot;&gt;                        &lt;a id=&quot;webBuyUrl&quot; href=&quot;/user_make_shop.php?type=117&quot; title=&quot;点击购买&quot; class=&quot;small-icon icon-buy&quot;&gt;我要购买&lt;/a&gt;                        &lt;/span&gt;                        &lt;span class=&quot;buy-zs&quot;&gt;&lt;i class=&quot;small-icon icon-z&quot;&gt;惠&lt;/i&gt;&lt;b&gt;购3年送1年&lt;/b&gt;&lt;/span&gt;                        &lt;span class=&quot;buy-zs&quot;&gt;&lt;i class=&quot;small-icon icon-z&quot;&gt;赠&lt;/i&gt;&lt;b&gt;企业OA&lt;/b&gt;&lt;/span&gt;                        &lt;span class=&quot;buy-zs&quot;&gt;&lt;i class=&quot;small-icon icon-z&quot;&gt;赠&lt;/i&gt;&lt;b&gt;4000电话&lt;/b&gt;&lt;/span&gt;                        &lt;/div&gt;                    ","669":"                        &lt;div class=&quot;buy-left&quot; id=&quot;webBuy&quot;&gt;                        &lt;i class=&quot;small-icon icon-c&quot;&gt;&lt;/i&gt;                        &lt;div class=&quot;buy-text&quot;&gt;                        &lt;img src=&quot;/images/VNew/chunjietehui_icon.png&quot; /&gt;电脑网站+手机网站+微信网站+全部模板+5G空间  =                        &lt;span class=&quot;red-color font-21&quot;&gt;200&lt;/span&gt;元/                        &lt;span class=&quot;red-color&quot;&gt;1&lt;/span&gt;年                        &lt;/div&gt;                        &lt;/div&gt;                        &lt;div class=&quot;buy-right&quot;&gt;                        &lt;span class=&quot;buy-but&quot;&gt;                        &lt;a id=&quot;webBuyUrl&quot; href=&quot;/user_make_shop.php?type=116&quot; title=&quot;点击购买&quot; class=&quot;small-icon icon-buy&quot;&gt;我要购买&lt;/a&gt;                        &lt;/span&gt;                        &lt;span class=&quot;buy-zs&quot;&gt;&lt;i class=&quot;small-icon icon-z&quot;&gt;惠&lt;/i&gt;&lt;b&gt;购3年送1年&lt;/b&gt;&lt;/span&gt;                        &lt;span class=&quot;buy-zs&quot;&gt;&lt;i class=&quot;small-icon icon-z&quot;&gt;赠&lt;/i&gt;&lt;b&gt;企业OA&lt;/b&gt;&lt;/span&gt;                        &lt;span class=&quot;buy-zs&quot;&gt;&lt;i class=&quot;small-icon icon-z&quot;&gt;赠&lt;/i&gt;&lt;b&gt;4000电话&lt;/b&gt;&lt;/span&gt;                        &lt;/div&gt;                    ","670":"                        &lt;div class=&quot;buy-left&quot; id=&quot;webBuy&quot;&gt;                        &lt;i class=&quot;small-icon icon-c&quot;&gt;&lt;/i&gt;                        &lt;div class=&quot;buy-text&quot;&gt;                        &lt;img src=&quot;/images/VNew/chunjietehui_icon.png&quot; /&gt;电脑网站+手机网站+微信网站+全部模板+5G空间  =                        &lt;span class=&quot;red-color font-21&quot;&gt;200&lt;/span&gt;元/                        &lt;span class=&quot;red-color&quot;&gt;1&lt;/span&gt;年                        &lt;/div&gt;                        &lt;/div&gt;                        &lt;div class=&quot;buy-right&quot;&gt;                        &lt;span class=&quot;buy-but&quot;&gt;                        &lt;a id=&quot;webBuyUrl&quot; href=&quot;/user_make_shop.php?type=116&quot; title=&quot;点击购买&quot; class=&quot;small-icon icon-buy&quot;&gt;我要购买&lt;/a&gt;                        &lt;/span&gt;                        &lt;span class=&quot;buy-zs&quot;&gt;&lt;i class=&quot;small-icon icon-z&quot;&gt;惠&lt;/i&gt;&lt;b&gt;购3年送1年&lt;/b&gt;&lt;/span&gt;                        &lt;span class=&quot;buy-zs&quot;&gt;&lt;i class=&quot;small-icon icon-z&quot;&gt;赠&lt;/i&gt;&lt;b&gt;企业OA&lt;/b&gt;&lt;/span&gt;                        &lt;span class=&quot;buy-zs&quot;&gt;&lt;i class=&quot;small-icon icon-z&quot;&gt;赠&lt;/i&gt;&lt;b&gt;4000电话&lt;/b&gt;&lt;/span&gt;                        &lt;/div&gt;                    "};
+    Ev.pubVar.templatesNames = {"666":"展示","670":"展示","669":"门户","8":"门户","668":"商城","7":"论坛"};
+    Ev.pubVar.templatesViewVersion = 2;
+
+    //成品版的一些公用变量
+    Ev.admin.cp.v.lookTempMain = 873;//预览的模板id当前模版主模板的id
+    Ev.admin.cp.v.lookTempVersion = 670;//这个是用来回显的版本变量
+    Ev.admin.cp.v.lookTempId = 873;//预览的模板id当前模版的id
+    Ev.admin.cp.v.usingTempMain = 873;//模板id当前模版主模板的id
+    Ev.admin.cp.v.usingTempVersion = 670;//当前使用的模板版本
+    Ev.admin.cp.v.usingTempId = 873;//当前使用的模板id
+    Ev.admin.cp.v.copyusingTempId = 8;
+    Ev.admin.cp.v.copylookTempId = 8;
+
+    //拖拽版的一些公用变量
+    Ev.admin.tj.v.lookTempId = 2;//预览的模板id当前模版的id
+    Ev.admin.tj.v.usingTempVersion = 1;//当前您使用的模版属于的版本
+    Ev.admin.tj.v.usingTempId = 2;//当前使用的模板id
+    Ev.admin.tj.v.mStyleType = 0; //用于记录选中的预设添加模块样式的默认模块是自定义模块还是系统模块
+    Ev.admin.tj.v.mStyle = ''; //用于记录选中的预设添加模块样式
+    Ev.admin.tj.v.mLookStyleType = 0;
+    Ev.admin.tj.v.mLookStyle = '';
+
+    Ev.admin.tj.v.mhStyle = ""; //用于记录选中的预设添加单行标题模块样式
+    Ev.admin.tj.v.mStyleLook = ''; //用来记录你要查看的预设模块的id
+    Ev.admin.tj.v.mStyleEdit = 'edit'; //用来记录新建还是编辑预设模块
+    Ev.admin.tj.v.aIframe = null;  //用来记录预设模块的弹窗对象
+    Ev.admin.tj.v.aIframeDom = null;  //用来记录预设模块的弹窗Dom对象
+    Ev.admin.tj.v.aIframeWin = null;  //用来记录预设模块的弹窗window对象
+    Ev.admin.tj.v.is_action = 1;
+  </script>
+  <script type="text/javascript" src="js/detect-zoom.js"></script>
+  <script type="text/javascript">
+    // 判断浏览器是否100%显示
+    $(function () {
+      var zoom = function () {
+        var zoom = Math.floor(detectZoom.zoom() * 100),
+          device = detectZoom.device().toFixed(2),
+          text = detectZoom.zoomText().toFixed(2);
+        if (zoom != 100) {
+          Ev.pubVar.zoomSaveVar = 1;
+          $("#detectZoom").show();
+        }
+      }
+      $(window).on('resize', function () {
+        zoom();
+      });
+      zoom();
+    });
+  </script>
+</head>
+<body>
+<body class=" dhtmlx_skin_dhx_skyblue">
+<div class="admin-wrapper admin-wrapper-add">
+  <!--top-area start-->
+  <div class="admin-top-area adminWebSelectAreas">
+    <div id="detectZoom">您的浏览器处于非100%状态，将不能进行任何操作，您可以按键盘“ctrl+数字0”组合键恢复初始状态,并刷新页面！</div>
+    <!--buy area start-->
+    <!--<div class="web-site-buy q" id="webBuyAd">
+
+      <div class="buy-left" id="webBuy">
+        <i class="small-icon icon-c"></i>
+        <div class="buy-text">
+          <img src="images/VNew/chunjietehui_icon.png">电脑网站+手机网站+微信网站+全部模板+5G空间 =
+          <span class="red-color font-21">200</span>元/
+          <span class="red-color">1</span>年
+        </div>
+      </div>
+      <div class="buy-right">
+                        <span class="buy-but">
+                        <a id="webBuyUrl" href="/user_make_shop.php?type=116" title="点击购买" class="small-icon icon-buy">我要购买</a>
+                        </span>
+        <span class="buy-zs"><i class="small-icon icon-z">惠</i><b>购3年送1年</b></span>
+        <span class="buy-zs"><i class="small-icon icon-z">赠</i><b>企业OA</b></span>
+        <span class="buy-zs"><i class="small-icon icon-z">赠</i><b>4000电话</b></span>
+      </div>
+
+    </div>-->
+    <!--buy area end-->
+    <div class="admin-top q">
+      <div class="admin-site-version f-l" id="siteVersionSelect">
+        <ul class="q version-but">
+          <li class="f-l v-pc" id="webVersionSwitch">
+            <a class="cur" href="###"
+               data-url="http://a2889617.v.ev123.net/self_define/index.php?username=a2889617&amp;is_frame=1&amp;is_action=2">
+              <b>展示型</b>
+            </a>
+          </li>
+
+          <li class="f-l v-wap" id="webWap">
+            <a href="/wap_index_style.php">
+              <b>手机建站</b>
+            </a>
+          </li>
+
+          <li class="f-l v-oa">
+            <a href="/user_manage_style.php?vertype=oa">
+              <b>企业OA</b>
+            </a>
+          </li>
+
+        </ul>
+
+        <div class="pc-version-wrap">
+          <div class="box-135">
+            <div class="box-t"></div>
+            <div class="box-c">
+              <div class="pc-version-list" id="pcVersionList">
+                <dl class="dl-list">
+                  <dt>自主设计模板</dt>
+                  <dd class="tj-dd " data-v="tj" data-version="1">
+                    <small></small>
+                    <span>设计模板</span>
+                  </dd>
+                  <dt>精品定制模板</dt>
+                  <dd data-v="cp" class="cur" data-version="670">
+                    <small></small>
+                    <span>展示版</span>
+                  </dd>
+                  <dd data-v="cp" data-version="669">
+                    <small></small>
+                    <span>门户版</span>
+                  </dd>
+                  <dd data-v="cp" data-version="668">
+                    <small></small>
+                    <span>商城版</span>
+                  </dd>
+                  <dd data-v="cp" data-version="7">
+                    <small></small>
+                    <span>论坛版</span>
+                  </dd>
+                </dl>
+              </div>
+            </div>
+            <div class="box-b"></div>
+          </div>
+        </div>
+      </div>
+      <div class="select-edit-page f-l" id="selectEditPage">
+        <label class="f-l">正在设计</label>
+        <span class="cur-edit-page f-l" title="点击选择栏目进行栏目页设计"><em>首页</em></span>
+        <div class="edit-page-wrap">
+          <div class="tab-write-w">
+            <div class="tab-write-i"><strong>页面管理</strong></div>
+          </div>
+          <div class="edit-page-list-wrap">
+            <div class="ninebox-white-1">
+              <div class="ninebox-t">
+                <div class="ninebox-t-c"></div>
+                <span class="ninebox-t-l"></span><span class="ninebox-t-r"></span></div>
+              <div class="ninebox-c"><span class="ninebox-c-l"></span>
+                <div class="ninebox-c-c">
+                  <div class="edit-page-list">
+                    <dl class="dl-list" id="channel_manage">
+                      <dd id="web-edit-channelid-1"><a href="###"
+                                                       data-url="http://a2889617.v.ev123.net/self_define/index.php?username=a2889617&amp;is_frame=1&amp;is_action=2">首页</a>
+                        <div class="op-but"></div>
+                      </dd>
+                      <dd><a href="###"
+                             data-url="http://a2889617.v.ev123.net/dom/denglu.php?username=a2889617&amp;is_frame=1&amp;is_action=2">会员登录页</a>
+                        <div class="op-but">
+                          <small class="e-icon e-icon-design" title="设计栏目页面"></small>
+                        </div>
+                      </dd>
+                      <dd><a href="###"
+                             data-url="http://a2889617.v.ev123.net/dom/zhuce.php?username=a2889617&amp;is_frame=1&amp;is_action=2">会员注册页</a>
+                        <div class="op-but">
+                          <small class="e-icon e-icon-design" title="设计栏目页面"></small>
+                        </div>
+                      </dd>
+                      <dd><a href="###"
+                             data-url="http://a2889617.v.ev123.net/dom/search.php?username=a2889617&amp;is_frame=1&amp;is_action=2">搜索页</a>
+                        <div class="op-but">
+                          <small class="e-icon e-icon-design" title="设计栏目页面"></small>
+                        </div>
+                      </dd>
+                      <dd id="web-edit-channelid-14799996">
+                        <a href="###"
+                           data-url="http://a2889617.v.ev123.net/a2889617/item_14799996_0.html?is_frame=1&amp;is_action=2">维修项目</a>
+                        <div class="op-but">
+                          <small class="e-icon e-icon-design" title="设计栏目页面"></small>
+                          <small class="e-icon e-icon-edit" data-type="2"
+                                 data-url="/own_item_doc.php?channel_id=14799996&amp;is_frame=2&amp;u=1487226624"
+                                 title="发布内容"></small>
+                          <small class="e-icon e-icon-subedit" data-url="/VNew/column_xiala.php?channel_id=14799996"
+                                 title="下拉菜单"></small>
+                        </div>
+                      </dd>
+                      <dd id="web-edit-channelid-14799997">
+                        <a href="###"
+                           data-url="http://a2889617.v.ev123.net/a2889617/item_14799997_0.html?is_frame=1&amp;is_action=2">维修师傅</a>
+                        <div class="op-but">
+                          <small class="e-icon e-icon-design" title="设计栏目页面"></small>
+                          <small class="e-icon e-icon-edit" data-type="2"
+                                 data-url="/own_item_doc.php?channel_id=14799997&amp;is_frame=2&amp;u=1487226624"
+                                 title="发布内容"></small>
+                          <small class="e-icon e-icon-subedit" data-url="/VNew/column_xiala.php?channel_id=14799997"
+                                 title="下拉菜单"></small>
+                        </div>
+                      </dd>
+                      <dd id="web-edit-channelid-14799998">
+                        <a href="###"
+                           data-url="http://a2889617.v.ev123.net/a2889617/bk_14799998.html?is_frame=1&amp;is_action=2">维修保障</a>
+                        <div class="op-but">
+                          <small class="e-icon e-icon-design" title="设计栏目页面"></small>
+                          <small class="e-icon e-icon-subedit" data-url="/VNew/column_xiala.php?channel_id=14799998"
+                                 title="下拉菜单"></small>
+                        </div>
+                      </dd>
+                      <dd id="web-edit-channelid-14800000">
+                        <a href="###"
+                           data-url="http://a2889617.v.ev123.net/a2889617/bk_14800000.html?is_frame=1&amp;is_action=2">联系我们</a>
+                        <div class="op-but">
+                          <small class="e-icon e-icon-design" title="设计栏目页面"></small>
+                          <small class="e-icon e-icon-subedit" data-url="/VNew/column_xiala.php?channel_id=14800000"
+                                 title="下拉菜单"></small>
+                        </div>
+                      </dd>
+                      <dd id="web-edit-channelid-14800011">
+                        <a href="###"
+                           data-url="http://a2889617.v.ev123.net/a2889617/vip_doc/14800011_0_0_1.html?is_frame=1&amp;is_action=2">文章资讯</a>
+                        <div class="op-but">
+                          <small class="e-icon e-icon-design" title="设计栏目页面"></small>
+                          <small class="e-icon e-icon-edit" data-type="2"
+                                 data-url="/own_add_doc.php?channel_id=14800011&amp;is_frame=2&amp;u=1487226624"
+                                 title="发布内容"></small>
+                          <small class="e-icon e-icon-subedit" data-url="/VNew/column_xiala.php?channel_id=14800011"
+                                 title="下拉菜单"></small>
+                        </div>
+                      </dd>
+                      <dd id="web-edit-channelid-14801086">
+                        <a href="###"
+                           data-url="http://a2889617.v.ev123.net/self_define/guest_book.php?username=a2889617&amp;is_frame=1&amp;is_action=2">在线留言</a>
+                        <div class="op-but">
+                          <small class="e-icon e-icon-design" title="设计栏目页面"></small>
+                          <small class="e-icon e-icon-edit" data-type="3"
+                                 data-url="/new_guest_set.php?channel_id=14801086&amp;dom_id=&amp;is_frame=2&amp;u=1487226624"
+                                 title="发布内容"></small>
+                          <small class="e-icon e-icon-subedit" data-url="/VNew/column_xiala.php?channel_id=14801086"
+                                 title="下拉菜单"></small>
+                        </div>
+                      </dd>
+                      <dd id="web-edit-channelid-14802551">
+                        <a href="###"
+                           data-url="http://a2889617.v.ev123.net/a2889617/bk_14802551.html?is_frame=1&amp;is_action=2">关于我们</a>
+                        <div class="op-but">
+                          <small class="e-icon e-icon-design" title="设计栏目页面"></small>
+                          <small class="e-icon e-icon-subedit" data-url="/VNew/column_xiala.php?channel_id=14802551"
+                                 title="下拉菜单"></small>
+                        </div>
+                      </dd>
+                      <dd id="web-edit-channelid-14801087">
+                        <a href="###"
+                           data-url="http://a2889617.v.ev123.net/self_define/map.php?channel_id=14801087&amp;username=a2889617&amp;is_frame=1&amp;is_action=2">企业位置</a>
+                        <div class="op-but">
+                          <small class="e-icon e-icon-design" title="设计栏目页面"></small>
+                          <small class="e-icon e-icon-edit" data-type="3"
+                                 data-url="/map.php?channel_id=14801087&amp;dom_id=&amp;is_frame=2&amp;u=1487226624"
+                                 title="发布内容"></small>
+                          <small class="e-icon e-icon-subedit" data-url="/VNew/column_xiala.php?channel_id=14801087"
+                                 title="下拉菜单"></small>
+                        </div>
+                      </dd>
+                    </dl>
+                  </div>
+                  <p class="add-edit-page"><a href="###">
+                    <small class="e-icon e-icon-addpage"></small>
+                    添加栏目</a></p>
+                  <p class="set-edit-page"><a href="###">
+                    <small class="e-icon e-icon-setpage"></small>
+                    管理栏目</a></p>
+                </div>
+                <span class="ninebox-c-r"></span></div>
+              <div class="ninebox-b">
+                <div class="ninebox-b-c"></div>
+                <span class="ninebox-b-l"></span><span class="ninebox-b-r"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="admin-top-operate f-r">
+        <!--网站语言选择 start-->
+        <div class="select-language f-r" id="selectLanguage">
+          <span class="cur-language" title="点击更改语言"><b>
+            简体中文          </b></span>
+          <div class="language-list-wrap">
+            <div class="box-86">
+              <div class="box-t"></div>
+              <div class="box-c">
+                <div class="language-list">
+                  <dl class="dl-list">
+                    <dt><span>选择语言</span></dt>
+                    <dd data-type="0"><span>简体中文</span></dd>
+                    <dd data-type="4"><span>繁体中文</span></dd>
+                    <dd data-type="1"><span>English</span></dd>
+                    <dd data-type="3"><span>韩文</span></dd>
+                    <dd data-type="5"><span>日文</span></dd>
+                  </dl>
+                </div>
+              </div>
+              <div class="box-b"></div>
+            </div>
+          </div>
+        </div>
+        <!--网站语言选择 end-->
+        <div class="admin-save f-r" id="adminSaveBut">
+          <a href="###" onclick="save_index_set(1);" title="保存" class="save-a"><b>保存</b></a>
+        </div>
+        <div class="admin-preview f-r" id="adminPreviewBut">
+          <a class="preview-a" title="预览我的网站效果" data-ceshi="1" href="http://a2889617.pc.ev123.com.cn" target="_blank">
+            <small></small>
+            <b>预览网址</b></a>
+          <div class="show-size-address">
+            <em class="sj"><i class="i-1"></i><i class="i-2"></i></em>
+            <div class="ninebox-white-1">
+              <div class="ninebox-t">
+                <div class="ninebox-t-c"></div>
+                <span class="ninebox-t-l"></span><span class="ninebox-t-r"></span></div>
+              <div class="ninebox-c"><span class="ninebox-c-l"></span>
+                <div class="ninebox-c-c">
+                  <dl class="show-size-address-inner">
+
+                    <dd class="site-address">您的网址：<a class="url" target="_blank"
+                                                     href="http://a2889617.pc.ev123.com.cn/vip_a2889617.html">a2889617.pc.ev123.com.cn</a><a
+                        class="url-collect"
+                        href="javascript:AddFavorite('http://a2889617.pc.ev123.com.cn','我的建站ABC网站网址')">加入收藏</a></dd>
+                    <dd class="admin-address">您的后台登陆网址：<a class="url" target="_blank"
+                                                          href="http://a2889617.pc.ev123.com.cn/login.php">a2889617.pc.ev123.com.cn/login.php</a><a
+                        class="url-collect"
+                        href="javascript:AddFavorite('http://a2889617.pc.ev123.com.cn/login.php','我的网站后台')">加入收藏</a>
+                    </dd>
+
+                    <!-- <dd class="site-address">您的网址：<a class="url" target="_blank" href="http://a2889617.v.ev123.net/vip_a2889617.html">a2889617.v.ev123.net</a><a class="url-collect" href="javascript:AddFavorite('http://a2889617.v.ev123.net','我的建站ABC网站网址')">加入收藏</a></dd>
+                      <dd class="admin-address">您的后台登陆网址：<a class="url" target="_blank" href="http://a2889617.v.ev123.net/login.php">a2889617.v.ev123.net/login.php</a><a class="url-collect" href="javascript:AddFavorite('http://a2889617.v.ev123.net/login.php','我的网站后台')">加入收藏</a></dd>-->
+
+                    <dd class="admin-username">您的网站管理员用户名：<span class="url">a2889617</span></dd>
+                    <dd class="bangding-but">
+                      <div class="but-element-o b-33-blue">
+                        <div class="but-element-i">
+                          <a id="ylWebBuyUrl" href="" class="but">为我的网站绑定独立域名</a>
+                        </div>
+                      </div>
+                    </dd>
+                  </dl>
+                </div>
+                <span class="ninebox-c-r"></span></div>
+              <div class="ninebox-b">
+                <div class="ninebox-b-c"></div>
+                <span class="ninebox-b-l"></span><span class="ninebox-b-r"></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="admin-operate-help f-r" id="adminHelpBut"><a class="operate-help-a" href="javascript:;"
+                                                                 title="界面说明">
+          <small></small>
+          <b>说明</b></a></div>
+        <div class="admin-site-width f-r" id="adminSiteWidthBut"><a class="site-width-a" href="###" title="网站宽度">
+          <small></small>
+          <b>网站宽度</b></a></div>
+        <div class="admin-user-center f-r" id="userCenter"><a class="user-center-a" title="查看个人中心" href="###">
+          <small></small>
+          <b>用户中心</b></a>
+          <div class="usercenter-list-wrap">
+            <div class="box-96">
+              <div class="box-t"></div>
+              <div class="box-c">
+                <div class="usercenter-list">
+                  <dl class="dl-list">
+                    <dd class="my-center" data-url="/user_index.php?is_frame=2&amp;v=2015" data-name="myCenter">
+                      <small></small>
+                      <span>用户中心</span></dd>
+                    <dd class="my-home" data-url="/user_index.php?is_frame=2&amp;v=2015" data-name="myHome">
+                      <span>用户首页</span></dd>
+                    <dd class="my-prassword" data-url="/modify_pwd.php?is_frame=2&amp;v=2015" data-name="myPrassword">
+                      <span>修改密码</span></dd>
+                    <dd class="my-logout" data-name="myLogout"><span>安全退出</span></dd>
+                  </dl>
+                </div>
+              </div>
+              <div class="box-b"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="ruler_x">
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <!--top-area end-->
+  <div class="showWebSite" id="show_web_site">
+    <div class="switchoverButArea" id="switchoverButArea">
+      <div class="switchoverBut">
+        <a href="###" class="design-a" data-id="designBut"><b>设计界面</b></a>
+        <a href="###" class="conadmin-a" data-id="conEditBut"><b>内容管理界面</b><em></em></a>
+        <a href="###" class="advancedfunadmin-a" data-id="advancedfunEditBut"><b>高级管理界面</b><em></em></a>
+        <a href="###" class="hangYefunadmin-a" data-id="hangYefunEditBut">
+          <b>行业应用</b>
+          <em></em>
+        </a>
+      </div>
+    </div>
+
+    <iframe style="min-height: 1000px;" id="navigate_iframe" name="navigate_iframe" class="wIframe" src="tpl/index.html" scrolling="no" frameborder="0"  allowtransparency="true">
+
+    </iframe>
+
+  </div>
+</div>
+<!--toolbar start-->
+<div class="admin-toolbar admin-toolbar-hover" id="adminToolbar">
+  <big class="tool-switch tool-switch-off" id="toolSwitch" data-state="1"></big>
+
+  <dl class="dl-toolbar" id="dlToolbar">
+
+    <dd class="tool-dd tool-template" id="toolTemplate">
+      <div class="tool-inner" title="模板选择">
+        <small class="e-icon e-icon-template"></small>
+        <span class="i-name">模板选择</span>
+      </div>
+    </dd>
+
+
+    <dd class="tool-dd tool-column" id="toolColumn">
+      <div class="tool-inner" title="网站栏目">
+        <small class="e-icon e-icon-column"></small>
+        <span class="i-name">网站栏目</span>
+      </div>
+    </dd>
+
+    <dd class="tool-dd tool-addconrow" id="toolAddConrow">
+      <div class="tool-inner" title="添加">
+        <small class="e-icon e-icon-addconrow"></small>
+        <span class="i-name">添加模块</span>
+      </div>
+    </dd>
+    <!-- <dd class="tool-dd tool-addrow" id="toolAddrow">
+      <div class="tool-inner" title="添加布局">
+        <small class="e-icon e-icon-addrow"></small><span class="i-name">添加布局</span>
+      </div>
+    </dd> -->
+
+
+    <dd class="tool-dd tool-backbuild" id="toolBackbuild"
+        data-url="http://a2889617.v.ev123.net/self_define/index.php?username=a2889617&amp;is_frame=1&amp;is_action=2">
+      <div class="tool-inner" title="设计网站">
+        <small class="e-icon e-icon-backbuild"></small>
+        <span class="i-name">设计网站</span>
+      </div>
+    </dd>
+
+
+    <dd class="tool-dd tool-upcon" id="toolUpcon">
+      <div class="tool-inner" title="内容发布">
+        <small class="e-icon e-icon-upcon"></small>
+        <span class="i-name">内容发布</span>
+      </div>
+    </dd>
+    <dd id="hangye" class="tool-dd tool-hangye">
+      <div title="行业应用" class="tool-inner">
+        <small class="e-icon e-icon-hangye"></small>
+        <span class="i-name">行业应用</span>
+      </div>
+    </dd>
+    <dd class="tool-dd tool-advancedfun" id="toolAdvancedfun">
+      <div class="tool-inner" title="高级功能">
+        <small class="e-icon e-icon-advancedfun"></small>
+        <span class="i-name">高级功能</span>
+      </div>
+    </dd>
+    <dd style="display:none" class="tool-dd tool-mall" id="toolMall">
+      <div class="tool-inner" title="订单管理">
+        <small class="e-icon e-icon-mall"></small>
+        <span class="i-name">商城管理</span></div>
+    </dd>
+  </dl>
+
+  <div class="admin-more-toolbar-wrap" id="adminMoreToolbarWrap">
+    <div class="admin-more-toolbar" id="toolTemplate_more">
+      <em class="sj"><i class="i-1"></i><i class="i-2"></i></em>
+      <div class="ninebox-white-1">
+        <div class="ninebox-t">
+          <div class="ninebox-t-c"></div>
+          <span class="ninebox-t-l"></span><span class="ninebox-t-r"></span></div>
+        <div class="ninebox-c"><span class="ninebox-c-l"></span>
+          <div class="ninebox-c-c">
+            <div class="more-toolbar-inner">
+              <ul class="q">
+                <li id="boutiqueWebBut" data-version="670">
+                  <img class="tuijian-img" src="images/VNew/tuijian_icon.png">
+                  <small class="e-icon e-icon-boutique"></small>
+                  <span class="i-name">精品定制模板</span>
+                </li>
+                <li id="tjWebBut" data-version="1">
+                  <small class="e-icon e-icon-tjweb"></small>
+                  <span class="i-name">自主设计模板</span></li>
+                <!--  -->
+                <li id="tempHistoryBut" data-version="100">
+                  <small class="e-icon e-icon-history"></small>
+                  <span class="i-name">历史记录</span></li>
+              </ul>
+            </div>
+          </div>
+          <span class="ninebox-c-r"></span></div>
+        <div class="ninebox-b">
+          <div class="ninebox-b-c"></div>
+          <span class="ninebox-b-l"></span><span class="ninebox-b-r"></span></div>
+      </div>
+    </div>
+    <div class="admin-more-toolbar" id="toolAddConrow_more">
+      <em class="sj"><i class="i-1"></i><i class="i-2"></i></em>
+      <div class="ninebox-white-1">
+        <div class="ninebox-t">
+          <div class="ninebox-t-c"></div>
+          <span class="ninebox-t-l"></span><span class="ninebox-t-r"></span></div>
+        <div class="ninebox-c"><span class="ninebox-c-l"></span>
+          <div class="ninebox-c-c">
+            <div class="more-toolbar-inner">
+              <ul class="q">
+                <li id="addConrowBut">
+                  <small class="e-icon e-icon-conrow"></small>
+                  <span class="i-name">添加通栏</span></li>
+                <li id="addLayoutBut">
+                  <small class="e-icon e-icon-layout"></small>
+                  <span class="i-name">添加布局</span></li>
+                <!-- <li id="addElementBut"><small class="e-icon e-icon-element"></small><span class="i-name">添加元素</span></li> -->
+                <li id="addSysModuleBut">
+                  <small class="e-icon e-icon-sysmodule"></small>
+                  <span class="i-name">系统模块</span></li>
+              </ul>
+            </div>
+          </div>
+          <span class="ninebox-c-r"></span></div>
+        <div class="ninebox-b">
+          <div class="ninebox-b-c"></div>
+          <span class="ninebox-b-l"></span><span class="ninebox-b-r"></span></div>
+      </div>
+    </div>
+    <div class="admin-more-toolbar" id="toolColumn_more">
+      <em class="sj">
+        <i class="i-1"></i>
+        <i class="i-2"></i>
+      </em>
+      <div class="ninebox-white-1">
+        <div class="ninebox-t">
+          <div class="ninebox-t-c"></div>
+          <span class="ninebox-t-l"></span>
+          <span class="ninebox-t-r"></span>
+        </div>
+        <div class="ninebox-c">
+          <span class="ninebox-c-l"></span>
+          <div class="ninebox-c-c">
+            <div class="more-toolbar-inner">
+              <ul class="q">
+                <li id="siteColumnNew">
+                  <small class="e-icon e-icon-column-new"></small>
+                  <span class="i-name">一键加栏目</span>
+                </li>
+                <li id="siteColumnAdmin">
+                  <small class="e-icon e-icon-column-admin"></small>
+                  <span class="i-name">栏目管理</span>
+                </li>
+                <li id="siteContentUp">
+                  <small class="e-icon e-icon-count-up"></small>
+                  <span class="i-name">内容发布</span>
+                </li>
+                <li id="siteColumnDesign">
+                  <small class="e-icon e-icon-column-design"></small>
+                  <span class="i-name">设计栏目</span>
+                </li>
+                <!-- <li id="addSiteColumn">
+                  <small class="e-icon e-icon-add-nav"></small>
+                  <span class="i-name">增加栏目</span>
+                </li>
+                <li id="xialaColumnAdmin">
+                  <small class="e-icon e-icon-pull-nav"></small>
+                  <span class="i-name">下拉菜单</span>
+                </li> -->
+              </ul>
+            </div>
+          </div>
+          <span class="ninebox-c-r"></span>
+        </div>
+        <div class="ninebox-b">
+          <div class="ninebox-b-c"></div>
+          <span class="ninebox-b-l"></span>
+          <span class="ninebox-b-r"></span>
+        </div>
+      </div>
+    </div>
+    <div class="admin-more-toolbar" id="toolBbs_more">
+      <em class="sj"><i class="i-1"></i><i class="i-2"></i></em>
+      <div class="ninebox-white-1">
+        <div class="ninebox-t">
+          <div class="ninebox-t-c"></div>
+          <span class="ninebox-t-l"></span><span class="ninebox-t-r"></span></div>
+        <div class="ninebox-c"><span class="ninebox-c-l"></span>
+          <div class="ninebox-c-c">
+            <div class="more-toolbar-inner">
+              <ul class="q">
+                <li id="bbsLayoutAddBut" data-url="/add_bbs_class.php?is_frame=2&amp;dom_id=14">
+                  <small class="e-icon e-icon-add-layout"></small>
+                  <span class="i-name">添加版区</span></li>
+                <li id="bbsLayoutAdminBut" data-url="/add_bbs_thread_type.php?is_frame=2">
+                  <small class="e-icon e-icon-layout-admin"></small>
+                  <span class="i-name">版区管理</span></li>
+                <li id="bbsPostAdminBut" data-url="/bbs_tiezi_list.php?is_frame=2&amp;dom_id=14">
+                  <small class="e-icon e-icon-post-admin"></small>
+                  <span class="i-name">帖子管理</span></li>
+                <li id="bbsMemberSearchBut" data-url="/bbs_tiezi_list.php?s=username&amp;is_frame=2">
+                  <small class="e-icon e-icon-user-name"></small>
+                  <span class="i-name">用户名搜索</span></li>
+                <li id="bbsAdvancedBut" data-url="/wap_bbs_set.php?dom_id=14&amp;is_frame=2">
+                  <small class="e-icon e-icon-advancedfun"></small>
+                  <span class="i-name">高级设置</span></li>
+                <li id="bbsStyleBut" data-url="/bbs_style.php?is_frame=2">
+                  <small class="e-icon e-icon-layout-style"></small>
+                  <span class="i-name">展示效果</span></li>
+              </ul>
+            </div>
+          </div>
+          <span class="ninebox-c-r"></span></div>
+        <div class="ninebox-b">
+          <div class="ninebox-b-c"></div>
+          <span class="ninebox-b-l"></span><span class="ninebox-b-r"></span></div>
+      </div>
+    </div>
+    <div class="admin-more-toolbar" id="toolMall_more">
+      <em class="sj"><i class="i-1"></i><i class="i-2"></i></em>
+      <div class="ninebox-white-1">
+        <div class="ninebox-t">
+          <div class="ninebox-t-c"></div>
+          <span class="ninebox-t-l"></span><span class="ninebox-t-r"></span></div>
+        <div class="ninebox-c"><span class="ninebox-c-l"></span>
+          <div class="ninebox-c-c">
+            <div class="more-toolbar-inner">
+              <ul class="q">
+                <li id="shoppingCarBut" data-url="/user_dingdan_set.php?is_frame=2&amp;dom_id=1844">
+                  <small class="e-icon e-icon-shopping-car"></small>
+                  <span class="i-name">购物车</span></li>
+                <li id="orderAdminBut" data-url="/mall_dingdan.php?is_frame=2&amp;dom_id=1844">
+                  <small class="e-icon e-icon-order-admin"></small>
+                  <span class="i-name">订单管理</span></li>
+                <li id="linePayBut" data-url="/mall_payment.php?is_frame=2&amp;dom_id=1844">
+                  <small class="e-icon e-icon-line-pay"></small>
+                  <span class="i-name">在线支付</span></li>
+                <li id="sendBut" data-url="/user_logistics_companies.php?is_frame=2&amp;dom_id=1844">
+                  <small class="e-icon e-icon-send"></small>
+                  <span class="i-name">物流配送</span></li>
+                <li id="invoiceBut" data-url="mall_fapiao.php?is_frame=2&amp;dom_id=1844">
+                  <small class="e-icon e-icon-invoice"></small>
+                  <span class="i-name">发票管理</span></li>
+                <li id="tuanBut" data-url="/own_group_buy_class.php?is_frame=2&amp;dom_id=1845">
+                  <small class="e-icon e-icon-tuan"></small>
+                  <span class="i-name">团购</span></li>
+                <li id="returnsBut" data-url="/mall_returns.php?is_frame=2&amp;dom_id=1844">
+                  <small class="e-icon e-icon-returns"></small>
+                  <span class="i-name">退换货</span></li>
+                <li id="integralBut" data-url="/integral_config.php?is_frame=2&amp;dom_id=1841">
+                  <small class="e-icon e-icon-integral"></small>
+                  <span class="i-name">积分商城</span></li>
+              </ul>
+            </div>
+          </div>
+          <span class="ninebox-c-r"></span></div>
+        <div class="ninebox-b">
+          <div class="ninebox-b-c"></div>
+          <span class="ninebox-b-l"></span><span class="ninebox-b-r"></span></div>
+      </div>
+    </div>
+    <div class="admin-more-toolbar" id="toolMember_more">
+      <em class="sj"><i class="i-1"></i><i class="i-2"></i></em>
+      <div class="ninebox-white-1">
+        <div class="ninebox-t">
+          <div class="ninebox-t-c"></div>
+          <span class="ninebox-t-l"></span><span class="ninebox-t-r"></span></div>
+        <div class="ninebox-c"><span class="ninebox-c-l"></span>
+          <div class="ninebox-c-c">
+            <div class="more-toolbar-inner">
+              <ul class="q">
+                <li id="memberAdminBut" data-url="/member_list.php?is_frame=2&amp;dom_id=18">
+                  <small class="e-icon e-icon-member-admin"></small>
+                  <span class="i-name">会员管理</span></li>
+                <li id="memberGradeBut" data-url="/member_level_set.php?is_frame=2&amp;dom_id=18">
+                  <small class="e-icon e-icon-member-grade"></small>
+                  <span class="i-name">会员等级</span></li>
+                <li id="memberReadersBut" data-url="/user_member_purview_add.php?is_frame=2&amp;dom_id=18">
+                  <small class="e-icon e-icon-member-readers"></small>
+                  <span class="i-name">会员浏览权限</span></li>
+                <li id="memberPublishBut" data-url="/user_member_purview_add.php?is_frame=2&amp;type=1&amp;dom_id=18">
+                  <small class="e-icon e-icon-member-publish"></small>
+                  <span class="i-name">会员发布权限</span></li>
+                <li id="memberIntegralBut" data-url="/user_integral_search.php?is_frame=2&amp;dom_id=18">
+                  <small class="e-icon e-icon-member-integral"></small>
+                  <span class="i-name">会员积分</span></li>
+              </ul>
+            </div>
+          </div>
+          <span class="ninebox-c-r"></span></div>
+        <div class="ninebox-b">
+          <div class="ninebox-b-c"></div>
+          <span class="ninebox-b-l"></span><span class="ninebox-b-r"></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--toolbar end-->
+<div class="quick-switch-temp" id="quickSwitchTemp">
+  <div class="quick-switch-inner quick-switch-inner-new q">
+    <div class="color-area">
+      <em></em>
+      <em></em>
+      <em></em>
+    </div>
+    <div class="btn-area">
+      <span data-id="anewtemp" class="quick-anewtemp" title="重新选择模板"><b>重选模板</b></span>
+      <span data-id="savetemp" class="quick-savetemp" title="保存此模板"><b>保存模板</b></span>
+      <span data-id="prevtemp" class="quick-prevtemp" title="切换到上一个模板"><b>上一模板</b></span>
+      <span data-id="nexttemp" class="quick-nexttemp" title="切换到下一个模板"><b>下一模板</b></span>
+    </div>
+    <span data-id="closeBut" class="quick-close" title="关闭"></span>
+  </div>
+  <div class="quick-bg"></div>
+</div>
+<script language="javascript">
+  function get_out(url) {
+    var model_id2 = readCookie("user_tmp_model_id_a2889617");
+    if (model_id2) {
+      v_msg(1, 18, 0, 1, url);
+    } else {
+      location.href = url;
+    }
+  }
+
+  function update_module_con_html(module_id) {
+    if (!module_id) return false;
+    Ev.pubVar.wIframeWin.update_module_con_html(module_id);
+  }
+
+  function update_other_con_html(name) {
+    if (!name) return false;
+    Ev.pubVar.wIframeWin.update_other_con_html(name);
+  }
+
+  function updateDesignPageData(objData) {
+    if (objData.type == 1) {
+      Ev.pubVar.wIframeWin.updateFMData(objData);
+    }
+  }
+
+  function iframe_location(url, key) {
+    Ev.admin.pageModeSwitch(3, url, '', '');
+    dhxWins.window("w1").close();
+  }
+
+  function drop_dom_new(dom_id) {
+    if (confirm('确定要卸载该功能吗？')) {
+      url = "/dom_manage.php?drop=1&dom_id=" + dom_id;
+      var title = "卸载功能";
+      get_url_window(url, title, 400, 240);
+      $('#dom_ok_' + dom_id).hide();
+      setTimeout('window.location.reload()', 1000);
+    }
+  }
+
+  function tj_index_bg_img(pic_url) {
+    if (!pic_url) return false;
+    Ev.pubFun.changeBgImg(pic_url);
+  }
+
+  function ini_set_mode() {
+    dhxWins = new dhtmlXWindows();
+    dhxWins.enableAutoViewport(true);
+    dhxWins.setImagePath("/msg/codebase/imgs/");
+  }
+
+  $(function () {
+    ini_set_mode();
+  });
+
+  function updateNavHtmlCode() {
+    $.post('/VNew/ajax.php?type=9&timestamp=' + Ev.pubFun.UTCTimeDemo(), function (sHtml) {
+      if ($.trim(sHtml)) {
+        $('#channel_manage').html(sHtml);
+        $('#channel_manage dd:eq(0) a').attr('data-url', Ev.pubVar.wIframe.data("indexurl"));
+      }
+    })
+  }
+</script>
+
+<div class="interface-help" id="interfaceHelp">
+  <div class="help-bg"></div>
+  <div class="help-prompt-area">
+    <div class="version-prompt prompt-box" data-id="webVersionSwitch">
+      <em class="t"></em>
+      <div class="prompt-box-bg"></div>
+      <p class="prompt-text">点击下拉菜单选择网站版本</p>
+    </div>
+    <div class="selectEditPage-prompt prompt-box" data-id="selectEditPage" style="left:400px; top:50px;">
+      <em class="t"></em>
+      <div class="prompt-box-bg"></div>
+      <p class="prompt-text">点击下拉菜单可选择网站<br>栏目页进行栏目样式设计</p>
+    </div>
+    <div class="save-prompt prompt-box" data-id="adminSaveBut" style="left:1150px; top:50px;">
+      <em class="t"></em>
+      <div class="prompt-box-bg"></div>
+      <p class="prompt-text">点击保存按钮<br>进行网站保存</p>
+    </div>
+    <div class="language-prompt prompt-box" data-id="selectLanguage" style="left:1250px; top:50px;">
+      <em class="t"></em>
+      <div class="prompt-box-bg"></div>
+      <p class="prompt-text">点击下拉菜单<br>可选择网站<br>的语言版本</p>
+    </div>
+    <div class="toolAddrow-prompt prompt-box" data-id="toolAddrow" style="left:80px; top:138px;">
+      <em class="l"></em>
+      <div class="prompt-box-bg"></div>
+      <p class="prompt-text" style="line-height:32px;">点击在自主设计模板下添加模块</p>
+    </div>
+    <div class="toolTemplate-prompt prompt-box" data-id="toolTemplate" style="left:80px; top:195px;">
+      <em class="l"></em>
+      <div class="prompt-box-bg"></div>
+      <p class="prompt-text" style="line-height:32px;">点击选择网站模板</p>
+    </div>
+    <div class="toolColumn-prompt prompt-box" data-id="toolColumn" style="left:80px; top:252px;">
+      <em class="l"></em>
+      <div class="prompt-box-bg"></div>
+      <p class="prompt-text" style="line-height:32px;">点击增加和管理您的网站栏目</p>
+    </div>
+    <div class="toolUpcon-prompt prompt-box" data-id="toolUpcon" style="left:80px; top:309px;">
+      <em class="l"></em>
+      <div class="prompt-box-bg"></div>
+      <p class="prompt-text" style="line-height:32px;">上传和管理网站栏目内容</p>
+    </div>
+    <div class="toolAdvancedfun-prompt prompt-box" data-id="toolAdvancedfun" style="left:80px; top:366px;">
+      <em class="l"></em>
+      <div class="prompt-box-bg"></div>
+      <p class="prompt-text" style="line-height:32px;">40多个网站功能供您任意选择</p>
+    </div>
+    <div class="online-prompt prompt-box" data-id="onlineArea" style="right:55px; top:266px;">
+      <em class="r"></em>
+      <div class="prompt-box-bg"></div>
+      <p class="prompt-text" style="line-height:32px;">遇到问题点击这里找客服</p>
+    </div>
+  </div>
+</div>
+
+<div class="site-width-wrap" id="siteWidthWrap">
+  <em class="sj"><i class="i-1"></i><i class="i-2"></i></em>
+  <div class="ninebox-white-1">
+    <div class="ninebox-t">
+      <div class="ninebox-t-c"></div>
+      <span class="ninebox-t-l"></span><span class="ninebox-t-r"></span></div>
+    <div class="ninebox-c"><span class="ninebox-c-l"></span>
+      <div class="ninebox-c-c">
+        <div class="site-width-wrap-inner">
+          <strong>网站宽度设置：</strong>
+          <div class="width-line-wrap">
+            <ul>
+              <li title="960px" class="li-960" data-num="960"><b>960</b></li>
+              <li title="1020px" class="li-1020" data-num="1020"><b>1020</b></li>
+              <li title="1080px" class="li-1080" data-num="1080"><b>1080</b></li>
+              <li title="1140px" class="li-1140" data-num="1140"><b>1140</b></li>
+              <li title="1200px" class="li-1200" data-num="1200"><b>1200</b></li>
+              <li title="1260px" class="li-1260" data-num="1260"><b>1260</b></li>
+              <li title="1320px" class="li-1320" data-num="1320"><b>1320</b></li>
+              <li title="1920px" class="li-1920" data-num="1920"><b>1920</b></li>
+            </ul>
+            <b class="cur-b" data-val="960"></b>
+          </div>
+          <div class="site-width-but"><a href="###" class="width-btn reset-btn" data-id="reset">取消</a><a href="###"
+                                                                                                         class="width-btn enter-btn"
+                                                                                                         data-id="enter">确定</a>
+          </div>
+        </div>
+      </div>
+      <span class="ninebox-c-r"></span></div>
+    <div class="ninebox-b">
+      <div class="ninebox-b-c"></div>
+      <span class="ninebox-b-l"></span><span class="ninebox-b-r"></span></div>
+  </div>
+</div>
+
+<div class="online-area" id="onlineArea">
+  <div class="online-open-area">
+    <div class="online-open-t"></div>
+    <div class="online-open-m">
+      <a class="s-service" href="###" data-id="service">
+        <small class="icon-pic"></small>
+        <b>在线客服</b></a>
+      <small class="open-small"></small>
+      <a target="_blank" href="http://www.ev123.net/zhaoshang.php">
+        <small class="icon-pic"></small>
+        <b>加盟代理</b></a>
+      <a class="s-case" data-id="case" href="http://www.ev123.net/anli.php" target="_blank">
+        <small class="icon-pic"></small>
+        <b>客户案例</b></a>
+    </div>
+    <div class="online-open-b"></div>
+  </div>
+  <div class="online-con-area">
+    <dl class="online-con-inner online-service" id="onlineService">
+      <dd class="online-QQ">
+        <div style="padding-top:10px;padding-left:30px">
+          <!-- WPA Button Begin -->
+          <a target="_blank"
+             href="http://crm2.qq.com/page/portalpage/wpa.php?uin=4000123127&amp;f=1&amp;ty=1&amp;aty=0&amp;a=&amp;from=5"><img
+              src="images/QQ.png"></a>
+          <!-- WPA Button End -->
+        </div>
+        <div style="line-height:20px;width:100%;height:20px;font-size:10px;color:#8c8c8c">(在线时间：周一至周日 9点至18点)</div>
+      </dd>
+      <dd class="online-icon-but q">
+        <span class="icon-item train-item" data-id="train" data-url="/user_make_index.php?type=111"
+              title="免费培训教您如何快速建站！"><small class="icon-pic"></small><span class="icon-name">网站备案</span></span>
+        <!--<span class="icon-item read-item" data-id="read" data-url="/topic/newhelp/" title="新手进入能够快速了解建站流程！"><small class="icon-pic"></small><span class="icon-name">新手必读</span></span>-->
+        <span class="icon-item manual-item" data-id="manual" data-url="/help_index.php?channel_id=12401520"
+              title="查看建站帮助文档，让您轻松建站！"><small class="icon-pic"></small><span class="icon-name">帮助中心</span></span>
+        <span class="icon-item mall-item" data-id="mall" data-url="/user_make_shop.php" title="挑选更多的网站风格和功能！"><small
+            class="icon-pic"></small><span class="icon-name">建站商城</span></span>
+        <span class="icon-item sitebug-item" data-id="sitebug" data-url="/user_make_index.php?type=109"
+              title="找技术反馈网站存在的系统问题！"><small class="icon-pic"></small><span class="icon-name">网站bug</span></span>
+        <span class="icon-item function-item" data-id="function" data-url="/user_make_index.php?type=115"><small
+            class="icon-pic"></small><span class="icon-name" title="为您的网站添加更多功能！">需求反馈</span></span>
+
+        <span class="icon-item complaint" data-id="complaint" data-url="/user_make_index.php?type=120"><small
+            class="icon-pic"></small><span class="icon-name">投诉建议</span></span>
+
+      </dd>
+      <dd class="online-tel">
+        <small class="icon-pic"></small>
+        <span>4000-123-127</span></dd>
+    </dl>
+  </div>
+</div>
+
+
+<iframe frameborder="0" class="dhx_modal_cover_ifr" src="javascript:false;" style="display: none; z-index: 0;"></iframe>
+<div class="dhx_modal_cover_dv" style="display: none; z-index: 0;"></div>
+<div class="dhx_content_vp_cover" style="display: none;"></div>
+<div class="dhx_carcass_resmove" style="display: none;"></div>
+</body>
+</body>
+</html>

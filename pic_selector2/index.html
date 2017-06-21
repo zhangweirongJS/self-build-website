@@ -1,0 +1,581 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+    <title>图片选择器</title>
+    <link rel="Stylesheet" type="text/css" href="/css/pic_select/pic_select.css??212320170308wer3" />
+    <link type="text/css" href="/jquery/demos.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/css/VNew/style_editcss.css" />
+    <script src="/js/jquery-1.7.1.min.js" language="JavaScript" ></script>
+    <script language="javascript" src="/js/VNew/link.js?asd"></script>
+    <script type="text/javascript" src="/include/public.js"></script>
+</head>
+<body>
+<div class="imgSet">
+    <div class="imgSet_tab">
+        <div class="alertTabT" id="alert_tab_t">
+            <ul>
+                <li><a href="/pic_selector?tj=1&banner=1&t_width=1440&t_height=480">上传</a></li>
+                <li class="cur"><a href="/pic_selector2?tj=1&banner=1&t_width=1440&t_height=480">素材库</a></li>
+                <li><a href="/pic_selector3?tj=1&banner=1&t_width=1440&t_height=480">我的图片</a></li>
+                <li><a href="/pic_selector4.?tj=1&banner=1&t_width=1440&t_height=480">图片搬家</a></li>
+            </ul>
+            <a id="addMo_customStyle_btn" class="addMoCustomStyleBtn" style="display: none;">添加自定义样式</a>
+        </div>
+        <div class="imgSet_tab_center">
+            <div class="img_Date" id="img_Date">
+                <div class="imgSet_tit">
+                    <ul>
+                        <li>
+                            <em>图片类型：</em>
+                            <select class="in_select" onchange="changeType(this)">
+                                <option selected="selected" value="5">通栏广告</option>
+                                <option  value="12">插图</option>
+                                <option  value="9">小图标</option>
+                            </select>
+                        </li>
+                        <li>
+                            <em>行业选择：</em>
+                            <select class="in_select" id="hy_id">
+                                <option value="0" selected >全部行业</option>
+                                <option value="33280"  >通用行业</option>
+                                <option value="845"  >摄影公司</option>
+                                <option value="79"  >保洁公司</option>
+                                <option value="738"  >人才招聘</option>
+                                <option value="254"  >出版印刷</option>
+                                <option value="34"  >广告公司</option>
+                                <option value="1973"  >金融投资</option>
+                                <option value="1271"  >绿化公司</option>
+                                <option value="5763"  >工程机械</option>
+                                <option value="4030"  >电工电气</option>
+                                <option value="2528"  >餐饮</option>
+                                <option value="71"  >培训公司</option>
+                                <option value="2437"  >商务酒店</option>
+                                <option value="843"  >旅游网站</option>
+                                <option value="2532"  >教育培训</option>
+                                <option value="2"  >软件下载</option>
+                                <option value="3"  >翻译公司</option>
+                                <option value="6"  >律师事务所</option>
+                                <option value="47"  >物流公司</option>
+                                <option value="279"  >装修装饰</option>
+                                <option value="18942"  >婚纱摄影</option>
+                                <option value="39878"  >儿童相关</option>
+                            </select>
+                        </li>
+                        <li>
+                            <em>尺寸选择：</em>
+                            <select class="in_select" id="pic_size" name="pic_size">
+                                <option value="3" >全部尺寸</option>
+                                <option value="1" >960*340</option>
+                                <option value="2" selected>1440*380</option>
+                            </select>
+                        </li>
+                        <script language="javascript">
+                            $(function(){
+                                $('#hy_id').on('change', function(){
+                                    var _val = $(this).val();
+                                    var url = '/pic_selector2.php?id=0&tj=1&size=0&banner=1&t_width=1440&t_height=480&pic_size=2&type=5&is_frame=0';
+                                    if (_val > 0) {
+                                        url += '&hy_id='+ _val;
+                                    }
+                                    window.location.href = url;
+                                });
+
+                                $('#pic_size').on('change', function(){
+                                    var _val = $(this).val();
+                                    var url = '/pic_selector2.php?id=0&tj=1&size=0&banner=1&t_width=1440&t_height=480&type=5&is_frame=0';
+                                    if (_val > 0) {
+                                        url += '&pic_size='+ _val;
+                                    }
+                                    window.location.href = url;
+                                });
+                            });
+                        </script>
+                        <li>
+                            <em>颜色：</em>
+                            <select class="in_select" onchange="changeColor(this)">
+                                <option selected="selected" value="0">所有颜色</option>
+                                <option  value="1">红色</option>
+                                <option  value="2">橙色</option>
+                                <option  value="3">黄色</option>
+                                <option  value="4">绿色</option>
+                                <option  value="6">粉色</option>
+                                <option  value="7">蓝色</option>
+                                <option  value="8">紫色</option>
+                                <option  value="9">棕色</option>
+                                <option  value="10">灰色</option>
+                                <option  value="11">黑色</option>
+                                <option  value="12">白色</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+                <div class="imgSet_list" id="imgSet_list">
+                    <ul class="clearfix" id="imgSet">
+                        <li class="list" id="list_4359" data-id="4359" data-pic="http://img4.dlszywz.com/pic_pic/5/4359_1.jpg">
+                            <a href="###">
+                                    <span class="pic">
+                                        <img src="http://img4.dlszywz.com/pic_pic/5/4359_150_150_1.jpg" title="绿化-3.jpg">
+                                    </span>
+                                <p class="pic_name">绿化-3.jpg</p>
+                                <a href="###" class="choose"></a>
+                                <!-- <a href="###" class="del_img" data-id="4359"></a> -->
+                            </a>
+                        </li>
+                        <li class="list" id="list_4358" data-id="4358" data-pic="http://img4.dlszywz.com/pic_pic/5/4358_1.jpg">
+                            <a href="###">
+                                    <span class="pic">
+                                        <img src="http://img4.dlszywz.com/pic_pic/5/4358_150_150_1.jpg" title="金融-1">
+                                    </span>
+                                <p class="pic_name">金融-1</p>
+                                <a href="###" class="choose"></a>
+                                <!-- <a href="###" class="del_img" data-id="4358"></a> -->
+                            </a>
+                        </li>
+                        <li class="list" id="list_4357" data-id="4357" data-pic="http://img4.dlszywz.com/pic_pic/5/4357_1.jpg">
+                            <a href="###">
+                                    <span class="pic">
+                                        <img src="http://img4.dlszywz.com/pic_pic/5/4357_150_150_1.jpg" title="金融-5">
+                                    </span>
+                                <p class="pic_name">金融-5</p>
+                                <a href="###" class="choose"></a>
+                                <!-- <a href="###" class="del_img" data-id="4357"></a> -->
+                            </a>
+                        </li>
+                        <li class="list" id="list_4356" data-id="4356" data-pic="http://img4.dlszywz.com/pic_pic/5/4356_1.jpg">
+                            <a href="###">
+                                    <span class="pic">
+                                        <img src="http://img4.dlszywz.com/pic_pic/5/4356_150_150_1.jpg" title="金融-12">
+                                    </span>
+                                <p class="pic_name">金融-12</p>
+                                <a href="###" class="choose"></a>
+                                <!-- <a href="###" class="del_img" data-id="4356"></a> -->
+                            </a>
+                        </li>
+                        <li class="list" id="list_4355" data-id="4355" data-pic="http://img4.dlszywz.com/pic_pic/5/4355_1.jpg">
+                            <a href="###">
+                                    <span class="pic">
+                                        <img src="http://img4.dlszywz.com/pic_pic/5/4355_150_150_1.jpg" title="金融-15">
+                                    </span>
+                                <p class="pic_name">金融-15</p>
+                                <a href="###" class="choose"></a>
+                                <!-- <a href="###" class="del_img" data-id="4355"></a> -->
+                            </a>
+                        </li>
+                        <li class="list" id="list_4354" data-id="4354" data-pic="http://img4.dlszywz.com/pic_pic/5/4354_1.jpg">
+                            <a href="###">
+                                    <span class="pic">
+                                        <img src="http://img4.dlszywz.com/pic_pic/5/4354_150_150_1.jpg" title="金融-2">
+                                    </span>
+                                <p class="pic_name">金融-2</p>
+                                <a href="###" class="choose"></a>
+                                <!-- <a href="###" class="del_img" data-id="4354"></a> -->
+                            </a>
+                        </li>
+                        <li class="list" id="list_4353" data-id="4353" data-pic="http://img4.dlszywz.com/pic_pic/5/4353_1.jpg">
+                            <a href="###">
+                                    <span class="pic">
+                                        <img src="http://img4.dlszywz.com/pic_pic/5/4353_150_150_1.jpg" title="金融-9">
+                                    </span>
+                                <p class="pic_name">金融-9</p>
+                                <a href="###" class="choose"></a>
+                                <!-- <a href="###" class="del_img" data-id="4353"></a> -->
+                            </a>
+                        </li>
+                        <li class="list" id="list_4352" data-id="4352" data-pic="http://img4.dlszywz.com/pic_pic/5/4352_1.jpg">
+                            <a href="###">
+                                    <span class="pic">
+                                        <img src="http://img4.dlszywz.com/pic_pic/5/4352_150_150_1.jpg" title="金融-7">
+                                    </span>
+                                <p class="pic_name">金融-7</p>
+                                <a href="###" class="choose"></a>
+                                <!-- <a href="###" class="del_img" data-id="4352"></a> -->
+                            </a>
+                        </li>
+                        <li class="list" id="list_4351" data-id="4351" data-pic="http://img4.dlszywz.com/pic_pic/5/4351_1.jpg">
+                            <a href="###">
+                                    <span class="pic">
+                                        <img src="http://img4.dlszywz.com/pic_pic/5/4351_150_150_1.jpg" title="金融-8">
+                                    </span>
+                                <p class="pic_name">金融-8</p>
+                                <a href="###" class="choose"></a>
+                                <!-- <a href="###" class="del_img" data-id="4351"></a> -->
+                            </a>
+                        </li>
+                        <li class="list" id="list_4330" data-id="4330" data-pic="http://img4.dlszywz.com/pic_pic/5/4330_1.jpg">
+                            <a href="###">
+                                    <span class="pic">
+                                        <img src="http://img4.dlszywz.com/pic_pic/5/4330_150_150_1.jpg" title="金融-18">
+                                    </span>
+                                <p class="pic_name">金融-18</p>
+                                <a href="###" class="choose"></a>
+                                <!-- <a href="###" class="del_img" data-id="4330"></a> -->
+                            </a>
+                        </li>
+                        <li class="list" id="list_4329" data-id="4329" data-pic="http://img4.dlszywz.com/pic_pic/5/4329_1.jpg">
+                            <a href="###">
+                                    <span class="pic">
+                                        <img src="http://img4.dlszywz.com/pic_pic/5/4329_150_150_1.jpg" title="金融-14">
+                                    </span>
+                                <p class="pic_name">金融-14</p>
+                                <a href="###" class="choose"></a>
+                                <!-- <a href="###" class="del_img" data-id="4329"></a> -->
+                            </a>
+                        </li>
+                        <li class="list" id="list_4328" data-id="4328" data-pic="http://img4.dlszywz.com/pic_pic/5/4328_1.jpg">
+                            <a href="###">
+                                    <span class="pic">
+                                        <img src="http://img4.dlszywz.com/pic_pic/5/4328_150_150_1.jpg" title="金融-17">
+                                    </span>
+                                <p class="pic_name">金融-17</p>
+                                <a href="###" class="choose"></a>
+                                <!-- <a href="###" class="del_img" data-id="4328"></a> -->
+                            </a>
+                        </li>
+                        <li class="list" id="list_4327" data-id="4327" data-pic="http://img4.dlszywz.com/pic_pic/5/4327_1.jpg">
+                            <a href="###">
+                                    <span class="pic">
+                                        <img src="http://img4.dlszywz.com/pic_pic/5/4327_150_150_1.jpg" title="金融-16">
+                                    </span>
+                                <p class="pic_name">金融-16</p>
+                                <a href="###" class="choose"></a>
+                                <!-- <a href="###" class="del_img" data-id="4327"></a> -->
+                            </a>
+                        </li>
+                        <li class="list" id="list_4326" data-id="4326" data-pic="http://img4.dlszywz.com/pic_pic/5/4326_1.jpg">
+                            <a href="###">
+                                    <span class="pic">
+                                        <img src="http://img4.dlszywz.com/pic_pic/5/4326_150_150_1.jpg" title="金融-4">
+                                    </span>
+                                <p class="pic_name">金融-4</p>
+                                <a href="###" class="choose"></a>
+                                <!-- <a href="###" class="del_img" data-id="4326"></a> -->
+                            </a>
+                        </li>
+                        <li class="list" id="list_4325" data-id="4325" data-pic="http://img4.dlszywz.com/pic_pic/5/4325_1.jpg">
+                            <a href="###">
+                                    <span class="pic">
+                                        <img src="http://img4.dlszywz.com/pic_pic/5/4325_150_150_1.jpg" title="金融-10">
+                                    </span>
+                                <p class="pic_name">金融-10</p>
+                                <a href="###" class="choose"></a>
+                                <!-- <a href="###" class="del_img" data-id="4325"></a> -->
+                            </a>
+                        </li>
+                        <li class="list" id="list_4324" data-id="4324" data-pic="http://img4.dlszywz.com/pic_pic/5/4324_1.jpg">
+                            <a href="###">
+                                    <span class="pic">
+                                        <img src="http://img4.dlszywz.com/pic_pic/5/4324_150_150_1.jpg" title="金融-6">
+                                    </span>
+                                <p class="pic_name">金融-6</p>
+                                <a href="###" class="choose"></a>
+                                <!-- <a href="###" class="del_img" data-id="4324"></a> -->
+                            </a>
+                        </li>
+                        <li class="list" id="list_4323" data-id="4323" data-pic="http://img4.dlszywz.com/pic_pic/5/4323_1.jpg">
+                            <a href="###">
+                                    <span class="pic">
+                                        <img src="http://img4.dlszywz.com/pic_pic/5/4323_150_150_1.jpg" title="金融-3">
+                                    </span>
+                                <p class="pic_name">金融-3</p>
+                                <a href="###" class="choose"></a>
+                                <!-- <a href="###" class="del_img" data-id="4323"></a> -->
+                            </a>
+                        </li>
+                        <li class="list" id="list_4322" data-id="4322" data-pic="http://img4.dlszywz.com/pic_pic/5/4322_1.jpg">
+                            <a href="###">
+                                    <span class="pic">
+                                        <img src="http://img4.dlszywz.com/pic_pic/5/4322_150_150_1.jpg" title="金融-20">
+                                    </span>
+                                <p class="pic_name">金融-20</p>
+                                <a href="###" class="choose"></a>
+                                <!-- <a href="###" class="del_img" data-id="4322"></a> -->
+                            </a>
+                        </li>
+                        <li class="list" id="list_4321" data-id="4321" data-pic="http://img4.dlszywz.com/pic_pic/5/4321_1.jpg">
+                            <a href="###">
+                                    <span class="pic">
+                                        <img src="http://img4.dlszywz.com/pic_pic/5/4321_150_150_1.jpg" title="金融-19">
+                                    </span>
+                                <p class="pic_name">金融-19</p>
+                                <a href="###" class="choose"></a>
+                                <!-- <a href="###" class="del_img" data-id="4321"></a> -->
+                            </a>
+                        </li>
+                        <li class="list" id="list_4320" data-id="4320" data-pic="http://img4.dlszywz.com/pic_pic/5/4320_1.jpg">
+                            <a href="###">
+                                    <span class="pic">
+                                        <img src="http://img4.dlszywz.com/pic_pic/5/4320_150_150_1.jpg" title="金融-11">
+                                    </span>
+                                <p class="pic_name">金融-11</p>
+                                <a href="###" class="choose"></a>
+                                <!-- <a href="###" class="del_img" data-id="4320"></a> -->
+                            </a>
+                        </li>
+                        <li class="list" id="list_4319" data-id="4319" data-pic="http://img4.dlszywz.com/pic_pic/5/4319_1.jpg">
+                            <a href="###">
+                                    <span class="pic">
+                                        <img src="http://img4.dlszywz.com/pic_pic/5/4319_150_150_1.jpg" title="金融-13">
+                                    </span>
+                                <p class="pic_name">金融-13</p>
+                                <a href="###" class="choose"></a>
+                                <!-- <a href="###" class="del_img" data-id="4319"></a> -->
+                            </a>
+                        </li>
+                        <li class="list" id="list_4318" data-id="4318" data-pic="http://img4.dlszywz.com/pic_pic/5/4318_1.jpg">
+                            <a href="###">
+                                    <span class="pic">
+                                        <img src="http://img4.dlszywz.com/pic_pic/5/4318_150_150_1.jpg" title="培训-8">
+                                    </span>
+                                <p class="pic_name">培训-8</p>
+                                <a href="###" class="choose"></a>
+                                <!-- <a href="###" class="del_img" data-id="4318"></a> -->
+                            </a>
+                        </li>
+                        <li class="list" id="list_4317" data-id="4317" data-pic="http://img4.dlszywz.com/pic_pic/5/4317_1.jpg">
+                            <a href="###">
+                                    <span class="pic">
+                                        <img src="http://img4.dlszywz.com/pic_pic/5/4317_150_150_1.jpg" title="培训-11">
+                                    </span>
+                                <p class="pic_name">培训-11</p>
+                                <a href="###" class="choose"></a>
+                                <!-- <a href="###" class="del_img" data-id="4317"></a> -->
+                            </a>
+                        </li>
+                        <li class="list" id="list_4316" data-id="4316" data-pic="http://img4.dlszywz.com/pic_pic/5/4316_1.jpg">
+                            <a href="###">
+                                    <span class="pic">
+                                        <img src="http://img4.dlszywz.com/pic_pic/5/4316_150_150_1.jpg" title="培训-5">
+                                    </span>
+                                <p class="pic_name">培训-5</p>
+                                <a href="###" class="choose"></a>
+                                <!-- <a href="###" class="del_img" data-id="4316"></a> -->
+                            </a>
+                        </li>
+                        <li class="list" id="list_4315" data-id="4315" data-pic="http://img4.dlszywz.com/pic_pic/5/4315_1.jpg">
+                            <a href="###">
+                                    <span class="pic">
+                                        <img src="http://img4.dlszywz.com/pic_pic/5/4315_150_150_1.jpg" title="培训-16">
+                                    </span>
+                                <p class="pic_name">培训-16</p>
+                                <a href="###" class="choose"></a>
+                                <!-- <a href="###" class="del_img" data-id="4315"></a> -->
+                            </a>
+                        </li>
+                        <li class="list" id="list_4314" data-id="4314" data-pic="http://img4.dlszywz.com/pic_pic/5/4314_1.jpg">
+                            <a href="###">
+                                    <span class="pic">
+                                        <img src="http://img4.dlszywz.com/pic_pic/5/4314_150_150_1.jpg" title="培训-19">
+                                    </span>
+                                <p class="pic_name">培训-19</p>
+                                <a href="###" class="choose"></a>
+                                <!-- <a href="###" class="del_img" data-id="4314"></a> -->
+                            </a>
+                        </li>
+                        <li class="list" id="list_4313" data-id="4313" data-pic="http://img4.dlszywz.com/pic_pic/5/4313_1.jpg">
+                            <a href="###">
+                                    <span class="pic">
+                                        <img src="http://img4.dlszywz.com/pic_pic/5/4313_150_150_1.jpg" title="培训-20">
+                                    </span>
+                                <p class="pic_name">培训-20</p>
+                                <a href="###" class="choose"></a>
+                                <!-- <a href="###" class="del_img" data-id="4313"></a> -->
+                            </a>
+                        </li>
+                        <li class="list" id="list_4292" data-id="4292" data-pic="http://img4.dlszywz.com/pic_pic/5/4292_1.jpg">
+                            <a href="###">
+                                    <span class="pic">
+                                        <img src="http://img4.dlszywz.com/pic_pic/5/4292_150_150_1.jpg" title="培训-15">
+                                    </span>
+                                <p class="pic_name">培训-15</p>
+                                <a href="###" class="choose"></a>
+                                <!-- <a href="###" class="del_img" data-id="4292"></a> -->
+                            </a>
+                        </li>
+                        <li class="list" id="list_4291" data-id="4291" data-pic="http://img4.dlszywz.com/pic_pic/5/4291_1.jpg">
+                            <a href="###">
+                                    <span class="pic">
+                                        <img src="http://img4.dlszywz.com/pic_pic/5/4291_150_150_1.jpg" title="培训-10">
+                                    </span>
+                                <p class="pic_name">培训-10</p>
+                                <a href="###" class="choose"></a>
+                                <!-- <a href="###" class="del_img" data-id="4291"></a> -->
+                            </a>
+                        </li>
+                        <li class="list" id="list_4290" data-id="4290" data-pic="http://img4.dlszywz.com/pic_pic/5/4290_1.jpg">
+                            <a href="###">
+                                    <span class="pic">
+                                        <img src="http://img4.dlszywz.com/pic_pic/5/4290_150_150_1.jpg" title="培训-1">
+                                    </span>
+                                <p class="pic_name">培训-1</p>
+                                <a href="###" class="choose"></a>
+                                <!-- <a href="###" class="del_img" data-id="4290"></a> -->
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="listMore" id="listMore" style="display:none;">
+                        <a href="javascript:;" style="margin: 0px auto; width: 99%;"></a>
+                    </div>
+                </div>
+                <div class="list_btn" id="list_btn">
+                    <div class="warn_info">
+                        <em>使用须知</em>
+                        <p>素材库部分资源来自网络，版权归原作者所有，如有问题敬请告知，我们会立即处理。
+                            <i></i>
+                        </p>
+                    </div>
+                    <a href="###" class="Btn_ok" data-id="o" style="margin-left: 88px;">确定</a>
+                    <a href="###" class="Btn_disable" data-id="r">取消</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script language="javascript">
+    var PicArr = [],maximum = 1;
+    $(function(){
+        if (!Array.prototype.indexOf){
+            Array.prototype.indexOf = function(elt /*, from*/){
+                var len = this.length >>> 0;
+                var from = Number(arguments[1]) || 0;
+                from = (from < 0)
+                    ? Math.ceil(from)
+                    : Math.floor(from);
+                if (from < 0)
+                    from += len;
+                for (; from < len; from++)
+                {
+                    if (from in this &&
+                        this[from] === elt)
+                        return from;
+                }
+                return -1;
+            };
+        }
+        var img_Date = $("#img_Date"),
+            imgSet_list = $("#imgSet_list"),
+            imgSet = $("#imgSet"),
+            listMore = $("#listMore"),
+            list_btn = $("#list_btn");
+        list_btn.on({
+            click : function(){
+                var t = $(this),
+                    c = t.data('id');
+                if(c == 'o'){
+                    close_div();
+                }else if(c =='r'){
+                    window.parent.close_window('w5');
+                }
+            }
+        },'a');
+        imgSet_list.on({
+            scroll : function(){
+                var t = $(this),only = t.scrollTop() + t.height(),
+                    ul = imgSet;
+                ulH = ul.height() - 800;
+                if(t.data('x') != 1){
+                    if(only > ulH){
+                        listMore.trigger('click');
+                        t.data('x',1);
+                    }
+                }
+            }
+        });
+        // 查看更多
+        listMore.on('click',function() {
+            var time = Date.parse(new Date());
+            var listNum = imgSet.find('li').size();
+            $.ajax({
+                url: '/action/pic_selector/ajax_get_pic.php?time='+time,
+                type: 'POST',
+                dataType: 'json',
+                data: {'listNum': listNum ,'size':'0','color':'0','type':'5','tj':'1','banner':'1','t_width':'1440','t_height':'480','pic_size':'2'},
+                success:function (data) {
+                    var listStr = '';
+                    if ( data ) {
+                        for (var i in data) {
+                            listStr += '<li class="list" id="list_'+i+'" data-id="'+i+'" data-pic="'+data[i]['pic2']+'">';
+                            listStr += '<a href="###">';
+                            listStr += '<span class="pic"><img src="'+data[i]['pic']+'" title="'+data[i]['name']+'"></span>';
+                            listStr += '<p class="pic_name">';
+                            if(data[i]['name'])
+                                listStr += data[i]['name']+'</p>';
+                            else
+                                listStr += '无名称</p>';
+                            listStr += '<a href="###" class="choose"></a>';
+                            listStr += '</a></li>';
+                        }
+                        $('#imgSet').append(listStr);
+                        $('.imgSet_list').data('x',0);
+                    }
+                }
+            });
+        });
+        imgSet.on({
+            click : function(){
+                var tmpId = $(this).data('id');
+                if(!PicArr || PicArr.indexOf(tmpId)==-1){
+                    if(maximum>1){
+                        if(PicArr.length+1>maximum){
+                            window.parent.Ev.pubFun.alertWindow('最多可选择'+maximum+'张图片！','error');
+                            return false;
+                        }
+                        PicArr.push(tmpId);
+                        $(this).addClass("cur");//siblings().removeClass("cur");
+                    }else{
+                        PicArr = [tmpId];
+                        $(this).addClass("cur").siblings().removeClass("cur");
+                    }
+                    $(this).find(".choose").first().addClass("cur_img");
+                }else{
+                    PicArr = remove(PicArr,tmpId);
+                    $(this).removeClass("cur");
+                    $(this).find(".choose").first().removeClass("cur_img");
+                }
+            }
+        },'li');
+    });
+    function remove(arr,val){
+        var index = arr.indexOf(val);
+        if(index!=-1) arr.splice(index,1);
+        return arr;
+    }
+    function UTCTimeDemo(){
+        var now = new Date().getTime();
+        var datestr=escape(now*1000+Math.round(Math.random()*1000));
+        return datestr;
+    }
+    function changeColor(obj){
+        var type = $(obj).val();
+        if(!type)
+            window.location.href = "/pic_selector2.php?id=0&tj=1&size=0&banner=1&t_width=1440&t_height=480&pic_size=2&type=5&color=0&is_frame=0";
+        else
+            window.location.href = "/pic_selector2.php?id=0&tj=1&size=0&banner=1&t_width=1440&t_height=480&pic_size=2&type=5&color="+type+"&is_frame=0";
+    }
+    function close_div(){
+        if(!PicArr.length){
+            window.parent.Ev.pubFun.alertWindow("请先选择图片",'error');
+            return false;
+        }
+        window.parent.Ev.pubFun.alertWindow("请设置图片裁剪压缩方式");
+        var img_source = $('#list_'+PicArr[0]).data('pic');
+        var body_width = '100%';
+        var body_height = '100%';
+        var is_frame='0';
+        var url='/pic_cut.php?img_source='+img_source+'&tj=1&banner=1&t_width=1440&t_height=480&is_sel2=1&u='+UTCTimeDemo();
+        window.location.href = url;
+        window.parent.Ev.pubFun.addLoadingWindow();
+    }
+
+    function changeType(obj){
+        var type = $(obj).val();
+        window.location.href = "/pic_selector2.php?id=0&tj=1&size=0&banner=1&t_width=1440&t_height=480&type="+type;
+    }
+</script>
+</body>
+</html>
+
+
+

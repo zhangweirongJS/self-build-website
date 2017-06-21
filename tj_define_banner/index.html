@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+    <meta http-equiv="x-ua-compatible" content="ie=7" />
+    <title>焦点图</title>
+    <link type="text/css" rel="stylesheet" href="/css/VNew/admin_20140730.css?212320170309wer3" />
+    <link type="text/css" rel="stylesheet" href="/css/VNew/style_editcss.css?212320170309wer3" />
+    <script type="text/javascript" src="/include/cookies.js"></script>
+    <script type="text/javascript" src="/js/jquery-1.7.1.min.js" ></script>
+    <script type="text/javascript" src="/include/public.js?212320170309wer3"></script>
+    <script type="text/javascript" src="/js/VNew/link.js?212320170309wer3"></script>
+    <script type="text/javascript" src="/js/tj/tj_public.js?212320170309wer3"></script>
+    <link type="text/css" rel="stylesheet" href="/css/tj/spectrum.css?212320170309wer3" />
+    <script type="text/javascript" src="/js/tj/spectrum.js?212320170309wer3"></script>
+    <script type="text/javascript">
+//        document.domain = "ev123.net";
+        var body_height = 400;
+//        var user_name   = 'zwr123456';
+        var winP = window.parent;
+    </script>
+</head>
+<body>
+<div class="tabArea banner-tab-area">
+    <div class="alertTab" id="alert_tab">
+        <div class="TabCLoading" id="tabc_loading"></div>
+        <div class="alertTabT" id="alert_tab_t">
+            <ul>
+                <li data-id="bannerAdd" id="bannerAdd_tab" class="cur"><a href="javascript:;" >上传焦点图</a></li>
+                <li data-id="bannerAdmin" id="bannerAdmin_tab"><a href="/tj_define_banner_list" >管理焦点图</a></li>
+                <li data-id="bannerSet" id="bannerSet_tab"><a href="/tj_define_banner_set" >效果设置</a></li>
+            </ul>
+        </div>
+        <div class="alertTabC" id="alert_tab_c">
+            <div class="alertTabCIn banner-add" id="bannerAdd">
+                <form action="/tj_define_banner" method="post" enctype="multipart/form-data" id="myform" name="myform">
+                    <div class="tableDiv">
+                        <table>
+                            <tr class="tr-banner-title">
+                                <th class="t-a-m v-a-m">标 题：<em class="starred">*</em></th>
+                                <td>
+                                    <span class="text-element-o t-27-gray">
+                                        <span class="text-element-i">
+                                            <input id="name" name="title"  value="" maxlength="45" size="20">
+                                        </span>
+                                    </span>
+                                    <span class="but-element-o b-26-blue">
+                                        <em class="but-element-i"><a href="javascript:show_iframe(2,0);">查找标题</a></em>
+                                    </span>
+                                    <span class="redPoint" id="name_error"></span>
+                                </td>
+                            </tr>
+                            <tr class="tr-banner-url">
+                                <th class="t-a-m v-a-m">链 接：<em class="starred">*</em></th>
+                                <td>
+                                    <span class="text-element-o t-27-gray">
+                                        <span class="text-element-i">
+                                            <input id="link" name="link" value="#" maxlength="250" size="20" readonly="readonly" onclick="show_iframe('',0)">
+                                        </span>
+                                    </span>
+                                    <span class="but-element-o b-26-blue">
+                                        <em class="but-element-i"><a href="javascript:show_iframe(2,0);">查找链接</a></em>
+                                    </span>
+                                    <span class="redPoint" id="link_error"></span>
+                                </td>
+                            </tr>
+                            <tr class="tr-banner-target">
+                                <th class="t-a-m v-a-m">打开方式：<em class="starred">*</em></th>
+                                <td>
+                                    <select class="selectObj" name="target_type">
+                                        <option value="0" selected="selected" >本窗口</option>
+                                        <option value="1"  >新窗口</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="tr-banner-pic">
+                                <th class="t-a-m v-a-m">图 片：<em class="starred">*</em></th>
+                                <td>
+                                    <div class="banner-img-show" id="show_pic" style="display:none;"  class="show_pic"><img src=""></div>
+                                    <div class="up_pic">
+                                        <span class="but-element-o b-26-blue" onclick="tj_show_selector3();">
+                                            <em class="but-element-i"><a href="javascript:;">上传图片</a></em>
+                                        </span>
+                                        <span class="but-element-o b-26-blue" id="edit_pic" style="display:none;" onclick="tj_show_editor3();">
+                                            <em class="but-element-i"><a href="javascript:;">美化图片</a></em>
+                                        </span>
+                                        &nbsp;&nbsp;<span class="px" id="propicpath1_error">最佳尺寸：宽<span class="redPoint" id="pic_width"></span>像素&nbsp;高<span class="redPoint" id="pic_height"></span>像素&nbsp;的图片</span></div>
+                                    <input type="hidden" name="pic" id="pic" value="" />
+                                </td>
+                            </tr>
+                            <tr class="tr-banner-bgcolor">
+                                <th class="t-a-m v-a-m">背景色：</th>
+                                <td>
+                                    <input type="text" name="bg_color" id="bg_color" value="#ffffff" />
+                                    &nbsp;<span class="but-element-o b-26-red" id="clearBgColor">
+                                        <em class="but-element-i"><a href="###">清除</a></em>
+                                    </span>
+                                    <div class="redPoint">最多显示6条数据</div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="submitBut" id="my_submit_div">
+                        <b class="but but-blue" data-action="submit">保存</b>
+                        <b class="but but-gray" data-action="reset">取消</b>
+                        <input id="add_tag" name="add_tag" value="0" type="hidden">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var this_ = winP.Ev.pubVar.wIframe.contents().find("#banner_area");
+    var thisH = this_.height();
+    var thisW = this_.width();
+
+    (parseInt(thisW) == 1200)
+        ?  ($("#pic_width").html(1200))
+        :  ($("#pic_width").html(1440));
+    $("#pic_height").html(thisH);
+    /*function clear_bg_url() {
+     $("#clear_url").val(1);
+     $("#bg_url_view").remove();
+     }*/
+    $(function(){
+        var my_submit_div = $("#my_submit_div"),form = $('#myform'),
+            nameObj=$('#name'),
+            linkObj=$('#link'),
+            bg_colorObj = $("#bg_color");
+        bg_colorObj.spectrum({
+            color: bg_colorObj.val(),
+            flat:false,
+            clickoutFiresChange: true,
+            showInitial: true,
+            preferredFormat: "hex",
+            showInput: true,
+            chooseText: "确定",
+            cancelText: "取消",
+            change: function (color) {
+            }
+        });
+        $('#clearBgColor').on('click',function(){
+            bg_colorObj.val("");
+            $("#bg_color").next(".sp-replacer").find(".sp-preview-inner").css("background-color","transparent");
+        });
+        my_submit_div.on({
+            click : function(){
+                var t = $(this),action = t.data('action');
+                switch(action){
+                    case 'submit' :
+                        var name = $.trim(nameObj.val()),link = $.trim(linkObj.val()),
+                            fun = function(o,t){
+                                winP.Ev.pubFun.alertWindow(t,'warn');
+                                o.focus();
+                                return false;
+                            };
+                        if(name == ''){
+                            return fun(nameObj,"请填写标题！");
+                        }
+                        if(link == ''){
+                            return fun(linkObj,"链接不能为空！");
+                        }
+                        t.removeClass('but-blue').addClass('but-gray').text('保存中...');
+                        $('#add_tag').val(1);
+                        form.submit();
+                        break;
+                    case 'reset':
+                        winP.close_window();
+                        break;
+                }
+            }
+        },'.but');
+    });
+</script>
+<script type="text/javascript">
+    function friame_kg() {
+        var tmp_title='编辑内容';
+        var body_height2=$('body').height();
+        if(body_height2>360){
+            body_height=body_height2+50;
+            window.parent.resize_window('w1',tmp_title,700,body_height);
+        }else if(body_height2<360){
+            window.parent.resize_window('w1',tmp_title,700,400);
+        }
+    }
+    $(function(){friame_kg();});
+</script>
+</body>
+</html>

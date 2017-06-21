@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+    <title>图片选择器</title>
+    <link rel="Stylesheet" type="text/css" href="/css/pic_select/pic_select.css??212320170308wer3" />
+    <link type="text/css" href="/jquery/demos.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/css/VNew/style_editcss.css" />
+    <script src="/js/jquery-1.7.1.min.js" language="JavaScript" ></script>
+    <script language="javascript" src="/js/VNew/link.js?asd"></script>
+    <script type="text/javascript" src="/include/public.js"></script>
+    <script src="http://open.web.meitu.com/sources/xiuxiu.js" type="text/javascript"></script>
+</head>
+<body>
+<div class="imgSet">
+    <div class="imgSet_tab">
+        <div class="alertTabT" id="alert_tab_t">
+            <ul>
+                <li><a href="/pic_selector?tj=1&banner=1&t_width=1440&t_height=480">上传</a></li>
+                <li><a href="/pic_selector2?tj=1&banner=1&t_width=1440&t_height=480">素材库</a></li>
+                <li><a href="/pic_selector3?tj=1&banner=1&t_width=1440&t_height=480">我的图片</a></li>
+                <li class="cur"><a href="/pic_selector4
+                ?tj=1&banner=1&t_width=1440&t_height=480">图片搬家</a></li>
+            </ul>
+            <a id="addMo_customStyle_btn" class="addMoCustomStyleBtn" style="display: none;">添加自定义样式</a>
+        </div>
+        <div class="imgSet_tab_center">
+            <div class="img_Move" id="img_Move">
+                <div class="imgSet_tit">
+                    <!-- <select class="in_select margin_r me_File_set" id="in_select">
+                        <option selected="selected" value="0">网页地址</option>
+                        <option  value="1">图片地址</option>
+                    </select>
+                    <div class="jd">
+                        <label class="jdText">共<em id="total">112</em>张，正在处理第<i id="last">1</i>张</label>
+                        <span class="jdImg">
+                            <em id="process"></em>
+                        </span>
+                    </div>-->
+                    <em class="fl">网页地址：</em>
+                    <input type="text" name="webUrl" id="webUrl" value="" class="in_text margin_r search_text">
+                    <a href="###" class="search_btn" onclick="changeType()">搜索</a>
+                    <span class="fr"></span>
+                </div>
+                <div class="imgSet_list" id="imgSet_list">
+                    <div style="width:100%;line-height:50px; text-align:center;font-size:12px; font-weight:bold">暂无找到图片</div>
+                </div>
+                <div class="list_btn" id="list_btn">
+                    <a href="###" class="Btn_ok" data-id="o">确定</a>
+                    <a href="###" class="Btn_disable" data-id="r">取消</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="xiuxiu_div" style="position: relative;"></div>
+
+<script language="javascript">
+    var PicArr = [],maximum = 1;
+    $(function(){
+        if (!Array.prototype.indexOf){
+            Array.prototype.indexOf = function(elt /*, from*/){
+                var len = this.length >>> 0;
+                var from = Number(arguments[1]) || 0;
+                from = (from < 0)
+                    ? Math.ceil(from)
+                    : Math.floor(from);
+                if (from < 0)
+                    from += len;
+                for (; from < len; from++)
+                {
+                    if (from in this &&
+                        this[from] === elt)
+                        return from;
+                }
+                return -1;
+            };
+        }
+        var img_Date = $("#img_Date"),
+            imgSet_list = $("#imgSet_list"),
+            imgSet = $("#imgSet"),
+            listMore = $("#listMore"),
+            list_btn = $("#list_btn");
+        list_btn.on({
+            click : function(){
+                var t = $(this),
+                    c = t.data('id');
+                if(c == 'o'){
+                    close_div();
+                }else if(c =='r'){
+                    window.parent.close_window('w5');
+                }
+            }
+        },'a');
+        imgSet.on({
+            click : function(){
+                var tmpId = $(this).data('id');
+                if(!PicArr || PicArr.indexOf(tmpId)==-1){
+                    if(maximum>1){
+                        if(PicArr.length+1>maximum){
+                            window.parent.Ev.pubFun.alertWindow('最多可选择'+maximum+'张图片！','error');
+                            return false;
+                        }
+                        PicArr.push(tmpId);
+                        $(this).addClass("cur");//siblings().removeClass("cur");
+                    }else{
+                        PicArr = [tmpId];
+                        $(this).addClass("cur").siblings().removeClass("cur");
+                    }
+                    $(this).find(".choose").first().addClass("cur_img");
+                }else{
+                    PicArr = remove(PicArr,tmpId);
+                    $(this).removeClass("cur");
+                    $(this).find(".choose").first().removeClass("cur_img");
+                }
+            }
+        },'li');
+    });
+    //时间戳
+    function UTCTimeDemo(){
+        var now = new Date().getTime();
+        var datestr=escape(now*1000+Math.round(Math.random()*1000));
+        return datestr;
+    }
+    function close_div(img_source){
+        if(!PicArr.length){
+            window.parent.Ev.pubFun.alertWindow("请先选择图片",'error');
+            return false;
+        }
+        window.parent.Ev.pubFun.alertWindow("请设置图片裁剪压缩方式");
+        var img_source = $('#list_'+PicArr[0]).data('pic');
+        var body_width = '100%';
+        var body_height = '100%';
+        var is_frame='0';
+        var url='/pic_cut.php?from=mypic&img_source='+img_source+'&tj=1&banner=1&t_width=1440&t_height=480&is_sel2=1&u='+UTCTimeDemo();
+        window.location.href = url;
+        window.parent.Ev.pubFun.addLoadingWindow();
+    }
+    function changeType(){
+        //var witch = $("#in_select option:selected").val();
+        var webUrl = $("#webUrl").val();
+        webUrl = encodeURIComponent(webUrl);
+        window.location.href = "/pic_selector4.php?id=0&tj=1&size=0&banner=1&t_width=1440&t_height=480&webUrl="+webUrl;
+    }
+</script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,6 @@
+@charset "gb2312";
+/*	Date:2012-10-30;
+	author:qwguo;
+	purpose:关于模板元素的格式化;
+*/
+body,ul,ol,li,dl,dd,p,h1,h2,h3,h4,h5,h6,input,td,tr,table{margin:0px; padding:0px;}li{list-style:none;}table{border-collapse:collapse;}img{border:0px;}.q{zoom:1;}.q:after{content:"";display:block; clear:both; height:0px; line-height:0px; visibility:hidden; overflow:hidden;}.f-l{float:left;}.f-r{float:right;}.C-lr{clear:both;display:block;height:0px; font-size:0px; overflow:hidden;}html{_background-image:url(about:blank);_background-attachment:fixed;}body{font-size:12px; font-family: '宋体';}a,a:hover{text-decoration:none;}

@@ -1,0 +1,1814 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>导航样式编辑</title>
+  <link rel="stylesheet" type="text/css" href="css/VNew/base.css" />
+  <link rel="stylesheet" type="text/css" href="css/VNew/spectrum.css" />
+  <link rel="stylesheet" type="text/css" href="css/VNew/style_editcss.css" />
+  <script type="text/javascript" src="js/VNew/jquery-1.8.3.min.js"></script>
+  <script type="text/javascript" src="js/VNew/spectrum.js"></script>
+  <script type="text/javascript">
+    //document.domain = "ev123.net";
+  </script>
+  <script type="text/javascript" src="js/VNew/tj/edit_public.js"></script>
+  <script type="text/javascript" src="js/VNew/tj/basic_module_style/nav_style_edit.js"></script>
+  <script type="text/javascript" src="js/VNew/tj/basic_module_style/json_array.js"></script>
+</head>
+<body>
+<div class="tabArea">
+  <div class="alertTab" id="alert_tab">
+    <div class="TabCLoading" id="tabc_loading"></div>
+    <div class="alertTabT" id="alert_tab_t">
+      <ul>
+        <li data-id="skinStyle" id="skinStyle_tab">
+          <a href="javascript:;">样式选择</a>
+        </li>
+        <li data-id="exteriorStyle" id="exteriorStyle_tab">
+          <a href="javascript:;">导航外观</a>
+        </li>
+        <li data-id="itemStyle" id="itemStyle_tab">
+          <a href="javascript:;">导航栏目项</a>
+        </li>
+        <li data-id="subItemStyle" id="subItemStyle_tab">
+          <a href="javascript:;">下拉菜单栏目项</a>
+        </li>
+      </ul>
+    </div>
+    <div class="alertTabC" id="alert_tab_c">
+      <!--导航样式选择 start-->
+      <div class="NStyleSet" id="skinStyle">
+        <!--颜色选择 start-->
+        <div class="ScolorSearch"> <strong>颜色选择：</strong>
+          <div class="ScolorList" id="color_list">
+            <b class="default" title="模版默认样式" data-color="default" data-val="1000"><em></em> <i>默</i></b>  <b class="all" title="全部" data-color="all" data-val="0"><i class="i1"></i>
+            <i class="i2"></i>
+            <i class="i3"></i>
+            <i class="i4"></i> <em></em></b>
+            <b class="red" title="红色" data-color="red" data-val="1">
+              <em></em>
+            </b>
+            <b class="blue" title="蓝色" data-color="blue" data-val="2">
+              <em></em>
+            </b>
+            <b class="orange" title="橙色" data-color="orange" data-val="3">
+              <em></em>
+            </b>
+            <b class="purple" title="紫色" data-color="purple" data-val="4">
+              <em></em>
+            </b>
+            <b class="black" title="黑色" data-color="black" data-val="5">
+              <em></em>
+            </b>
+            <b class="green" title="绿色" data-color="green" data-val="6">
+              <em></em>
+            </b>
+            <b class="brown" title="褐色" data-color="brown" data-val="7">
+              <em></em>
+            </b>
+          </div>
+        </div>
+        <!--颜色选择 end-->
+        <!--选择样式 start-->
+        <div class="NStyleList" id="N_style_list">
+          <div class="NstyleDiv">
+            <ul class="NStyleListUl q" id="N_style_list_ul"></ul>
+          </div>
+          <div class="NstyleIndex" id="N_style_index"></div>
+        </div>
+        <!--选择样式 start-->
+        <div class="submitBut">
+          <b class="but but-blue" id="N_skinStyleEnter">确定</b>
+          <b class="but but-blue" id="N_skinStyleReset">恢复本项默认</b>
+        </div>
+      </div>
+      <!--导航样式选择 end-->
+      <!--导航全局设置 start-->
+      <div class="NGlobalSet" id="exteriorStyle">
+        <div class="tableDiv">
+          <table>
+            <caption>导航设置</caption>
+            <tr>
+              <th>导航定位：</th>
+              <td>
+                <!--<input type="radio" class="radioObj" name="NAbsoToggle" id="N_absoAuto" onclick="Nset.NAbsoToggle(0)">
+                <label class="labelObj" for="N_absoAuto">默认</label>
+                <input type="radio" class="radioObj" name="NAbsoToggle" id="N_absoYes" onclick="Nset.NAbsoToggle(1)">
+                <label class="labelObj" for="N_absoYes">浮动</label>
+                <input type="radio" class="radioObj" name="NAbsoToggle" id="N_absoNo" onclick="Nset.NAbsoToggle(2)">
+                <label class="labelObj" for="N_absoNo">跟随滚动</label> -->
+                <input type="radio" class="radioObj" name="NPositionToggle" id="N_positionAuto" onclick="Nset.NPositionToggle(0)">
+                <label class="labelObj" for="N_positionAuto">默认</label>
+                <input type="radio" class="radioObj" name="NPositionToggle" id="N_positionAbsolute" onclick="Nset.NPositionToggle(1)">
+                <label class="labelObj" for="N_positionAbsolute">可拖动</label>
+                <!--<input type="radio" class="radioObj" name="NPositionToggle" id="N_positionFixed" onclick="Nset.NPositionToggle(2)">
+                <label class="labelObj" for="N_positionFixed">跟随滚动</label>
+                -->
+                <input type="radio" class="radioObj" name="NPositionToggle" id="N_positionRelative" onclick="Nset.NPositionToggle(2)">
+                <label class="labelObj" for="N_positionRelative">不可拖动</label>
+              </td>
+            </tr>
+            <tr id="trNavFull">
+              <th>背景通栏：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NFullToggle" id="N_fullAuto" onclick="Nset.NFullToggle(0)">
+                <label class="labelObj" for="N_fullAuto">默认</label>
+                <input type="radio" class="radioObj" name="NFullToggle" id="N_fullNo" onclick="Nset.NFullToggle(1)">
+                <label class="labelObj" for="N_fullNo">否</label>
+                <input type="radio" class="radioObj" name="NFullToggle" id="N_fullYes" onclick="Nset.NFullToggle(2)">
+                <label class="labelObj" for="N_fullYes">是</label>
+              </td>
+            </tr>
+            <tr id="trNavWidth">
+              <th>导航内宽度：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NWidthToggle" id="N_widthAuto" onclick="Nset.NWidthToggle(0)" />
+                <label class='labelObj' for="N_widthAuto">默认</label>
+                <input type='radio' class="radioObj" name="NWidthToggle" id="N_widthCus" onclick="Nset.NWidthToggle(2)">
+                <label class='labelObj' for="N_widthCus">自定义</label>
+                <span class="redPoint">"调整导航宽度需要保存页面"</span>
+                <ul class="attrSetingList" id="N_widthAttrlist">
+                  <li>
+                    <span class="labelspan">宽度值：</span>
+                    <input type="text" class="inputObj" name="NWidth" style="width:50px;" id="N_width" onchange="Nset.NWidth(this)" />
+                    <span class="px">像素</span>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>导航高度：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NHeightToggle" id="N_heightAuto" onclick="Nset.NHeightToggle(0)" />
+                <label class='labelObj' for="N_heightAuto">默认</label>
+                <input type='radio' class="radioObj" name="NHeightToggle" id="N_heightCus" onclick="Nset.NHeightToggle(2)">
+                <label class='labelObj' for="N_heightCus">自定义</label>
+                <span class="redPoint">"调整导航高度需要保存页面"</span>
+                <ul class="attrSetingList" id="N_heightAttrlist">
+                  <li>
+                    <span class="labelspan">高度值：</span>
+                    <input type="text" class="inputObj" name="NHeight" style="width:50px;" id="N_height" onchange="Nset.NHeight(this)" />
+                    <span class="px">像素</span>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>对齐设置：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NCFloatToggle" id="N_CFloatAuto" onclick="Nset.NCFloatToggle(0)" />
+                <label class='labelObj' for="N_CFloatAuto">默认</label>
+                <input type='radio' class="radioObj" name="NCFloatToggle" id="N_CFloatCus" onclick="Nset.NCFloatToggle(1)">
+                <label class='labelObj' for="N_CFloatCus">自定义</label>
+                <ul class="attrSetingList" id="N_CFloatAttrlist">
+                  <li>
+                    <span class="labelspan">对齐方式：</span>
+                    <select class="selectObj" name="NCFloat" id="N_CFloat" onchange="Nset.NCFloat(this.value)">
+                      <option value="left" selected="selected">左对齐</option>
+                      <option value="none">居中对齐</option>
+                      <option value="right">右对齐</option>
+                    </select>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>上下距离：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NMarginToggle" id="N_marginAuto" onclick="Nset.NMarginToggle(0)">
+                <label class="labelObj" for="N_marginAuto">默认</label>
+                <input type="radio" class="radioObj" name="NMarginToggle" id="N_marginCus" onclick="Nset.NMarginToggle(2)">
+                <label class="labelObj" for="N_marginCus">自定义</label>
+                <ul class="attrSetingList" id="N_marginAttrlist">
+                  <li>
+                    <span class="labelspan">上：</span>
+                    <input type="text" class="inputObj" name="NMarginTop" id="N_marginTop" style="width:40px;" onchange="Nset.NMarginTop(this)" />
+                    <span class="px">像素</span>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="labelspan">下：</span>
+                    <input type="text" class="inputObj" name="NMarginBottom" id="N_marginBottom" style="width:40px;" onchange="Nset.NMarginBottom(this)"  />
+                    <span class="px">像素</span>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>导航背景：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NBgToggle" id="N_bgAuto" onclick="Nset.NBgToggle(0)">
+                <label class='labelObj' for="N_bgAuto">默认</label>
+                <input type='radio' class="radioObj" name="NBgToggle" id="N_bgHide" onclick="Nset.NBgToggle(1)">
+                <label class='labelObj' for="N_bgHide">隐藏</label>
+                <input type='radio' class="radioObj" name="NBgToggle" id="N_bgCus" onclick="Nset.NBgToggle(2)">
+                <label class='labelObj' for="N_bgCus">自定义</label>
+                <ul class="attrSetingList" id="N_bgAttrlist">
+                  <li>
+                    <span class="labelspan">背景颜色：</span>
+                    <input class="colorObj" name="colorInput" id="N_bgColor" value="#000000" onchange="Nset.NBgColor(this.value)">
+                    <a title="取消背景颜色" onclick="Nset.NNoBgColor();" id="N_noBgColor" class="noBgColorObj" href="javascript:;">取消背景颜色</a>
+                  </li>
+                  <li>
+                    <span class="labelspan">背景图片：</span>
+                    <input type="text" name="NBgImage" id="N_bgImage" onchange="Nset.NBgImage(this.value)" class="bgObj"  value="none" disabled="disabled">
+                    <input type="button" class="bgButObj" id="N_bgImageBut" value="上传" onclick="pf.upBgImg('N_bgImage');" />
+                    <a href="javascript:;" class="bgLookObj" title="查看当前使用图片" id="N_bgImageLook" target="_blank">查看图片</a>
+                    <a href="javascript:;" class="bgNoneObj" id="N_bgImageNone" onclick="pf.noBgImg('N_bgImage');" title="取消背景图片">取消背景图片</a>
+                  </li>
+                  <li>
+                    <span class="labelspan">背景位置：</span>
+                    <select class="selectObj" name="NBgPosition" id="N_bgPosition" onchange="Nset.NBgPosition(this.value)">
+                      <option value="left top" selected="selected">左上</option>
+                      <option value="left center">左中</option>
+                      <option value="left bottom">左下</option>
+                      <option value="center top">中上</option>
+                      <option value="center center">居中</option>
+                      <option value="center bottom">中下</option>
+                      <option value="right top">右上</option>
+                      <option value="right center">右中</option>
+                      <option value="right bottom">右下</option>
+                    </select>
+                  </li>
+                  <li>
+                    <span class="labelspan">平铺：</span>
+                    <select class="selectObj" name="NBgRepeat" id="N_bgRepeat" onchange="Nset.NBgRepeat(this.value)">
+                      <option value="no-repeat">不平铺</option>
+                      <option value="repeat" selected="selected">平铺</option>
+                      <option value="repeat-x">横向平铺</option>
+                      <option value="repeat-y">纵向平铺</option>
+                    </select>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th class="labelspan">背景透明度：</th>
+              <td>
+                <input type="text" class="opacityObj" id="N_opacity" value='100' onchange="Nset.NOpacity(this.value)" name="opacityObj" />
+                <span class="pah">%</span>
+              </td>
+            </tr>
+            <!-- <tr>
+              <th>边框：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NBorderToggle" id="N_borderAuto" onclick="Nset.NBorderToggle(0);" />
+                <label class="labelObj" for="N_borderAuto">默认</label>
+                <input type="radio" class="radioObj" name="NBorderToggle" id="N_borderCus" onclick="Nset.NBorderToggle(2);" />
+                <label class="labelObj" for="N_borderCus">自定义</label>
+                <ul class="attrSetingList" id="N_borderAttrlist">
+                  <li>
+                    <span class="labelspan">边线颜色：</span>
+                    <input class="colorObj" name="colorInput" id="N_borderColor" value="#000000" onchange="Nset.NBorderColor(this.value);" />
+                  </li>
+                  <li>
+                    <span class="labelspan">宽度：</span>
+                    <select class="selectObj" id="N_borderWidth" onchange="Nset.NBorderWidth(this.value);">
+                      <option value="1" selected="selected">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </li>
+                  <li>
+                    <span class="labelspan">边线样式：</span>
+                    <select class="selectObj" id="N_borderStyle" onchange="Nset.NBorderStyle(this.value);">
+                      <option value="solid" selected="selected">实线</option>
+                      <option value="dashed">虚线</option>
+                      <option value="dotted">点状</option>
+                    </select>
+                  </li>
+                </ul>
+              </td>
+            </tr> -->
+            <tr>
+              <td colspan="2"><div class="attrlistHead">外边框：</div></td>
+            </tr>
+            <tr>
+              <th>上：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NBorderTopToggle" id="N_borderTopAuto" onclick="Nset.NBorderTopToggle(0);" />
+                <label class="labelObj" for="N_borderTopAuto">默认</label>
+                <input type="radio" class="radioObj" name="NBorderTopToggle" id="N_borderTopHide" onclick="Nset.NBorderTopToggle(1)">
+                <label class="labelObj" for="N_borderTopHide">隐藏</label>
+                <input type="radio" class="radioObj" name="NBorderTopToggle" id="N_borderTopCus" onclick="Nset.NBorderTopToggle(2);" />
+                <label class="labelObj" for="N_borderTopCus">自定义</label>
+                <ul class="attrSetingList" id="N_borderTopAttrlist">
+                  <li>
+                    <span class="labelspan">颜色：</span>
+                    <input class="colorObj" name="colorInput" id="N_borderTopColor" value="#cccccc" onchange="Nset.NBorderTopColor(this.value);" />
+                  </li>
+                  <li>
+                    <span class="labelspan">高度：</span>
+                    <select class="selectObj" name="NBorderTopWidth" id="N_borderTopWidth" onchange="Nset.NBorderTopWidth(this.value);">
+                      <option value="1" selected="selected">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12">12</option>
+                      <option value="13">13</option>
+                      <option value="14">14</option>
+                      <option value="15">15</option>
+                      <option value="16">16</option>
+                      <option value="17">17</option>
+                      <option value="18">18</option>
+                      <option value="19">19</option>
+                      <option value="20">20</option>
+                      <option value="21">21</option>
+                      <option value="22">22</option>
+                      <option value="23">23</option>
+                      <option value="24">24</option>
+                      <option value="25">25</option>
+                      <option value="26">26</option>
+                      <option value="27">27</option>
+                      <option value="28">28</option>
+                      <option value="29">29</option>
+                      <option value="30">30</option>
+                    </select>
+                    <span class="px">像素</span>
+                  </li>
+                  <li>
+                    <span class="labelspan">样式：</span>
+                    <select class="selectObj" name="NBorderTopStyle" id="N_borderTopStyle" onchange="Nset.NBorderTopStyle(this.value);">
+                      <option value="solid" selected="selected">实线</option>
+                      <option value="dashed">虚线</option>
+                      <option value="dotted">点状</option>
+                    </select>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>下：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NBorderBottomToggle" id="N_borderBottomAuto" onclick="Nset.NBorderBottomToggle(0);" />
+                <label class="labelObj" for="N_borderBottomAuto">默认</label>
+                <input type="radio" class="radioObj" name="NBorderBottomToggle" id="N_borderBottomHide" onclick="Nset.NBorderBottomToggle(1)">
+                <label class="labelObj" for="N_borderBottomHide">隐藏</label>
+                <input type="radio" class="radioObj" name="NBorderBottomToggle" id="N_borderBottomCus" onclick="Nset.NBorderBottomToggle(2);" />
+                <label class="labelObj" for="N_borderBottomCus">自定义</label>
+                <ul class="attrSetingList" id="N_borderBottomAttrlist">
+                  <li>
+                    <span class="labelspan">颜色：</span>
+                    <input class="colorObj" name="colorInput" id="N_borderBottomColor" value="#cccccc" onchange="Nset.NBorderBottomColor(this.value);" />
+                  </li>
+                  <li>
+                    <span class="labelspan">高度：</span>
+                    <select class="selectObj" name="NBorderBottomWidth" id="N_borderBottomWidth" onchange="Nset.NBorderBottomWidth(this.value);">
+                      <option value="1" selected="selected">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12">12</option>
+                      <option value="13">13</option>
+                      <option value="14">14</option>
+                      <option value="15">15</option>
+                      <option value="16">16</option>
+                      <option value="17">17</option>
+                      <option value="18">18</option>
+                      <option value="19">19</option>
+                      <option value="20">20</option>
+                      <option value="21">21</option>
+                      <option value="22">22</option>
+                      <option value="23">23</option>
+                      <option value="24">24</option>
+                      <option value="25">25</option>
+                      <option value="26">26</option>
+                      <option value="27">27</option>
+                      <option value="28">28</option>
+                      <option value="29">29</option>
+                      <option value="30">30</option>
+                    </select>
+                    <span class="px">像素</span>
+                  </li>
+                  <li>
+                    <span class="labelspan">样式：</span>
+                    <select class="selectObj" name="NBorderBottomStyle" id="N_borderBottomStyle" onchange="Nset.NBorderBottomStyle(this.value);">
+                      <option value="solid" selected="selected">实线</option>
+                      <option value="dashed">虚线</option>
+                      <option value="dotted">点状</option>
+                    </select>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>左：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NBorderLeftToggle" id="N_borderLeftAuto" onclick="Nset.NBorderLeftToggle(0);" />
+                <label class="labelObj" for="N_borderLeftAuto">默认</label>
+                <input type="radio" class="radioObj" name="NBorderLeftToggle" id="N_borderLeftHide" onclick="Nset.NBorderLeftToggle(1)">
+                <label class="labelObj" for="N_borderLeftHide">隐藏</label>
+                <input type="radio" class="radioObj" name="NBorderLeftToggle" id="N_borderLeftCus" onclick="Nset.NBorderLeftToggle(2);" />
+                <label class="labelObj" for="N_borderLeftCus">自定义</label>
+                <ul class="attrSetingList" id="N_borderLeftAttrlist">
+                  <li>
+                    <span class="labelspan">颜色：</span>
+                    <input class="colorObj" name="colorInput" id="N_borderLeftColor" value="#cccccc" onchange="Nset.NBorderLeftColor(this.value);" />
+                  </li>
+                  <li>
+                    <span class="labelspan">宽度：</span>
+                    <select class="selectObj" name="NBorderLeftWidth" id="N_borderLeftWidth" onchange="Nset.NBorderLeftWidth(this.value);">
+                      <option value="1" selected="selected">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12">12</option>
+                      <option value="13">13</option>
+                      <option value="14">14</option>
+                      <option value="15">15</option>
+                      <option value="16">16</option>
+                      <option value="17">17</option>
+                      <option value="18">18</option>
+                      <option value="19">19</option>
+                      <option value="20">20</option>
+                      <option value="21">21</option>
+                      <option value="22">22</option>
+                      <option value="23">23</option>
+                      <option value="24">24</option>
+                      <option value="25">25</option>
+                      <option value="26">26</option>
+                      <option value="27">27</option>
+                      <option value="28">28</option>
+                      <option value="29">29</option>
+                      <option value="30">30</option>
+                    </select>
+                    <span class="px">像素</span>
+                  </li>
+                  <li>
+                    <span class="labelspan">样式：</span>
+                    <select class="selectObj" name="NBorderLeftStyle" id="N_borderLeftStyle" onchange="Nset.NBorderLeftStyle(this.value);">
+                      <option value="solid" selected="selected">实线</option>
+                      <option value="dashed">虚线</option>
+                      <option value="dotted">点状</option>
+                    </select>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>右：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NBorderRightToggle" id="N_borderRightAuto" onclick="Nset.NBorderRightToggle(0);" />
+                <label class="labelObj" for="N_borderRightAuto">默认</label>
+                <input type="radio" class="radioObj" name="NBorderRightToggle" id="N_borderRightHide" onclick="Nset.NBorderRightToggle(1)">
+                <label class="labelObj" for="N_borderRightHide">隐藏</label>
+                <input type="radio" class="radioObj" name="NBorderRightToggle" id="N_borderRightCus" onclick="Nset.NBorderRightToggle(2);" />
+                <label class="labelObj" for="N_borderRightCus">自定义</label>
+                <ul class="attrSetingList" id="N_borderRightAttrlist">
+                  <li>
+                    <span class="labelspan">颜色：</span>
+                    <input class="colorObj" name="colorInput" id="N_borderRightColor" value="#cccccc" onchange="Nset.NBorderRightColor(this.value);" />
+                  </li>
+                  <li>
+                    <span class="labelspan">宽度：</span>
+                    <select class="selectObj" name="NBorderRightWidth" id="N_borderRightWidth" onchange="Nset.NBorderRightWidth(this.value);">
+                      <option value="1" selected="selected">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12">12</option>
+                      <option value="13">13</option>
+                      <option value="14">14</option>
+                      <option value="15">15</option>
+                      <option value="16">16</option>
+                      <option value="17">17</option>
+                      <option value="18">18</option>
+                      <option value="19">19</option>
+                      <option value="20">20</option>
+                      <option value="21">21</option>
+                      <option value="22">22</option>
+                      <option value="23">23</option>
+                      <option value="24">24</option>
+                      <option value="25">25</option>
+                      <option value="26">26</option>
+                      <option value="27">27</option>
+                      <option value="28">28</option>
+                      <option value="29">29</option>
+                      <option value="30">30</option>
+                    </select>
+                    <span class="px">像素</span>
+                  </li>
+                  <li>
+                    <span class="labelspan">样式：</span>
+                    <select class="selectObj" name="NBorderRightStyle" id="N_borderRightStyle" onchange="Nset.NBorderRightStyle(this.value);">
+                      <option value="solid" selected="selected">实线</option>
+                      <option value="dashed">虚线</option>
+                      <option value="dotted">点状</option>
+                    </select>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2"><div class="attrlistHead">内边框：</div></td>
+            </tr>
+            <tr>
+              <th>上：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NMainBorderTopToggle" id="N_mainBorderTopAuto" onclick="Nset.NMainBorderTopToggle(0);" />
+                <label class="labelObj" for="N_mainBorderTopAuto">默认</label>
+                <input type="radio" class="radioObj" name="NMainBorderTopToggle" id="N_mainBorderTopHide" onclick="Nset.NMainBorderTopToggle(1)">
+                <label class="labelObj" for="N_mainBorderTopHide">隐藏</label>
+                <input type="radio" class="radioObj" name="NMainBorderTopToggle" id="N_mainBorderTopCus" onclick="Nset.NMainBorderTopToggle(2);" />
+                <label class="labelObj" for="N_mainBorderTopCus">自定义</label>
+                <ul class="attrSetingList" id="N_mainBorderTopAttrlist">
+                  <li>
+                    <span class="labelspan">颜色：</span>
+                    <input class="colorObj" name="colorInput" id="N_mainBorderTopColor" value="#cccccc" onchange="Nset.NMainBorderTopColor(this.value);" />
+                  </li>
+                  <li>
+                    <span class="labelspan">高度：</span>
+                    <select class="selectObj" name="NMainBorderTopWidth" id="N_mainBorderTopWidth" onchange="Nset.NMainBorderTopWidth(this.value);">
+                      <option value="1" selected="selected">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12">12</option>
+                      <option value="13">13</option>
+                      <option value="14">14</option>
+                      <option value="15">15</option>
+                      <option value="16">16</option>
+                      <option value="17">17</option>
+                      <option value="18">18</option>
+                      <option value="19">19</option>
+                      <option value="20">20</option>
+                      <option value="21">21</option>
+                      <option value="22">22</option>
+                      <option value="23">23</option>
+                      <option value="24">24</option>
+                      <option value="25">25</option>
+                      <option value="26">26</option>
+                      <option value="27">27</option>
+                      <option value="28">28</option>
+                      <option value="29">29</option>
+                      <option value="30">30</option>
+                    </select>
+                    <span class="px">像素</span>
+                  </li>
+                  <li>
+                    <span class="labelspan">样式：</span>
+                    <select class="selectObj" name="NMainBorderTopStyle" id="N_mainBorderTopStyle" onchange="Nset.NMainBorderTopStyle(this.value);">
+                      <option value="solid" selected="selected">实线</option>
+                      <option value="dashed">虚线</option>
+                      <option value="dotted">点状</option>
+                    </select>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>下：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NMainBorderBottomToggle" id="N_mainBorderBottomAuto" onclick="Nset.NMainBorderBottomToggle(0);" />
+                <label class="labelObj" for="N_mainBorderBottomAuto">默认</label>
+                <input type="radio" class="radioObj" name="NMainBorderBottomToggle" id="N_mainBorderBottomHide" onclick="Nset.NMainBorderBottomToggle(1)">
+                <label class="labelObj" for="N_mainBorderBottomHide">隐藏</label>
+                <input type="radio" class="radioObj" name="NMainBorderBottomToggle" id="N_mainBorderBottomCus" onclick="Nset.NMainBorderBottomToggle(2);" />
+                <label class="labelObj" for="N_mainBorderBottomCus">自定义</label>
+                <ul class="attrSetingList" id="N_mainBorderBottomAttrlist">
+                  <li>
+                    <span class="labelspan">颜色：</span>
+                    <input class="colorObj" name="colorInput" id="N_mainBorderBottomColor" value="#cccccc" onchange="Nset.NMainBorderBottomColor(this.value);" />
+                  </li>
+                  <li>
+                    <span class="labelspan">高度：</span>
+                    <select class="selectObj" name="NMainBorderBottomWidth" id="N_mainBorderBottomWidth" onchange="Nset.NMainBorderBottomWidth(this.value);">
+                      <option value="1" selected="selected">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12">12</option>
+                      <option value="13">13</option>
+                      <option value="14">14</option>
+                      <option value="15">15</option>
+                      <option value="16">16</option>
+                      <option value="17">17</option>
+                      <option value="18">18</option>
+                      <option value="19">19</option>
+                      <option value="20">20</option>
+                      <option value="21">21</option>
+                      <option value="22">22</option>
+                      <option value="23">23</option>
+                      <option value="24">24</option>
+                      <option value="25">25</option>
+                      <option value="26">26</option>
+                      <option value="27">27</option>
+                      <option value="28">28</option>
+                      <option value="29">29</option>
+                      <option value="30">30</option>
+                    </select>
+                    <span class="px">像素</span>
+                  </li>
+                  <li>
+                    <span class="labelspan">样式：</span>
+                    <select class="selectObj" name="NMainBorderBottomStyle" id="N_mainBorderBottomStyle" onchange="Nset.NMainBorderBottomStyle(this.value);">
+                      <option value="solid" selected="selected">实线</option>
+                      <option value="dashed">虚线</option>
+                      <option value="dotted">点状</option>
+                    </select>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>左：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NMainBorderLeftToggle" id="N_mainBorderLeftAuto" onclick="Nset.NMainBorderLeftToggle(0);" />
+                <label class="labelObj" for="N_mainBorderLeftAuto">默认</label>
+                <input type="radio" class="radioObj" name="NMainBorderLeftToggle" id="N_mainBorderLeftHide" onclick="Nset.NMainBorderLeftToggle(1)">
+                <label class="labelObj" for="N_mainBorderLeftHide">隐藏</label>
+                <input type="radio" class="radioObj" name="NMainBorderLeftToggle" id="N_mainBorderLeftCus" onclick="Nset.NMainBorderLeftToggle(2);" />
+                <label class="labelObj" for="N_mainBorderLeftCus">自定义</label>
+                <ul class="attrSetingList" id="N_mainBorderLeftAttrlist">
+                  <li>
+                    <span class="labelspan">颜色：</span>
+                    <input class="colorObj" name="colorInput" id="N_mainBorderLeftColor" value="#cccccc" onchange="Nset.NMainBorderLeftColor(this.value);" />
+                  </li>
+                  <li>
+                    <span class="labelspan">宽度：</span>
+                    <select class="selectObj" name="NMainBorderLeftWidth" id="N_mainBorderLeftWidth" onchange="Nset.NMainBorderLeftWidth(this.value);">
+                      <option value="1" selected="selected">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12">12</option>
+                      <option value="13">13</option>
+                      <option value="14">14</option>
+                      <option value="15">15</option>
+                      <option value="16">16</option>
+                      <option value="17">17</option>
+                      <option value="18">18</option>
+                      <option value="19">19</option>
+                      <option value="20">20</option>
+                      <option value="21">21</option>
+                      <option value="22">22</option>
+                      <option value="23">23</option>
+                      <option value="24">24</option>
+                      <option value="25">25</option>
+                      <option value="26">26</option>
+                      <option value="27">27</option>
+                      <option value="28">28</option>
+                      <option value="29">29</option>
+                      <option value="30">30</option>
+                    </select>
+                    <span class="px">像素</span>
+                  </li>
+                  <li>
+                    <span class="labelspan">样式：</span>
+                    <select class="selectObj" name="NMainBorderLeftStyle" id="N_mainBorderLeftStyle" onchange="Nset.NMainBorderLeftStyle(this.value);">
+                      <option value="solid" selected="selected">实线</option>
+                      <option value="dashed">虚线</option>
+                      <option value="dotted">点状</option>
+                    </select>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>右：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NMainBorderRightToggle" id="N_mainBorderRightAuto" onclick="Nset.NMainBorderRightToggle(0);" />
+                <label class="labelObj" for="N_mainBorderRightAuto">默认</label>
+                <input type="radio" class="radioObj" name="NMainBorderRightToggle" id="N_mainBorderRightHide" onclick="Nset.NMainBorderRightToggle(1)">
+                <label class="labelObj" for="N_mainBorderRightHide">隐藏</label>
+                <input type="radio" class="radioObj" name="NMainBorderRightToggle" id="N_mainBorderRightCus" onclick="Nset.NMainBorderRightToggle(2);" />
+                <label class="labelObj" for="N_mainBorderRightCus">自定义</label>
+                <ul class="attrSetingList" id="N_mainBorderRightAttrlist">
+                  <li>
+                    <span class="labelspan">颜色：</span>
+                    <input class="colorObj" name="colorInput" id="N_mainBorderRightColor" value="#cccccc" onchange="Nset.NMainBorderRightColor(this.value);" />
+                  </li>
+                  <li>
+                    <span class="labelspan">宽度：</span>
+                    <select class="selectObj" name="NMainBorderRightWidth" id="N_mainBorderRightWidth" onchange="Nset.NMainBorderRightWidth(this.value);">
+                      <option value="1" selected="selected">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12">12</option>
+                      <option value="13">13</option>
+                      <option value="14">14</option>
+                      <option value="15">15</option>
+                      <option value="16">16</option>
+                      <option value="17">17</option>
+                      <option value="18">18</option>
+                      <option value="19">19</option>
+                      <option value="20">20</option>
+                      <option value="21">21</option>
+                      <option value="22">22</option>
+                      <option value="23">23</option>
+                      <option value="24">24</option>
+                      <option value="25">25</option>
+                      <option value="26">26</option>
+                      <option value="27">27</option>
+                      <option value="28">28</option>
+                      <option value="29">29</option>
+                      <option value="30">30</option>
+                    </select>
+                    <span class="px">像素</span>
+                  </li>
+                  <li>
+                    <span class="labelspan">样式：</span>
+                    <select class="selectObj" name="NMainBorderRightStyle" id="N_mainBorderRightStyle" onchange="Nset.NMainBorderRightStyle(this.value);">
+                      <option value="solid" selected="selected">实线</option>
+                      <option value="dashed">虚线</option>
+                      <option value="dotted">点状</option>
+                    </select>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2"><div class="attrlistHead">内间距：</div></td>
+            </tr>
+            <tr>
+              <th>内间距：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NMainPaddingToggle" id="N_mainPaddingAuto" onclick="Nset.NMainPaddingToggle(0)">
+                <label class="labelObj" for="N_mainPaddingAuto">默认</label>
+                <input type="radio" class="radioObj" name="NMainPaddingToggle" id="N_mainPaddingCus" onclick="Nset.NMainPaddingToggle(2)">
+                <label class="labelObj" for="N_mainPaddingCus">自定义</label>
+                <ul class="attrSetingList" id="N_mainPaddingAttrlist">
+                  <li>
+                    <span class="labelspan">左：</span>
+                    <input type="text" class="inputObj" name="NMainPaddingLeft" id="N_mainPaddingLeft" style="width:40px;" onchange="Nset.NMainPaddingLeft(this)" />
+                    <span class="px">像素</span>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="labelspan">右：</span>
+                    <input type="text" class="inputObj" name="NMainPaddingRight" id="N_mainPaddingRight" style="width:40px;" onchange="Nset.NMainPaddingRight(this)"  />
+                    <span class="px">像素</span>
+                  </li>
+                  <li>
+                    <span class="labelspan">上：</span>
+                    <input type="text" class="inputObj" name="NMainPaddingTop" id="N_mainPaddingTop" style="width:40px;" onchange="Nset.NMainPaddingTop(this)" />
+                    <span class="px">像素</span>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="labelspan">下：</span>
+                    <input type="text" class="inputObj" name="NMainPaddingBottom" id="N_mainPaddingBottom" style="width:40px;" onchange="Nset.NMainPaddingBottom(this)"  />
+                    <span class="px">像素</span>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+          <table>
+            <caption>下拉菜单：</caption>
+            <tr>
+              <th>宽度</th>
+              <td>
+                <input type="radio" class="radioObj" name="NSubWidthToggle" id="N_subWidthAuto" onclick="Nset.NSubWidthToggle(0)" />
+                <label class='labelObj' for="N_subWidthAuto">默认</label>
+                <input type='radio' class="radioObj" name="NSubWidthToggle" id="N_subWidthCus" onclick="Nset.NSubWidthToggle(2)">
+                <label class='labelObj' for="N_subWidthCus">自定义</label>
+                <ul class="attrSetingList" id="N_subWidthAttrlist">
+                  <li>
+                    <span class="labelspan">宽度值：</span>
+                    <input type="text" class="inputObj" style="width:50px;" id="N_subWidth" onchange="Nset.NSubWidth(this)" />
+                    <span class="px">像素</span>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>内间距：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NSubCPaddingToggle" id="N_subCPaddingAuto" onclick="Nset.NSubCPaddingToggle(0)">
+                <label class="labelObj" for="N_subCPaddingAuto">默认</label>
+                <input type="radio" class="radioObj" name="NSubCPaddingToggle" id="N_subCPaddingCus" onclick="Nset.NSubCPaddingToggle(2)">
+                <label class="labelObj" for="N_subCPaddingCus">自定义</label>
+                <ul class="attrSetingList" id="N_subCPaddingAttrlist">
+                  <li>
+                    <span class="labelspan">左：</span>
+                    <input type="text" class="inputObj" name="NSubCPaddingLeft" id="N_subCPaddingLeft" style="width:40px;" onchange="Nset.NSubCPaddingLeft(this)" />
+                    <span class="px">像素</span>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="labelspan">右：</span>
+                    <input type="text" class="inputObj" name="NSubCPaddingRight" id="N_subCPaddingRight" style="width:40px;" onchange="Nset.NSubCPaddingRight(this)"  />
+                    <span class="px">像素</span>
+                  </li>
+                  <li>
+                    <span class="labelspan">上：</span>
+                    <input type="text" class="inputObj" name="NSubCPaddingTop" id="N_subCPaddingTop" style="width:40px;" onchange="Nset.NSubCPaddingTop(this)" />
+                    <span class="px">像素</span>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="labelspan">下：</span>
+                    <input type="text" class="inputObj" name="NSubCPaddingBottom" id="N_subCPaddingBottom" style="width:40px;" onchange="Nset.NSubCPaddingBottom(this)"  />
+                    <span class="px">像素</span>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>背景：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NSubBgToggle" id="N_subBgAuto" onclick="Nset.NSubBgToggle(0)" />
+                <label class='labelObj' for="N_subBgAuto">默认</label>
+                <input type="radio" class="radioObj" name="NSubBgToggle" id="N_subBgHide" onclick="Nset.NSubBgToggle(1)" />
+                <label class='labelObj' for="N_subBgHide">隐藏</label>
+                <input type='radio' class="radioObj" name="NSubBgToggle" id="N_subBgCus" onclick="Nset.NSubBgToggle(2)">
+                <label class='labelObj' for="N_subBgCus">自定义</label>
+                <ul class="attrSetingList" id="N_subBgAttrlist">
+                  <li>
+                    <span class="labelspan">背景颜色：</span>
+                    <input class="colorObj" name="colorInput" id="N_subBgColor" onchange="Nset.NSubBgColor(this.value)" value="#000000">
+                    <a title="取消背景颜色" onclick="Nset.NSubNoBgColor();" id="N_subNoBgColor" class="noBgColorObj" href="javascript:;">取消背景颜色</a>
+                  </li>
+                  <li>
+                    <span class="labelspan">背景图片：</span>
+                    <input type="text" name="NSubBgImage" id="N_subBgImage" onchange="Nset.NSubBgImage(this.value)" class="bgObj"  value="none" disabled="disabled">
+                    <input type="button" class="bgButObj" id="N_subBgImageBut" value="上传" onclick="pf.upBgImg('N_subBgImage');" />
+                    <a href="javascript:;" class="bgLookObj" title="查看当前使用图片" id="N_subBgImageLook" target="_blank">查看图片</a>
+                    <a href="javascript:;" class="bgNoneObj" id="N_subBgImageNone" onclick="pf.noBgImg('N_subBgImage');" title="取消背景图片">取消背景图片</a>
+                  </li>
+                  <li>
+                    <span class="labelspan">背景位置：</span>
+                    <select class="selectObj" name="NSubBgPosition" id="N_subBgPosition" onchange="Nset.NSubBgPosition(this.value)">
+                      <option value="left top" selected="selected">左上</option>
+                      <option value="left center">左中</option>
+                      <option value="left bottom">左下</option>
+                      <option value="center top">中上</option>
+                      <option value="center center">居中</option>
+                      <option value="center bottom">中下</option>
+                      <option value="right top">右上</option>
+                      <option value="right center">右中</option>
+                      <option value="right bottom">右下</option>
+                    </select>
+                  </li>
+                  <li>
+                    <span class="labelspan">平铺：</span>
+                    <select class="selectObj" name="NSubBgRepeat" id="N_subBgRepeat" onchange="Nset.NSubBgRepeat(this.value)">
+                      <option value="no-repeat" selected="selected">不平铺</option>
+                      <option value="repeat">平铺</option>
+                      <option value="repeat-x">横向平铺</option>
+                      <option value="repeat-y">纵向平铺</option>
+                    </select>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th class="labelspan">透明度：</th>
+              <td>
+                <input type="text" class="opacityObj" id="N_subOpacity" value='100' onchange="Nset.NSubOpacity(this.value)" name="opacityObj" />
+                <span class="pah">%</span>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="submitBut">
+          <b class="but but-blue" id="N_exteriorStyleEnter" onclick="Nset.exteriorStyleEnter(this)">确定</b>
+          <b class="but but-blue" id="N_exteriorStyleReset" onclick="Nset.exteriorStyleReset()">恢复本项默认</b>
+        </div>
+      </div>
+      <!--导航全局设置 start-->
+      <!--导航栏目项设置 start-->
+      <div class="NItemSet" id="itemStyle">
+        <div class="tableDiv">
+          <table>
+            <caption>默认状态</caption>
+            <tr>
+              <th>栏目项宽度：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NItemWidthToggle" id="N_itemWidthAuto" onclick="Nset.NItemWidthToggle(0)" />
+                <label class='labelObj' for="N_itemWidthAuto">默认</label>
+                <input type='radio' class="radioObj" name="NItemWidthToggle" id="N_itemWidthCus" onclick="Nset.NItemWidthToggle(1)">
+                <label class='labelObj' for="N_itemWidthCus">自定义</label>
+                <ul class="attrSetingList" id="N_itemWidthAttrlist">
+                  <li>
+                    <span class="labelspan">宽度值：</span>
+                    <input type="text" class="inputObj" style="width:50px;" id="N_itemWidth" onchange="Nset.NItemWidth(this)" />
+                    <span class="px">像素</span>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>栏目项高度：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NItemAHeightToggle" id="N_itemAHeightAuto" onclick="Nset.NItemAHeightToggle(0)" />
+                <label class='labelObj' for="N_itemAHeightAuto">默认</label>
+                <input type='radio' class="radioObj" name="NItemAHeightToggle" id="N_itemAHeightCus" onclick="Nset.NItemAHeightToggle(2)">
+                <label class='labelObj' for="N_itemAHeightCus">自定义</label>
+                <ul class="attrSetingList" id="N_itemAHeightAttrlist">
+                  <li>
+                    <span class="labelspan">高度值：</span>
+                    <input type="text" class="inputObj" name="NItemAHeight" style="width:50px;" id="N_itemAHeight" onchange="Nset.NItemAHeight(this)" />
+                    <span class="px">像素</span>
+                  </li>
+                  <li>
+                    <span class="labelspan">行高度值：</span>
+                    <input type="text" class="inputObj" style="width:50px;" id="N_itemALineheight" name="NItemALineheight" onchange="Nset.NItemALineheight(this)" />
+                    <span class="px">像素</span>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>栏目项背景：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NItemBgToggle" id="N_itemBgAuto" onclick="Nset.NItemBgToggle(0)">
+                <label class='labelObj' for="N_itemBgAuto">默认</label>
+                <input type='radio' class="radioObj" name="NItemBgToggle" id="N_itemBgHide" onclick="Nset.NItemBgToggle(1)">
+                <label class='labelObj' for="N_itemBgHide">隐藏</label>
+                <input type='radio' class="radioObj" name="NItemBgToggle" id="N_itemBgCus" onclick="Nset.NItemBgToggle(2)">
+                <label class='labelObj' for="N_itemBgCus">自定义</label>
+                <ul class="attrSetingList" id="N_itemBgAttrlist">
+                  <li>
+                    <span class="labelspan">颜色：</span>
+                    <input class="colorObj" name="colorInput" id="N_itemBgColor" value="#000000" onchange="Nset.NItemBgColor(this.value)">
+                    <a title="取消背景颜色" onclick="Nset.NItemNoBgColor();" id="N_itemNoBgColor" class="noBgColorObj" href="javascript:;">取消背景颜色</a>
+                  </li>
+                  <li>
+                    <span class="labelspan">背景图片：</span>
+                    <input type="text" id="N_itemBgImage" onchange="Nset.NItemBgImage(this.value)" class="bgObj"  value="none" disabled="disabled">
+                    <input type="button" class="bgButObj" id="N_itemBgImageBut" value="上传" onclick="pf.upBgImg('N_itemBgImage');" />
+                    <a href="javascript:;" class="bgLookObj" title="查看当前使用图片" id="N_itemBgImageLook" target="_blank">查看图片</a>
+                    <a href="javascript:;" class="bgNoneObj" id="N_itemBgImageNone" onclick="pf.noBgImg('N_itemBgImage');" title="取消背景图片">取消背景图片</a>
+                  </li>
+                  <li>
+                    <span class="labelspan">背景位置：</span>
+                    <select class="selectObj" name="NItemBgPosition" id="N_itemBgPosition" onchange="Nset.NItemBgPosition(this.value)">
+                      <option value="left top">左上</option>
+                      <option value="left center" selected="selected">左中</option>
+                      <option value="left bottom">左下</option>
+                      <option value="center top">中上</option>
+                      <option value="center center">居中</option>
+                      <option value="center bottom">中下</option>
+                      <option value="right top">右上</option>
+                      <option value="right center">右中</option>
+                      <option value="right bottom">右下</option>
+                    </select>
+                  </li>
+                  <li>
+                    <span class="labelspan">平铺：</span>
+                    <select class="selectObj" name="NItemBgRepeat" id="N_itemBgRepeat" onchange="Nset.NItemBgRepeat(this.value)" selected="selected">
+                      <option value="no-repeat">不平铺</option>
+                      <option value="repeat">平铺</option>
+                      <option value="repeat-x">横向平铺</option>
+                      <option value="repeat-y">纵向平铺</option>
+                    </select>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th class="labelspan">透明度：</th>
+              <td>
+                <input type="text" class="opacityObj" id="N_itemOpacity" value='100' onchange="Nset.NItemOpacity(this.value)" name="opacityObj" />
+                <span class="pah">%</span>
+              </td>
+            </tr>
+            <tr>
+              <th>栏目项文字：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NItemFontToggle" id="N_itemFontAuto" onclick="Nset.NItemFontToggle(0);" />
+                <label class="labelObj" for="N_itemFontAuto">默认</label>
+                <input type="radio" class="radioObj" name="NItemFontToggle" id="N_itemFontCus" onclick="Nset.NItemFontToggle(1);" />
+                <label class="labelObj" for="N_itemFontCus">自定义</label>
+                <ul class="attrSetingList" id="N_itemFontAttrlist">
+                  <li>
+                    <span class="labelspan">颜色：</span>
+                    <input class="colorObj" name="colorInput" id="N_itemFontColor" value="#ffffff" onchange="Nset.NItemFontColor(this.value);"></li>
+                  <li>
+                    <span class="labelspan">文字大小：</span>
+                    <select class="selectObj" name="NItemFontSize" id="N_itemFontSize" onchange="Nset.NItemFontSize(this.value)">
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12">12</option>
+                      <option value="13">13</option>
+                      <option value="14" selected="selected">14</option>
+                      <option value="15">15</option>
+                      <option value="16">16</option>
+                      <option value="17">17</option>
+                      <option value="18">18</option>
+                      <option value="19">19</option>
+                      <option value="20">20</option>
+                      <option value="21">21</option>
+                      <option value="22">22</option>
+                      <option value="23">23</option>
+                      <option value="24">24</option>
+                      <option value="25">25</option>
+                      <option value="26">26</option>
+                      <option value="27">27</option>
+                      <option value="28">28</option>
+                      <option value="29">29</option>
+                      <option value="30">30</option>
+                    </select>
+                  </li>
+                  <li>
+                    <span class="labelspan">文字样式：</span>
+                    <input class="checkboxObj" name="NItemFontBold" type="checkbox" id="N_itemFontBold" onclick="Nset.NItemFontBold(this)" value="bold" />
+                    <label class="labelObj" for="N_itemFontBold">加粗</label>
+                    <input class="checkboxObj" type="checkbox" name="NItemFontItalic" id="N_itemFontItalic" value="italic" onclick="Nset.NItemFontItalic(this)" />
+                    <label for="N_itemFontItalic" class="labelObj">斜体</label>
+                    <input class="checkboxObj" name="NItemFontUnderline" type="checkbox" id="N_itemFontUnderline" value="underline" onclick="Nset.NItemFontUnderline(this)" />
+                    <label class="labelObj" for="N_itemFontUnderline">下划线</label>
+                  </li>
+                  <li>
+                    <span class="labelspan">文字字体：</span>
+                    <select id="N_itemFontFamily" name="NItemFontFamily" onchange="Nset.NItemFontFamily(this.value)">
+                      <option value="SimSun" selected="selected">宋体</option>
+                      <option value="PMingLiU">新细明体</option>
+                      <option value="FangSong_GB2312">仿宋_GB2312</option>
+                      <option value="微软雅黑">微软雅黑</option>
+                      <option value="隶书">隶书</option>
+                      <option value="幼圆">幼圆</option>
+                      <option value="STKaiti">华文楷体</option>
+                      <option value="方正舒体">方正舒体</option>
+                      <option value="华文彩云">华文彩云</option>
+                      <option value="华文行楷">华文行楷</option>
+                      <option value="华文宋体">华文宋体</option>
+                      <option value="Arial">Arial</option>
+                      <option value="Tahoma">Tahoma</option>
+                    </select>
+                    <span class="redPoint">"该项设置取决于客户电脑字体库而生效"</span>
+                  </li>
+                  <li>
+                    <span class="labelspan">对齐方式：</span>
+                    <select id="N_itemTextAlign" name="NItemTextAlign" onchange="Nset.NItemTextAlign(this.value)">
+                      <option value="center" selected="selected">居中对齐</option>
+                      <option value="left">左对齐</option>
+                      <option value="right">右对齐</option>
+                    </select>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>栏目项间隔：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NItemLineToggle" id="N_itemLineAuto" onclick="Nset.NItemLineToggle(0)" />
+                <label class='labelObj' for="N_itemLineAuto">默认</label>
+                <input type="radio" class="radioObj" name="NItemLineToggle" id="N_itemLineHide" onclick="Nset.NItemLineToggle(1)" />
+                <label class='labelObj' for="N_itemLineHide">隐藏</label>
+                <input type='radio' class="radioObj" name="NItemLineToggle" id="N_itemLineCus" onclick="Nset.NItemLineToggle(2)">
+                <label class='labelObj' for="N_itemLineCus">自定义</label>
+                <ul class="attrSetingList" id="N_itemLineAttrlist">
+                  <li>
+                    <span class="labelspan">高度值：</span>
+                    <input type="text" class="inputObj" name="NItemLineHeight" style="width:50px;" id="N_itemLineHeight" onchange="Nset.NItemLineHeight(this)" />
+                    <span class="px">像素</span>
+                  </li>
+                  <li>
+                    <span class="labelspan">宽度值：</span>
+                    <input type="text" class="inputObj" name="NItemLineWidth" style="width:50px;" id="N_itemLineWidth" onchange="Nset.NItemLineWidth(this)" value="1" />
+                    <span class="px">像素</span>
+                  </li>
+                  <li>
+                    <span class="labelspan">颜色：</span>
+                    <input class="colorObj" name="colorInput" id="N_itemLineBgColor" value="#000" onchange="Nset.NItemLineBgColor(this.value)">
+                    <a title="取消背景颜色" onclick="Nset.NItemLineNoBgColor();" id="N_itemLineNoBgColor" class="noBgColorObj" href="javascript:;">取消背景颜色</a>
+                  </li>
+                  <li>
+                    <span class="labelspan">背景图片：</span>
+                    <input type="text" name="NItemLineBgImage" id="N_itemLineBgImage" onchange="Nset.NItemLineBgImage(this.value)" class="bgObj"  value="none" disabled="disabled">
+                    <input type="button" class="bgButObj" id="N_itemLineBgImageBut" value="上传" onclick="pf.upBgImg('N_itemLineBgImage');" />
+                    <a href="javascript:;" class="bgLookObj" title="查看当前使用图片" id="N_itemLineBgImageLook" target="_blank">查看图片</a>
+                    <a href="javascript:;" class="bgNoneObj" id="N_itemLineBgImageNone" onclick="pf.noBgImg('N_itemLineBgImage');" title="取消背景图片">取消背景图片</a>
+                  </li>
+                  <li>
+                    <span class="labelspan">背景位置：</span>
+                    <select class="selectObj" name="NItemLineBgPosition" id="N_itemLineBgPosition" onchange="Nset.NItemLineBgPosition(this.value)">
+                      <option value="left top" selected="selected">左上</option>
+                      <option value="left center">左中</option>
+                      <option value="left bottom">左下</option>
+                      <option value="center top">中上</option>
+                      <option value="center center">居中</option>
+                      <option value="center bottom">中下</option>
+                      <option value="right top">右上</option>
+                      <option value="right center">右中</option>
+                      <option value="right bottom">右下</option>
+                    </select>
+                  </li>
+                  <li>
+                    <span class="labelspan">平铺：</span>
+                    <select class="selectObj" name="NItemLineBgRepeat" id="N_itemLineBgRepeat" onchange="Nset.NItemLineBgRepeat(this.value)">
+                      <option value="no-repeat" selected="selected">不平铺</option>
+                      <option value="repeat">平铺</option>
+                      <option value="repeat-x">横向平铺</option>
+                      <option value="repeat-y">纵向平铺</option>
+                    </select>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+          <table>
+            <caption>鼠标经过</caption>
+            <tr>
+              <th>栏目项背景：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NItemHoverBgToggle" id="N_itemHoverBgAuto" onclick="Nset.NItemHoverBgToggle(0)">
+                <label class='labelObj' for="N_itemHoverBgAuto">默认</label>
+                <input type='radio' class="radioObj" name="NItemHoverBgToggle" id="N_itemHoverBgHide" onclick="Nset.NItemHoverBgToggle(1)">
+                <label class='labelObj' for="N_itemHoverBgHide">隐藏</label>
+                <input type='radio' class="radioObj" name="NItemHoverBgToggle" id="N_itemHoverBgCus" onclick="Nset.NItemHoverBgToggle(2)">
+                <label class='labelObj' for="N_itemHoverBgCus">自定义</label>
+                <ul class="attrSetingList" id="N_itemHoverBgAttrlist">
+                  <li>
+                    <span class="labelspan">颜色：</span>
+                    <input class="colorObj" name="colorInput" id="N_itemHoverBgColor" onchange="Nset.NItemHoverBgColor(this.value)" value="#fff">
+                    <a title="取消背景颜色" onclick="Nset.NItemHoverNoBgColor();" id="N_itemHoverNoBgColor" class="noBgColorObj" href="javascript:;">取消背景颜色</a>
+                  </li>
+                  <li>
+                    <span class="labelspan">背景图片：</span>
+                    <input type="text" id="N_itemHoverBgImage" onchange="Nset.NItemHoverBgImage(this.value)" class="bgObj"  value="none" disabled="disabled">
+                    <input type="button" class="bgButObj" id="N_itemHoverBgImageBut" value="上传" onclick="pf.upBgImg('N_itemHoverBgImage');" />
+                    <a href="javascript:;" class="bgLookObj" title="查看当前使用图片" id="N_itemHoverBgImageLook" target="_blank">查看图片</a>
+                    <a href="javascript:;" class="bgNoneObj" id="N_itemHoverBgImageNone" onclick="pf.noBgImg('N_itemHoverBgImage');" title="取消背景图片">取消背景图片</a>
+                  </li>
+                  <li>
+                    <span class="labelspan">背景位置：</span>
+                    <select class="selectObj" name="NItemHoverBgPosition" id="N_itemHoverBgPosition" onchange="Nset.NItemHoverBgPosition(this.value)">
+                      <option value="left top" selected="selected">左上</option>
+                      <option value="left center">左中</option>
+                      <option value="left bottom">左下</option>
+                      <option value="center top">中上</option>
+                      <option value="center center">居中</option>
+                      <option value="center bottom">中下</option>
+                      <option value="right top">右上</option>
+                      <option value="right center">右中</option>
+                      <option value="right bottom">右下</option>
+                    </select>
+                  </li>
+                  <li>
+                    <span class="labelspan">平铺：</span>
+                    <select class="selectObj" name="NItemHoverBgRepeat" id="N_itemHoverBgRepeat" onchange="Nset.NItemHoverBgRepeat(this.value)">
+                      <option value="no-repeat">不平铺</option>
+                      <option value="repeat" selected="selected">平铺</option>
+                      <option value="repeat-x">横向平铺</option>
+                      <option value="repeat-y">纵向平铺</option>
+                    </select>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>栏目项文字：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NItemHoverFontToggle" id="N_itemHoverFontAuto" onclick="Nset.NItemHoverFontToggle(0);" />
+                <label class="labelObj" for="N_itemHoverFontAuto">默认</label>
+                <input type="radio" class="radioObj" name="NItemHoverFontToggle" id="N_itemHoverFontCus" onclick="Nset.NItemHoverFontToggle(1);" />
+                <label class="labelObj" for="N_itemHoverFontCus">自定义</label>
+                <ul class="attrSetingList" id="N_itemHoverFontAttrlist">
+                  <li>
+                    <span class="labelspan">颜色：</span>
+                    <input class="colorObj" name="colorInput" id="N_itemHoverFontColor" value="#000" onchange="Nset.NItemHoverFontColor(this.value);"></li>
+                  <li>
+                    <span class="labelspan">文字大小：</span>
+                    <select class="selectObj" name="NItemHoverFontSize" id="N_itemHoverFontSize" onchange="Nset.NItemHoverFontSize(this.value)">
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12">12</option>
+                      <option value="13">13</option>
+                      <option value="14" selected="selected">14</option>
+                      <option value="15">15</option>
+                      <option value="16">16</option>
+                      <option value="17">17</option>
+                      <option value="18">18</option>
+                      <option value="19">19</option>
+                      <option value="20">20</option>
+                      <option value="21">21</option>
+                      <option value="22">22</option>
+                      <option value="23">23</option>
+                      <option value="24">24</option>
+                      <option value="25">25</option>
+                      <option value="26">26</option>
+                      <option value="27">27</option>
+                      <option value="28">28</option>
+                      <option value="29">29</option>
+                      <option value="30">30</option>
+                    </select>
+                  </li>
+                  <li>
+                    <span class="labelspan">文字样式：</span>
+                    <input class="checkboxObj" name="NItemHoverFontBold" type="checkbox" id="N_itemHoverFontBold" onclick="Nset.NItemHoverFontBold(this)" value="bold" checked="checked" />
+                    <label class="labelObj" for="N_itemHoverFontBold">加粗</label>
+                    <input class="checkboxObj" type="checkbox" name="NItemHoverFontItalic" id="N_itemHoverFontItalic" value="italic" onclick="Nset.NItemHoverFontItalic(this)" />
+                    <label for="N_itemHoverFontItalic" class="labelObj">斜体</label>
+                    <input class="checkboxObj" name="NItemHoverFontUnderline" type="checkbox" id="N_itemHoverFontUnderline" value="underline" onclick="Nset.NItemHoverFontUnderline(this)" checked="checked" />
+                    <label class="labelObj" for="N_itemHoverFontUnderline">下划线</label>
+                  </li>
+                  <li>
+                    <span class="labelspan">文字字体：</span>
+                    <select id="N_itemHoverFontFamily" name="NItemHoverFontFamily" onchange="Nset.NItemHoverFontFamily(this.value)">
+                      <option value="SimSun" selected="selected">宋体</option>
+                      <option value="PMingLiU">新细明体</option>
+                      <option value="FangSong_GB2312">仿宋_GB2312</option>
+                      <option value="微软雅黑">微软雅黑</option>
+                      <option value="隶书">隶书</option>
+                      <option value="幼圆">幼圆</option>
+                      <option value="STKaiti">华文楷体</option>
+                      <option value="方正舒体">方正舒体</option>
+                      <option value="华文彩云">华文彩云</option>
+                      <option value="华文行楷">华文行楷</option>
+                      <option value="华文宋体">华文宋体</option>
+                      <option value="Arial">Arial</option>
+                      <option value="Tahoma">Tahoma</option>
+                    </select>
+                    <span class="redPoint">"该项设置取决于客户电脑字体库而生效"</span>
+                  </li>
+                  <li>
+                    <span class="labelspan">对齐方式：</span>
+                    <select id="N_itemHoverTextAlign" name="NItemHoverTextAlign" onchange="Nset.NItemHoverTextAlign(this.value)">
+                      <option value="center" selected="selected">居中对齐</option>
+                      <option value="left">左对齐</option>
+                      <option value="right">右对齐</option>
+                    </select>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+          <table>
+            <caption>当前状态</caption>
+            <tr>
+              <th>栏目项背景：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NItemCurBgToggle" id="N_itemCurBgAuto" onclick="Nset.NItemCurBgToggle(0)">
+                <label class='labelObj' for="N_itemCurBgAuto">默认</label>
+                <input type='radio' class="radioObj" name="NItemCurBgToggle" id="N_itemCurBgHide" onclick="Nset.NItemCurBgToggle(1)">
+                <label class='labelObj' for="N_itemCurBgHide">隐藏</label>
+                <input type='radio' class="radioObj" name="NItemCurBgToggle" id="N_itemCurBgCus" onclick="Nset.NItemCurBgToggle(2)">
+                <label class='labelObj' for="N_itemCurBgCus">自定义</label>
+                <ul class="attrSetingList" id="N_itemCurBgAttrlist">
+                  <li>
+                    <span class="labelspan">颜色：</span>
+                    <input class="colorObj" name="colorInput" id="N_itemCurBgColor" onchange="Nset.NItemCurBgColor(this.value)" value="#ffffff">
+                    <a title="取消背景颜色" onclick="Nset.NItemCurNoBgColor();" id="N_itemCurNoBgColor" class="noBgColorObj" href="javascript:;">取消背景颜色</a>
+                  </li>
+                  <li>
+                    <span class="labelspan">图片：</span>
+                    <input name="NItemCurBgImage" type="text" id="N_itemCurBgImage" onchange="Nset.NItemCurBgImage(this.value)" class="bgObj"  value="none" disabled="disabled">
+                    <input type="button" class="bgButObj" id="N_itemCurBgImageBut" value="上传" onclick="pf.upBgImg('N_itemCurBgImage');" />
+                    <a href="javascript:;" class="bgLookObj" title="查看当前使用图片" id="N_itemCurBgImageLook" target="_blank">查看图片</a>
+                    <a href="javascript:;" class="bgNoneObj" id="N_itemCurBgImageNone" onclick="pf.noBgImg('N_itemCurBgImage');" title="取消背景图片">取消背景图片</a>
+                  </li>
+                  <li>
+                    <span class="labelspan">背景位置：</span>
+                    <select class="selectObj" name="NItemCurBgPosition" id="N_itemCurBgPosition" onchange="Nset.NItemCurBgPosition(this.value)">
+                      <option value="left top" selected="selected">左上</option>
+                      <option value="left center">左中</option>
+                      <option value="left bottom">左下</option>
+                      <option value="center top">中上</option>
+                      <option value="center center">居中</option>
+                      <option value="center bottom">中下</option>
+                      <option value="right top">右上</option>
+                      <option value="right center">右中</option>
+                      <option value="right bottom">右下</option>
+                    </select>
+                  </li>
+                  <li>
+                    <span class="labelspan">平铺：</span>
+                    <select class="selectObj" name="NItemCurBgRepeat" id="N_itemCurBgRepeat" onchange="Nset.NItemCurBgRepeat(this.value)">
+                      <option value="no-repeat">不平铺</option>
+                      <option value="repeat" selected="selected">平铺</option>
+                      <option value="repeat-x">横向平铺</option>
+                      <option value="repeat-y">纵向平铺</option>
+                    </select>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>栏目项文字：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NItemCurFontToggle" id="N_itemCurFontAuto" onclick="Nset.NItemCurFontToggle(0);" />
+                <label class="labelObj" for="N_itemCurFontAuto">默认</label>
+                <input type="radio" class="radioObj" name="NItemCurFontToggle" id="N_itemCurFontCus" onclick="Nset.NItemCurFontToggle(1);" />
+                <label class="labelObj" for="N_itemCurFontCus">自定义</label>
+                <ul class="attrSetingList" id="N_itemCurFontAttrlist">
+                  <li>
+                    <span class="labelspan">颜色：</span>
+                    <input class="colorObj" name="colorInput" id="N_itemCurFontColor" value="#000000" onchange="Nset.NItemCurFontColor(this.value);"></li>
+                  <li>
+                    <span class="labelspan">文字大小：</span>
+                    <select class="selectObj" name="NItemCurFontSize" id="N_itemCurFontSize" onchange="Nset.NItemCurFontSize(this.value)">
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12">12</option>
+                      <option value="13">13</option>
+                      <option value="14" selected="selected">14</option>
+                      <option value="15">15</option>
+                      <option value="16">16</option>
+                      <option value="17">17</option>
+                      <option value="18">18</option>
+                      <option value="19">19</option>
+                      <option value="20">20</option>
+                      <option value="21">21</option>
+                      <option value="22">22</option>
+                      <option value="23">23</option>
+                      <option value="24">24</option>
+                      <option value="25">25</option>
+                      <option value="26">26</option>
+                      <option value="27">27</option>
+                      <option value="28">28</option>
+                      <option value="29">29</option>
+                      <option value="30">30</option>
+                    </select>
+                  </li>
+                  <li>
+                    <span class="labelspan">文字样式：</span>
+                    <input class="checkboxObj" name="NItemCurFontBold" type="checkbox" id="N_itemCurFontBold" onclick="Nset.NItemCurFontBold(this)" value="bold" checked="checked" />
+                    <label class="labelObj" for="N_itemCurFontBold">加粗</label>
+                    <input class="checkboxObj" type="checkbox" name="NItemCurFontItalic" id="N_itemCurFontItalic" value="italic" onclick="Nset.NItemCurFontItalic(this)" />
+                    <label for="N_itemCurFontItalic" class="labelObj">斜体</label>
+                    <input class="checkboxObj" name="NItemCurFontUnderline" type="checkbox" id="N_itemCurFontUnderline" value="underline" onclick="Nset.NItemCurFontUnderline(this)" checked="checked" />
+                    <label class="labelObj" for="N_itemCurFontUnderline">下划线</label>
+                  </li>
+                  <li>
+                    <span class="labelspan">文字字体：</span>
+                    <select id="N_itemCurFontFamily" name="NItemCurFontFamily" onchange="Nset.NItemCurFontFamily(this.value)">
+                      <option value="SimSun" selected="selected">宋体</option>
+                      <option value="PMingLiU">新细明体</option>
+                      <option value="FangSong_GB2312">仿宋_GB2312</option>
+                      <option value="微软雅黑">微软雅黑</option>
+                      <option value="隶书">隶书</option>
+                      <option value="幼圆">幼圆</option>
+                      <option value="STKaiti">华文楷体</option>
+                      <option value="方正舒体">方正舒体</option>
+                      <option value="华文彩云">华文彩云</option>
+                      <option value="华文行楷">华文行楷</option>
+                      <option value="华文宋体">华文宋体</option>
+                      <option value="Arial">Arial</option>
+                      <option value="Tahoma">Tahoma</option>
+                    </select>
+                    <span class="redPoint">"该项设置取决于客户电脑字体库而生效"</span>
+                  </li>
+                  <li>
+                    <span class="labelspan">对齐方式：</span>
+                    <select id="N_itemCurTextAlign" name="NItemCurTextAlign" onchange="Nset.NItemCurTextAlign(this.value)">
+                      <option value="center">居中对齐</option>
+                      <option value="left">左对齐</option>
+                      <option value="right">右对齐</option>
+                    </select>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="submitBut">
+          <b class="but but-blue" id="M_rule_set_enter"  onclick="Nset.NItemStyleEnter(this)">确定</b>
+          <b class="but but-blue" id="M_rule_set_reset" onclick="Nset.NItemStyleReset()">恢复本项默认</b>
+        </div>
+      </div>
+      <!--导航栏目项设置 end-->
+      <!--下拉菜单项设置 start-->
+      <div class="NSubSet" id="subItemStyle">
+        <div class="tableDiv">
+          <table>
+            <tr>
+              <th>是否单行显示：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NSubItemFloatToggle" id="N_subItemFloatNo" onclick="Nset.NSubItemFloatToggle(1)">
+                <label class="labelObj" for="N_subItemFloatNo">是</label>
+                <input type="radio" class="radioObj" name="NSubItemFloatToggle" id="N_subItemFloatYes" onclick="Nset.NSubItemFloatToggle(2)">
+                <label class="labelObj" for="N_subItemFloatYes">否</label>
+              </td>
+            </tr>
+          </table>
+          <table>
+            <caption>默认状态</caption>
+            <tr>
+              <th>栏目项高度：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NSubItemHeightToggle" id="N_subItemHeightAuto" onclick="Nset.NSubItemHeightToggle(0)" />
+                <label class='labelObj' for="N_subItemHeightAuto">默认</label>
+                <input type='radio' class="radioObj" name="NSubItemHeightToggle" id="N_subItemHeightCus" onclick="Nset.NSubItemHeightToggle(1)">
+                <label class='labelObj' for="N_subItemHeightCus">自定义</label>
+                <ul class="attrSetingList" id="N_subItemHeightAttrlist">
+                  <li>
+                    <span class="labelspan">高度值：</span>
+                    <input type="text" class="inputObj" style="width:50px;" name="NSubItemHeight" id="N_subItemHeight" onchange="Nset.NSubItemHeight(this)" />
+                    <span class="px">像素</span>
+                  </li>
+                  <li>
+                    <span class="labelspan">行高值：</span>
+                    <input type="text" class="inputObj" style="width:50px;" name="NSubItemLineheight" id="N_subItemLineheight" onchange="Nset.NSubItemLineheight(this)" />
+                    <span class="px">像素</span>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>栏目项宽度：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NSubItemWidthToggle" id="N_subItemWidthAuto" onclick="Nset.NSubItemWidthToggle(0)" />
+                <label class='labelObj' for="N_subItemWidthAuto">默认</label>
+                <input type='radio' class="radioObj" name="NSubItemWidthToggle" id="N_subItemWidthCus" onclick="Nset.NSubItemWidthToggle(1)">
+                <label class='labelObj' for="N_subItemWidthCus">自定义</label>
+                <ul class="attrSetingList" id="N_subItemWidthAttrlist">
+                  <li>
+                    <span class="labelspan">宽度值：</span>
+                    <input type="text" class="inputObj" style="width:50px;" name="NSubItemWidth" id="N_subItemWidth" onchange="Nset.NSubItemWidth(this)" />
+                    <span class="px">像素</span>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>上边线：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NSubItemBorderTopToggle" id="N_subItemBorderTopAuto" onclick="Nset.NSubItemBorderTopToggle(0);" />
+                <label class="labelObj" for="N_subItemBorderTopAuto">默认</label>
+                <input type="radio" class="radioObj" name="NSubItemBorderTopToggle" id="N_subItemBorderTopHide" onclick="Nset.NSubItemBorderTopToggle(1);" />
+                <label class="labelObj" for="N_subItemBorderTopHide">隐藏</label>
+                <input type="radio" class="radioObj" name="NSubItemBorderTopToggle" id="N_subItemBorderTopCus" onclick="Nset.NSubItemBorderTopToggle(2);" />
+                <label class="labelObj" for="N_subItemBorderTopCus">自定义</label>
+                <ul class="attrSetingList" id="N_subItemBorderTopAttrlist">
+                  <li>
+                    <span class="labelspan">边线颜色：</span>
+                    <input class="colorObj" name="colorInput" id="N_subItemBorderTopColor" onchange="Nset.NSubItemBorderTopColor(this.value);" value="#000000" />
+                  </li>
+                  <li>
+                    <span class="labelspan">边线样式：</span>
+                    <select class="selectObj" id="N_subItemBorderTopStyle" onchange="Nset.NSubItemBorderTopStyle(this.value);">
+                      <option value="solid" selected="selected">实线</option>
+                      <option value="dashed">虚线</option>
+                      <option value="dotted">点状</option>
+                    </select>
+                  </li>
+                  <li>
+                    <span class="labelspan">高度：</span>
+                    <select class="selectObj" id="N_subItemBorderTopWidth" onchange="Nset.NSubItemBorderTopWidth(this.value);">
+                      <option value="1" selected="selected">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>下边线：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NSubItemBorderBottomToggle" id="N_subItemBorderBottomAuto" onclick="Nset.NSubItemBorderBottomToggle(0);" />
+                <label class="labelObj" for="N_subItemBorderBottomAuto">默认</label>
+                <input type="radio" class="radioObj" name="NSubItemBorderBottomToggle" id="N_subItemBorderBottomHide" onclick="Nset.NSubItemBorderBottomToggle(1);" />
+                <label class="labelObj" for="N_subItemBorderBottomHide">隐藏</label>
+                <input type="radio" class="radioObj" name="NSubItemBorderBottomToggle" id="N_subItemBorderBottomCus" onclick="Nset.NSubItemBorderBottomToggle(2);" />
+                <label class="labelObj" for="N_subItemBorderBottomCus">自定义</label>
+                <ul class="attrSetingList" id="N_subItemBorderBottomAttrlist">
+                  <li>
+                    <span class="labelspan">边线颜色：</span>
+                    <input class="colorObj" name="colorInput" id="N_subItemBorderBottomColor" onchange="Nset.NSubItemBorderBottomColor(this.value);" value="#000000" />
+                  </li>
+                  <li>
+                    <span class="labelspan">边线样式：</span>
+                    <select class="selectObj" id="N_subItemBorderBottomStyle" onchange="Nset.NSubItemBorderBottomStyle(this.value);">
+                      <option value="solid" selected="selected">实线</option>
+                      <option value="dashed">虚线</option>
+                      <option value="dotted">点状</option>
+                    </select>
+                  </li>
+                  <li>
+                    <span class="labelspan">高度：</span>
+                    <select class="selectObj" id="N_subItemBorderBottomWidth" onchange="Nset.NSubItemBorderBottomWidth(this.value);">
+                      <option value="1" selected="selected">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>栏目项背景：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NSubItemABgToggle" id="N_subItemABgAuto" onclick="Nset.NSubItemABgToggle(0)">
+                <label class='labelObj' for="N_subItemABgAuto">默认</label>
+                <input type='radio' class="radioObj" name="NSubItemABgToggle" id="N_subItemABgHide" onclick="Nset.NSubItemABgToggle(1)">
+                <label class='labelObj' for="N_subItemABgHide">隐藏</label>
+                <input type='radio' class="radioObj" name="NSubItemABgToggle" id="N_subItemABgCus" onclick="Nset.NSubItemABgToggle(2)">
+                <label class='labelObj' for="N_subItemABgCus">自定义</label>
+                <ul class="attrSetingList" id="N_subItemABgAttrlist">
+                  <li>
+                    <span class="labelspan">颜色：</span>
+                    <input class="colorObj" name="colorInput" id="N_subItemABgColor" value="#000000" onchange="Nset.NSubItemABgColor(this.value)">
+                    <a title="取消背景颜色" onclick="Nset.NSubItemANoBgColor();" id="N_subItemANoBgColor" class="noBgColorObj" href="javascript:;">取消背景颜色</a>
+                  </li>
+                  <li>
+                    <span class="labelspan">背景图片：</span>
+                    <input type="text" id="N_subItemABgImage" onchange="Nset.NSubItemABgImage(this.value)" class="bgObj"  value="none" disabled="disabled">
+                    <input type="button" class="bgButObj" id="N_subItemABgImageBut" value="上传" onclick="pf.upBgImg('N_subItemABgImage');" />
+                    <a href="javascript:;" class="bgLookObj" title="查看当前使用图片" id="N_subItemABgImageLook" target="_blank">查看图片</a>
+                    <a href="javascript:;" class="bgNoneObj" id="N_subItemABgImageNone" onclick="pf.noBgImg('N_subItemABgImage');" title="取消背景图片">取消背景图片</a>
+                  </li>
+                  <li>
+                    <span class="labelspan">背景位置：</span>
+                    <select class="selectObj" name="NSubItemABgPosition" id="N_subItemABgPosition" onchange="Nset.NSubItemABgPosition(this.value)">
+                      <option value="left top" selected="selected">左上</option>
+                      <option value="left center">左中</option>
+                      <option value="left bottom">左下</option>
+                      <option value="center top">中上</option>
+                      <option value="center center">居中</option>
+                      <option value="center bottom">中下</option>
+                      <option value="right top">右上</option>
+                      <option value="right center">右中</option>
+                      <option value="right bottom">右下</option>
+                    </select>
+                  </li>
+                  <li>
+                    <span class="labelspan">平铺：</span>
+                    <select class="selectObj" name="NSubItemABgRepeat" id="N_subItemABgRepeat" onchange="Nset.NSubItemABgRepeat(this.value)" selected="selected">
+                      <option value="no-repeat">不平铺</option>
+                      <option value="repeat">平铺</option>
+                      <option value="repeat-x">横向平铺</option>
+                      <option value="repeat-y">纵向平铺</option>
+                    </select>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>栏目项文字：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NSubItemAFontToggle" id="N_subItemAFontAuto" onclick="Nset.NSubItemAFontToggle(0);" />
+                <label class="labelObj" for="N_subItemAFontAuto">默认</label>
+                <input type="radio" class="radioObj" name="NSubItemAFontToggle" id="N_subItemAFontCus" onclick="Nset.NSubItemAFontToggle(1);" />
+                <label class="labelObj" for="N_subItemAFontCus">自定义</label>
+                <ul class="attrSetingList" id="N_subItemAFontAttrlist">
+                  <li>
+                    <span class="labelspan">颜色：</span>
+                    <input class="colorObj" name="colorInput" id="N_subItemAFontColor" value="#ffffff" onchange="Nset.NSubItemAFontColor(this.value);"></li>
+                  <li>
+                    <span class="labelspan">文字大小：</span>
+                    <select class="selectObj" name="NSubItemAFontSize" id="N_subItemAFontSize" onchange="Nset.NSubItemAFontSize(this.value)">
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12" selected="selected">12</option>
+                      <option value="13">13</option>
+                      <option value="14">14</option>
+                      <option value="15">15</option>
+                      <option value="16">16</option>
+                      <option value="17">17</option>
+                      <option value="18">18</option>
+                      <option value="19">19</option>
+                      <option value="20">20</option>
+                      <option value="21">21</option>
+                      <option value="22">22</option>
+                      <option value="23">23</option>
+                      <option value="24">24</option>
+                      <option value="25">25</option>
+                      <option value="26">26</option>
+                      <option value="27">27</option>
+                      <option value="28">28</option>
+                      <option value="29">29</option>
+                      <option value="30">30</option>
+                    </select>
+                  </li>
+                  <li>
+                    <span class="labelspan">文字样式：</span>
+                    <input class="checkboxObj" name="NSubItemAFontBold" type="checkbox" id="N_subItemAFontBold" onclick="Nset.NSubItemAFontBold(this)" value="bold" />
+                    <label class="labelObj" for="N_subItemAFontBold">加粗</label>
+                    <input class="checkboxObj" type="checkbox" name="NSubItemAFontItalic" id="N_subItemAFontItalic" value="italic" onclick="Nset.NSubItemAFontItalic(this)" />
+                    <label for="N_subItemAFontItalic" class="labelObj">斜体</label>
+                    <input class="checkboxObj" name="NSubItemAFontUnderline" type="checkbox" id="N_subItemAFontUnderline" value="underline" onclick="Nset.NSubItemAFontUnderline(this)" />
+                    <label class="labelObj" for="N_subItemAFontUnderline">下划线</label>
+                  </li>
+                  <li>
+                    <span class="labelspan">文字字体：</span>
+                    <select id="N_subItemAFontFamily" name="NSubItemAFontFamily" onchange="Nset.NSubItemAFontFamily(this.value)">
+                      <option value="SimSun" selected="selected">宋体</option>
+                      <option value="PMingLiU">新细明体</option>
+                      <option value="FangSong_GB2312">仿宋_GB2312</option>
+                      <option value="微软雅黑">微软雅黑</option>
+                      <option value="隶书">隶书</option>
+                      <option value="幼圆">幼圆</option>
+                      <option value="STKaiti">华文楷体</option>
+                      <option value="方正舒体">方正舒体</option>
+                      <option value="华文彩云">华文彩云</option>
+                      <option value="华文行楷">华文行楷</option>
+                      <option value="华文宋体">华文宋体</option>
+                      <option value="Arial">Arial</option>
+                      <option value="Tahoma">Tahoma</option>
+                    </select>
+                    <span class="redPoint">"该项设置取决于客户电脑字体库而生效"</span>
+                  </li>
+                  <li>
+                    <span class="labelspan">对齐方式：</span>
+                    <select id="N_subItemATextAlign" name="NSubItemATextAlign" onchange="Nset.NSubItemATextAlign(this.value)">
+                      <option value="center" selected="selected">居中对齐</option>
+                      <option value="left">左对齐</option>
+                      <option value="right">右对齐</option>
+                    </select>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+          <table>
+            <caption>鼠标经过状态</caption>
+            <tr>
+              <th>栏目项背景：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NSubItemAHoverBgToggle" id="N_subItemAHoverBgAuto" onclick="Nset.NSubItemAHoverBgToggle(0)">
+                <label class='labelObj' for="N_subItemAHoverBgAuto">默认</label>
+                <input type='radio' class="radioObj" name="NSubItemAHoverBgToggle" id="N_subItemAHoverBgHide" onclick="Nset.NSubItemAHoverBgToggle(1)">
+                <label class='labelObj' for="N_subItemAHoverBgHide">隐藏</label>
+                <input type='radio' class="radioObj" name="NSubItemAHoverBgToggle" id="N_subItemAHoverBgCus" onclick="Nset.NSubItemAHoverBgToggle(2)">
+                <label class='labelObj' for="N_subItemAHoverBgCus">自定义</label>
+                <ul class="attrSetingList" id="N_subItemAHoverBgAttrlist">
+                  <li>
+                    <span class="labelspan">颜色：</span>
+                    <input class="colorObj" name="colorInput" id="N_subItemAHoverBgColor" value="#000000" onchange="Nset.NSubItemAHoverBgColor(this.value)">
+                    <a title="取消背景颜色" onclick="Nset.NSubItemAHoverNoBgColor();" id="N_subItemAHoverNoBgColor" class="noBgColorObj" href="javascript:;">取消背景颜色</a>
+                  </li>
+                  <li>
+                    <span class="labelspan">背景图片：</span>
+                    <input type="text" id="N_subItemAHoverBgImage" onchange="Nset.NSubItemAHoverBgImage(this.value)" class="bgObj"  value="none" disabled="disabled">
+                    <input type="button" class="bgButObj" id="N_subItemAHoverBgImageBut" value="上传" onclick="pf.upBgImg('N_subItemAHoverBgImage');" />
+                    <a href="javascript:;" class="bgLookObj" title="查看当前使用图片" id="N_subItemAHoverBgImageLook" target="_blank">查看图片</a>
+                    <a href="javascript:;" class="bgNoneObj" id="N_subItemAHoverBgImageNone" onclick="pf.noBgImg('N_subItemAHoverBgImage');" title="取消背景图片">取消背景图片</a>
+                  </li>
+                  <li>
+                    <span class="labelspan">背景位置：</span>
+                    <select class="selectObj" name="NSubItemAHoverBgPosition" id="N_subItemAHoverBgPosition" onchange="Nset.NSubItemAHoverBgPosition(this.value)">
+                      <option value="left top" selected="selected">左上</option>
+                      <option value="left center">左中</option>
+                      <option value="left bottom">左下</option>
+                      <option value="center top">中上</option>
+                      <option value="center center">居中</option>
+                      <option value="center bottom">中下</option>
+                      <option value="right top">右上</option>
+                      <option value="right center">右中</option>
+                      <option value="right bottom">右下</option>
+                    </select>
+                  </li>
+                  <li>
+                    <span class="labelspan">平铺：</span>
+                    <select class="selectObj" name="NSubItemAHoverBgRepeat" id="N_subItemAHoverBgRepeat" onchange="Nset.NSubItemAHoverBgRepeat(this.value)" selected="selected">
+                      <option value="no-repeat">不平铺</option>
+                      <option value="repeat">平铺</option>
+                      <option value="repeat-x">横向平铺</option>
+                      <option value="repeat-y">纵向平铺</option>
+                    </select>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>栏目项文字：</th>
+              <td>
+                <input type="radio" class="radioObj" name="NSubItemAHoverFontToggle" id="N_subItemAHoverFontAuto" onclick="Nset.NSubItemAHoverFontToggle(0);" />
+                <label class="labelObj" for="N_subItemAHoverFontAuto">默认</label>
+                <input type="radio" class="radioObj" name="NSubItemAHoverFontToggle" id="N_subItemAHoverFontCus" onclick="Nset.NSubItemAHoverFontToggle(1);" />
+                <label class="labelObj" for="N_subItemAHoverFontCus">自定义</label>
+                <ul class="attrSetingList" id="N_subItemAHoverFontAttrlist">
+                  <li>
+                    <span class="labelspan">颜色：</span>
+                    <input class="colorObj" name="colorInput" id="N_subItemAHoverFontColor" value="#ffffff" onchange="Nset.NSubItemAHoverFontColor(this.value);"></li>
+                  <li>
+                    <span class="labelspan">文字大小：</span>
+                    <select class="selectObj" name="NSubItemAHoverFontSize" id="N_subItemAHoverFontSize" onchange="Nset.NSubItemAHoverFontSize(this.value)">
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12" selected="selected">12</option>
+                      <option value="13">13</option>
+                      <option value="14">14</option>
+                      <option value="15">15</option>
+                      <option value="16">16</option>
+                      <option value="17">17</option>
+                      <option value="18">18</option>
+                      <option value="19">19</option>
+                      <option value="20">20</option>
+                      <option value="21">21</option>
+                      <option value="22">22</option>
+                      <option value="23">23</option>
+                      <option value="24">24</option>
+                      <option value="25">25</option>
+                      <option value="26">26</option>
+                      <option value="27">27</option>
+                      <option value="28">28</option>
+                      <option value="29">29</option>
+                      <option value="30">30</option>
+                    </select>
+                  </li>
+                  <li>
+                    <span class="labelspan">文字样式：</span>
+                    <input class="checkboxObj" name="NSubItemAHoverFontBold" type="checkbox" id="N_subItemAHoverFontBold" onclick="Nset.NSubItemAHoverFontBold(this)" value="bold" />
+                    <label class="labelObj" for="N_subItemAHoverFontBold">加粗</label>
+                    <input class="checkboxObj" type="checkbox" name="NSubItemAHoverFontItalic" id="N_subItemAHoverFontItalic" value="italic" onclick="Nset.NSubItemAHoverFontItalic(this)" />
+                    <label for="N_subItemAHoverFontItalic" class="labelObj">斜体</label>
+                    <input class="checkboxObj" name="NSubItemAHoverFontUnderline" type="checkbox" id="N_subItemAHoverFontUnderline" value="underline" onclick="Nset.NSubItemAHoverFontUnderline(this)" />
+                    <label class="labelObj" for="N_subItemAHoverFontUnderline">下划线</label>
+                  </li>
+                  <li>
+                    <span class="labelspan">文字字体：</span>
+                    <select id="N_subItemAHoverFontFamily" name="NSubItemAHoverFontFamily" onchange="Nset.NSubItemAHoverFontFamily(this.value)">
+                      <option value="SimSun" selected="selected">宋体</option>
+                      <option value="PMingLiU">新细明体</option>
+                      <option value="FangSong_GB2312">仿宋_GB2312</option>
+                      <option value="微软雅黑">微软雅黑</option>
+                      <option value="隶书">隶书</option>
+                      <option value="幼圆">幼圆</option>
+                      <option value="STKaiti">华文楷体</option>
+                      <option value="方正舒体">方正舒体</option>
+                      <option value="华文彩云">华文彩云</option>
+                      <option value="华文行楷">华文行楷</option>
+                      <option value="华文宋体">华文宋体</option>
+                      <option value="Arial">Arial</option>
+                      <option value="Tahoma">Tahoma</option>
+                    </select>
+                    <span class="redPoint">"该项设置取决于客户电脑字体库而生效"</span>
+                  </li>
+                  <li>
+                    <span class="labelspan">对齐方式：</span>
+                    <select id="N_subItemAHoverTextAlign" name="NSubItemAHoverTextAlign" onchange="Nset.NSubItemAHoverTextAlign(this.value)">
+                      <option value="center" selected="selected">居中对齐</option>
+                      <option value="left">左对齐</option>
+                      <option value="right">右对齐</option>
+                    </select>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="submitBut">
+          <b class="but but-blue" id="N_subItemStyleEnter" onclick="Nset.NSubItemStyleEnter(this)">确定</b>
+          <b class="but but-blue" id="N_subItemStyleReset" onclick="Nset.NSubItemStyleReset()">恢复本项默认</b>
+        </div>
+      </div>
+      <!--下拉菜单项设置 end--> </div>
+  </div>
+</div>
+</body>
+</html>

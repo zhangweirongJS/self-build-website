@@ -1,0 +1,157 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gbk">
+    <meta http-equiv="x-ua-compatible" content="ie=7">
+    <title>焦点图-营销通管理中心</title>
+    <link type="text/css" rel="stylesheet" href="/css/VNew/admin_20140730.css">
+    <link type="text/css" rel="stylesheet" href="/css/VNew/style_editcss.css">
+    <script type="text/javascript" src="/include/cookies.js"></script>
+    <script type="text/javascript" src="/js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/include/public.js"></script>
+    <script type="text/javascript" src="/js/VNew/public_plugins.js"></script>
+    <script type="text/javascript" src="/js/uploadPreview.js"></script>
+</head>
+<body>
+<div class="tabArea banner-tab-area">
+    <div class="alertTab" id="alert_tab">
+        <div class="TabCLoading" id="tabc_loading"></div>
+        <div class="alertTabT" id="alert_tab_t">
+            <ul>
+                <li data-id="bannerAdd" id="bannerAdd_tab"><a href="/tj_define_banner">上传焦点图</a></li>
+                <li data-id="bannerAdmin" id="bannerAdmin_tab" class="cur"><a href="javascript:;">管理焦点图</a></li>
+                <li data-id="bannerSet" id="bannerSet_tab"><a href="/tj_define_banner_set">效果设置</a></li>
+            </ul>
+        </div>
+        <div class="alertTabC" id="alert_tab_c">
+            <div class="alertTabCIn banner-admin" id="bannerAdmin">
+                <form action="/tj_define_banner_list" method="post" enctype="multipart/form-data" id="form1" name="form1">
+                    <div class="tableDiv">
+                        <dl class="cus-table">
+                            <dt class="table-h">
+                            <div class="table-h-i">
+                                <table>
+                                    <tbody><tr>
+                                        <td class="t-a-c td-1">
+                                            <div class="td-i">标题</div>
+                                        </td>
+                                        <td class="t-a-c td-2">
+                                            <div class="td-i">排序</div>
+                                        </td>
+                                        <td class="t-a-c td-3">
+                                            <div class="td-i">操作</div>
+                                        </td>
+                                    </tr>
+                                    </tbody></table>
+                            </div>
+                            </dt>
+                            <dd class="table-b" id="bannerAdminList">
+                                <ul class="table-b-i">
+                                    <li class="tr-item" id="row_1">
+                                        <table>
+                                            <tbody><tr>
+                                                <td class="t-a-c v-a-m td-1">
+                                                    <div class="td-i">
+                                                        <input type="hidden" name="ids[]" value="743603" id="ids_1">
+                                                        <input class="sort-input" type="hidden" name="row_no_743603" id="row_no_743603" value="1">banner(系统拷贝)						        				        </div>
+                                                </td>
+                                                <td class="t-a-c v-a-m td-2">
+                                                    <div class="td-i">
+						        				        	<span class="move-icon">
+											                    <i title="向上移动" id="per_743603" data-action="up" class="up-icon" style="display:none"></i>
+											                    <i title="向下移动" id="las_743603" data-action="down" class="down-icon" style="display:none"></i>
+										                    </span>
+                                                    </div>
+                                                </td>
+                                                <td class="t-a-c v-a-m td-3">
+                                                    <div class="td-i">
+							        				        <span class="but-element-o b-26-blue">
+					                                            <em class="but-element-i"><a class="edit" href="/tj_define_banner.php?id=743603">编辑</a></em>
+					                                        </span>
+                                                        <span class="but-element-o b-26-red">
+					                                            <em class="but-element-i"><a class="del" href="javascript:delBannerId('743603')">删除</a></em>
+					                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            </tbody></table>
+                                    </li>
+                                </ul>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="submitBut" id="my_submit_div">
+                        <b class="but but-blue" data-action="submit">保存</b>
+                        <b class="but but-gray" data-action="reset">取消</b>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function(){
+        var bannerAdminList = $('#bannerAdminList'),
+            my_submit_div = $("#my_submit_div"),form = $('#form1');
+        bannerAdminList.cScroll({
+            w:10,
+            tbB :true
+        });
+        bannerAdminList.on({
+            click : function(){
+                var t = $(this),action = t.data('action'),tr = t.parents('.tr-item');
+                var fun = function(){
+                    var tsort = tr.find('.sort-input'),
+                        x,psort;
+                    if(action == 'up'){
+                        psort = tr.prev('.tr-item').find('.sort-input');
+                    }else{
+                        psort = tr.next('.tr-item').find('.sort-input');
+                    }
+                    x = tsort.val();
+                    tsort.val(psort.val());
+                    psort.val(x);
+                };
+                adminPF.upDownMove(tr,action,fun);
+            }
+        },'.move-icon i');
+        my_submit_div.on({
+            click : function(){
+                var t = $(this),action = t.data('action');
+                switch(action){
+                    case 'submit' :
+                        t.removeClass('but-blue').addClass('but-gray').text('保存中...');
+                        form.submit();
+                        break;
+                    case 'reset':
+                        w.close_window();
+                        break;
+                }
+            }
+        },'.but');
+    });
+    function delBannerId(iId) {
+        if (!iId) { return false; }
+
+        var confirmJson = {
+            but_1 : {text:"确定", fun:function(){ window.location.href="/tj_define_banner_list.php?del_id="+ iId; }},
+            but_2 : {text:"取消", fun:function(){}}
+        };
+        w.sysDefine.manage('确定要删除吗？删除后将不可恢复！', 3, confirmJson);
+    }
+    var row_num=1;
+</script>
+<script type="text/javascript">
+    function friame_kg() {
+        var tmp_title='编辑内容';
+        var body_height2=$('body').height();
+        if(body_height2>360){
+            body_height=body_height2+50;
+            window.parent.resize_window('w1',tmp_title,700,body_height);
+        }else if(body_height2<360){
+            window.parent.resize_window('w1',tmp_title,700,400);
+        }
+    }
+    $(function(){friame_kg();});
+</script>
+
+
+</body></html>

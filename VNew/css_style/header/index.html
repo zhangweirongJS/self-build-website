@@ -1,0 +1,724 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+    <title>头部样式编辑</title>
+    <link rel="stylesheet" type="text/css" href="/css/VNew/spectrum.css" />
+    <link rel="stylesheet" type="text/css" href="/css/VNew/style_editcss.css" />
+    <script type="text/javascript" src="/js/VNew/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="/js/VNew/spectrum.js"></script>
+    <script type="text/javascript" src="/js/VNew/tj/edit_public.js"></script>
+    <script type="text/javascript" src="/js/VNew/tj/basic_module_style/head_style_edit.js"></script>
+<body>
+<div class="tabArea">
+    <div class="alertTab">
+        <div class="TabCLoading" id="tabc_loading"></div>
+        <div class="alertTabT" id="alert_tab_t">
+            <ul>
+                <li data-id="exterior" id="exterior_tab">
+                    <a href="javascript:;">外观样式设计</a>
+                </li>
+                <li data-id="interior" id="interior_tab">
+                    <a href="javascript:;">内容样式设计</a>
+                </li>
+            </ul>
+        </div>
+        <div class="alertTabC" id="alert_tab_c">
+            <!--头部外部设置 start-->
+            <div class="alertTabCIn" id="exterior">
+                <div class="tableDiv">
+                    <table>
+                        <tr>
+                            <th>背景：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="TopBgToggle" id="Top_bgAuto" onclick="Tset.TopBgToggle(0)">
+                                <label class="labelObj" for="Top_bgAuto">默认</label>
+                                <input type="radio" class="radioObj" name="TopBgToggle" id="Top_bgHide" onclick="Tset.TopBgToggle(1)">
+                                <label class="labelObj" for="Top_bgHide">隐藏</label>
+                                <input type="radio" class="radioObj" name="TopBgToggle" id="Top_bgCus" onclick="Tset.TopBgToggle(2)">
+                                <label class="labelObj" for="Top_bgCus">自定义</label>
+                                <ul class="attrSetingList" id="Top_bgAttrlist">
+                                    <li>
+                                        <span class="labelspan">背景颜色：</span>
+                                        <input class="colorObj" name="colorInput" id="Top_bgColor" value="#000000" onchange="Tset.TopBgColor(this.value)">
+                                        <a title="取消背景颜色" onclick="Tset.TopNoBgColor();" id="Top_noBgColor" class="noBgColorObj" href="javascript:;">取消背景颜色</a>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">背景图片：</span>
+                                        <input type="type" name="TopBgImage" id="Top_bgImage" onchange="Tset.TopBgImage(this.value)" class="bgObj"  value="none" disabled="disabled">
+                                        <input type="button" class="bgButObj" id="Top_bgImageBut" value="上传" onclick="pf.upBgImg('Top_bgImage');" />
+                                        <a href="javascript:;" class="bgLookObj" title="查看当前使用图片" id="Top_bgImageLook" target="_blank">查看背景图片</a>
+                                        <a href="javascript:;" class="bgNoneObj" id="Top_bgImageNone" onclick="pf.noBgImg('Top_bgImage');" title="取消背景图片">取消背景图片</a>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">背景位置：</span>
+                                        <select class="selectObj" name="TopBgPosition" id="Top_bgPosition" onchange="Tset.TopBgPosition(this.value)">
+                                            <option value="left top" selected="selected">左上</option>
+                                            <option value="left center">左中</option>
+                                            <option value="left bottom">左下</option>
+                                            <option value="center top">中上</option>
+                                            <option value="center center">居中</option>
+                                            <option value="center bottom">中下</option>
+                                            <option value="right top">右上</option>
+                                            <option value="right center">右中</option>
+                                            <option value="right bottom">右下</option>
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">平铺：</span>
+                                        <select class="selectObj" name="TopBgRepeat" id="Top_bgRepeat" onchange="Tset.TopBgRepeat(this.value)">
+                                            <option value="no-repeat" selected="selected">不平铺</option>
+                                            <option value="repeat">平铺</option>
+                                            <option value="repeat-x">横向平铺</option>
+                                            <option value="repeat-y">纵向平铺</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="labelspan">背景透明度：</th>
+                            <td>
+                                <input type="text" name="opacityObj" class="opacityObj" id="Top_opacity" value='100' onchange="Tset.TopOpacity(this.value)" />
+                                <span class="pah">%</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>背景是否通栏：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="TopFullToggle" id="Top_fullAuto" onclick="Tset.TopFullToggle(0)">
+                                <label class="labelObj" for="Top_fullAuto">默认</label>
+                                <input type="radio" class="radioObj" name="TopFullToggle" id="Top_fullNo" onclick="Tset.TopFullToggle(1)">
+                                <label class="labelObj" for="Top_fullNo">否</label>
+                                <input type="radio" class="radioObj" name="TopFullToggle" id="Top_fullYes" onclick="Tset.TopFullToggle(2)">
+                                <label class="labelObj" for="Top_fullYes">是</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>高度设置：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="TopConHeightToggle" id="Top_conHeightAuto" onclick="Tset.TopConHeightToggle(0)" />
+                                <label class='labelObj' for="Top_conHeightAuto">默认</label>
+                                <input type='radio' class="radioObj" name="TopConHeightToggle" id="Top_conHeightCus" onclick="Tset.TopConHeightToggle(2)">
+                                <label class='labelObj' for="Top_conHeightCus">自定义</label>
+                                <ul class="attrSetingList" id="Top_conHeightAttrlist">
+                                    <li>
+                                        <span class="labelspan">高度值：</span>
+                                        <input type="text" name="TopConHeight" class="inputObj" style="width:50px;" id="Top_conHeight" onchange="Tset.TopConHeight(this)" />
+                                        <span class="px">像素</span>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>上边线：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="TopBorderTopToggle" id="Top_borderTopAuto" onclick="Tset.TopBorderTopToggle(0);" />
+                                <label class="labelObj" for="Top_borderTopAuto">默认</label>
+                                <input type="radio" class="radioObj" name="TopBorderTopToggle" id="Top_borderTopHide" onclick="Tset.TopBorderTopToggle(1)">
+                                <label class="labelObj" for="Top_borderTopHide">隐藏</label>
+                                <input type="radio" class="radioObj" name="TopBorderTopToggle" id="Top_borderTopCus" onclick="Tset.TopBorderTopToggle(2);" />
+                                <label class="labelObj" for="Top_borderTopCus">自定义</label>
+                                <ul class="attrSetingList" id="Top_borderTopAttrlist">
+                                    <li>
+                                        <span class="labelspan">颜色：</span>
+                                        <input class="colorObj" name="colorInput" id="Top_borderTopColor" value="#cccccc" onchange="Tset.TopBorderTopColor(this.value);" />
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">高度：</span>
+                                        <select class="selectObj" name="TopBorderTopWidth" id="Top_borderTopWidth" onchange="Tset.TopBorderTopWidth(this.value);">
+                                            <option value="1" selected="selected">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="15">15</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>
+                                            <option value="22">22</option>
+                                            <option value="23">23</option>
+                                            <option value="24">24</option>
+                                            <option value="25">25</option>
+                                            <option value="26">26</option>
+                                            <option value="27">27</option>
+                                            <option value="28">28</option>
+                                            <option value="29">29</option>
+                                            <option value="30">30</option>
+                                        </select>
+                                        <span class="px">像素</span>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">样式：</span>
+                                        <select class="selectObj" name="TopBorderTopStyle" id="Top_borderTopStyle" onchange="Tset.TopBorderTopStyle(this.value);">
+                                            <option value="solid" selected="selected">实线</option>
+                                            <option value="dashed">虚线</option>
+                                            <option value="dotted">点状</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>下边线：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="TopBorderBottomToggle" id="Top_borderBottomAuto" onclick="Tset.TopBorderBottomToggle(0);" />
+                                <label class="labelObj" for="Top_borderBottomAuto">默认</label>
+                                <input type="radio" class="radioObj" name="TopBorderBottomToggle" id="Top_borderBottomHide" onclick="Tset.TopBorderBottomToggle(1)">
+                                <label class="labelObj" for="Top_borderBottomHide">隐藏</label>
+                                <input type="radio" class="radioObj" name="TopBorderBottomToggle" id="Top_borderBottomCus" onclick="Tset.TopBorderBottomToggle(2);" />
+                                <label class="labelObj" for="Top_borderBottomCus">自定义</label>
+                                <ul class="attrSetingList" id="Top_borderBottomAttrlist">
+                                    <li>
+                                        <span class="labelspan">颜色：</span>
+                                        <input class="colorObj" name="colorInput" id="Top_borderBottomColor" value="#cccccc" onchange="Tset.TopBorderBottomColor(this.value);" />
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">高度：</span>
+                                        <select class="selectObj" name="TopBorderBottomWidth" id="Top_borderBottomWidth" onchange="Tset.TopBorderBottomWidth(this.value);">
+                                            <option value="1" selected="selected">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="15">15</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>
+                                            <option value="22">22</option>
+                                            <option value="23">23</option>
+                                            <option value="24">24</option>
+                                            <option value="25">25</option>
+                                            <option value="26">26</option>
+                                            <option value="27">27</option>
+                                            <option value="28">28</option>
+                                            <option value="29">29</option>
+                                            <option value="30">30</option>
+                                        </select>
+                                        <span class="px">像素</span>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">样式：</span>
+                                        <select class="selectObj" name="TopBorderBottomStyle" id="Top_borderBottomStyle" onchange="Tset.TopBorderBottomStyle(this.value);">
+                                            <option value="solid" selected="selected">实线</option>
+                                            <option value="dashed">虚线</option>
+                                            <option value="dotted">点状</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>左边线：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="TopBorderLeftToggle" id="Top_borderLeftAuto" onclick="Tset.TopBorderLeftToggle(0);" />
+                                <label class="labelObj" for="Top_borderLeftAuto">默认</label>
+                                <input type="radio" class="radioObj" name="TopBorderLeftToggle" id="Top_borderLeftHide" onclick="Tset.TopBorderLeftToggle(1)">
+                                <label class="labelObj" for="Top_borderLeftHide">隐藏</label>
+                                <input type="radio" class="radioObj" name="TopBorderLeftToggle" id="Top_borderLeftCus" onclick="Tset.TopBorderLeftToggle(2);" />
+                                <label class="labelObj" for="Top_borderLeftCus">自定义</label>
+                                <ul class="attrSetingList" id="Top_borderLeftAttrlist">
+                                    <li>
+                                        <span class="labelspan">颜色：</span>
+                                        <input class="colorObj" name="colorInput" id="Top_borderLeftColor" value="#cccccc" onchange="Tset.TopBorderLeftColor(this.value);" />
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">宽度：</span>
+                                        <select class="selectObj" name="TopBorderLeftWidth" id="Top_borderLeftWidth" onchange="Tset.TopBorderLeftWidth(this.value);">
+                                            <option value="1" selected="selected">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="15">15</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>
+                                            <option value="22">22</option>
+                                            <option value="23">23</option>
+                                            <option value="24">24</option>
+                                            <option value="25">25</option>
+                                            <option value="26">26</option>
+                                            <option value="27">27</option>
+                                            <option value="28">28</option>
+                                            <option value="29">29</option>
+                                            <option value="30">30</option>
+                                        </select>
+                                        <span class="px">像素</span>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">样式：</span>
+                                        <select class="selectObj" name="TopBorderLeftStyle" id="Top_borderLeftStyle" onchange="Tset.TopBorderLeftStyle(this.value);">
+                                            <option value="solid" selected="selected">实线</option>
+                                            <option value="dashed">虚线</option>
+                                            <option value="dotted">点状</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>右边线：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="TopBorderRightToggle" id="Top_borderRightAuto" onclick="Tset.TopBorderRightToggle(0);" />
+                                <label class="labelObj" for="Top_borderRightAuto">默认</label>
+                                <input type="radio" class="radioObj" name="TopBorderRightToggle" id="Top_borderRightHide" onclick="Tset.TopBorderRightToggle(1)">
+                                <label class="labelObj" for="Top_borderRightHide">隐藏</label>
+                                <input type="radio" class="radioObj" name="TopBorderRightToggle" id="Top_borderRightCus" onclick="Tset.TopBorderRightToggle(2);" />
+                                <label class="labelObj" for="Top_borderRightCus">自定义</label>
+                                <ul class="attrSetingList" id="Top_borderRightAttrlist">
+                                    <li>
+                                        <span class="labelspan">颜色：</span>
+                                        <input class="colorObj" name="colorInput" id="Top_borderRightColor" value="#cccccc" onchange="Tset.TopBorderRightColor(this.value);" />
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">宽度：</span>
+                                        <select class="selectObj" name="TopBorderRightWidth" id="Top_borderRightWidth" onchange="Tset.TopBorderRightWidth(this.value);">
+                                            <option value="1" selected="selected">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="15">15</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>
+                                            <option value="22">22</option>
+                                            <option value="23">23</option>
+                                            <option value="24">24</option>
+                                            <option value="25">25</option>
+                                            <option value="26">26</option>
+                                            <option value="27">27</option>
+                                            <option value="28">28</option>
+                                            <option value="29">29</option>
+                                            <option value="30">30</option>
+                                        </select>
+                                        <span class="px">像素</span>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">样式：</span>
+                                        <select class="selectObj" name="TopBorderRightStyle" id="Top_borderRightStyle" onchange="Tset.TopBorderRightStyle(this.value);">
+                                            <option value="solid" selected="selected">实线</option>
+                                            <option value="dashed">虚线</option>
+                                            <option value="dotted">点状</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>上下距离：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="TopMarginToggle" id="Top_marginAuto" onclick="Tset.TopMarginToggle(0)">
+                                <label class="labelObj" for="Top_marginAuto">默认</label>
+                                <input type="radio" class="radioObj" name="TopMarginToggle" id="Top_marginCus" onclick="Tset.TopMarginToggle(2)">
+                                <label class="labelObj" for="Top_marginCus">自定义</label>
+                                <ul class="attrSetingList" id="Top_marginAttrlist">
+                                    <li>
+                                        <span class="labelspan">上：</span>
+                                        <input type="text" class="inputObj" name="TopMarginTop" id="Top_marginTop" style="width:40px;" onchange="Tset.TopMarginTop(this)" />
+                                        <span class="px">像素</span>
+                                        &nbsp;&nbsp;&nbsp;
+                                        <span class="labelspan">下：</span>
+                                        <input type="text" class="inputObj" name="TopMarginBottom" id="Top_marginBottom" style="width:40px;" onchange="Tset.TopMarginBottom(this)"  />
+                                        <span class="px">像素</span>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="submitBut">
+                    <b class="but but-blue" id="Top_exteriorEnter" onclick="Tset.TopEnter(this)">确定</b>
+                    <b class="but but-blue" id="Top_exteriorReset" onclick="Tset.TopExteriorReset()">恢复本项默认</b>
+                </div>
+            </div>
+            <!--头部外部设置 end-->
+            <!--头部内部设置 start-->
+            <div class="alertTabCIn" id="interior">
+                <div class="tableDiv">
+                    <table>
+                        <tr><th></th><td><div><span class="redPoint" style="font-size:16px;">以下设置是为了兼容2015-12-22之前使用过该功能的用户。</span></div></td></tr>
+                        <tr>
+                            <th>背景：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="TopConBgToggle" id="Top_conBgAuto" onclick="Tset.TopConBgToggle(0)">
+                                <label class="labelObj" for="Top_conBgAuto">默认</label>
+                                <input type="radio" class="radioObj" name="TopConBgToggle" id="Top_conBgHide" onclick="Tset.TopConBgToggle(1)">
+                                <label class="labelObj" for="Top_conBgHide">隐藏</label>
+                                <input type="radio" class="radioObj" name="TopConBgToggle" id="Top_conBgCus" onclick="Tset.TopConBgToggle(2)">
+                                <label class="labelObj" for="Top_conBgCus">自定义</label>
+                                <ul class="attrSetingList" id="Top_conBgAttrlist">
+                                    <li>
+                                        <span class="labelspan">背景颜色：</span>
+                                        <input class="colorObj" name="colorInput" id="Top_conBgColor" value="#eeeeee" onchange="Tset.TopConBgColor(this.value)">
+                                        <a title="取消背景颜色" onclick="Tset.TopNoConBgColor();" id="Top_noConBgColor" class="noBgColorObj" href="javascript:;">取消背景颜色</a>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">背景图片：</span>
+                                        <input type="type" name="TopConBgImage" id="Top_conBgImage" onchange="Tset.TopConBgImage(this.value)" class="bgObj"  value="none" disabled="disabled">
+                                        <input type="button" class="bgButObj" id="Top_conBgImageBut" value="上传" onclick="pf.upBgImg('Top_conBgImage');" />
+                                        <a href="javascript:;" class="bgLookObj" title="查看当前使用图片" id="Top_conBgImageLook" target="_blank">查看背景图片</a>
+                                        <a href="javascript:;" class="bgNoneObj" id="Top_conBgImageNone" onclick="pf.noBgImg('Top_conBgImage');" title="取消背景图片">取消背景图片</a>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">背景位置：</span>
+                                        <select class="selectObj" name="TopConBgPosition" id="Top_conBgPosition" onchange="Tset.TopConBgPosition(this.value)">
+                                            <option value="left top" selected="selected">左上</option>
+                                            <option value="left center">左中</option>
+                                            <option value="left bottom">左下</option>
+                                            <option value="center top">中上</option>
+                                            <option value="center center">居中</option>
+                                            <option value="center bottom">中下</option>
+                                            <option value="right top">右上</option>
+                                            <option value="right center">右中</option>
+                                            <option value="right bottom">右下</option>
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">平铺：</span>
+                                        <select class="selectObj" name="TopConBgRepeat" id="Top_conBgRepeat" onchange="Tset.TopConBgRepeat(this.value)">
+                                            <option value="no-repeat" selected="selected">不平铺</option>
+                                            <option value="repeat">平铺</option>
+                                            <option value="repeat-x">横向平铺</option>
+                                            <option value="repeat-y">纵向平铺</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>上边线：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="TopConBorderTopToggle" id="Top_conBorderTopAuto" onclick="Tset.TopConBorderTopToggle(0);" />
+                                <label class="labelObj" for="Top_conBorderTopAuto">默认</label>
+                                <input type="radio" class="radioObj" name="TopConBorderTopToggle" id="Top_conBorderTopHide" onclick="Tset.TopConBorderTopToggle(1)">
+                                <label class="labelObj" for="Top_conBorderTopHide">隐藏</label>
+                                <input type="radio" class="radioObj" name="TopConBorderTopToggle" id="Top_conBorderTopCus" onclick="Tset.TopConBorderTopToggle(2);" />
+                                <label class="labelObj" for="Top_conBorderTopCus">自定义</label>
+                                <ul class="attrSetingList" id="Top_conBorderTopAttrlist">
+                                    <li>
+                                        <span class="labelspan">颜色：</span>
+                                        <input class="colorObj" name="colorInput" id="Top_conBorderTopColor" value="#cccccc" onchange="Tset.TopConBorderTopColor(this.value);" />
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">高度：</span>
+                                        <select class="selectObj" name="TopConBorderTopWidth" id="Top_conBorderTopWidth" onchange="Tset.TopConBorderTopWidth(this.value);">
+                                            <option value="1" selected="selected">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="15">15</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>
+                                            <option value="22">22</option>
+                                            <option value="23">23</option>
+                                            <option value="24">24</option>
+                                            <option value="25">25</option>
+                                            <option value="26">26</option>
+                                            <option value="27">27</option>
+                                            <option value="28">28</option>
+                                            <option value="29">29</option>
+                                            <option value="30">30</option>
+                                        </select>
+                                        <span class="px">像素</span>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">样式：</span>
+                                        <select class="selectObj" name="TopConBorderTopStyle" id="Top_conBorderTopStyle" onchange="Tset.TopConBorderTopStyle(this.value);">
+                                            <option value="solid" selected="selected">实线</option>
+                                            <option value="dashed">虚线</option>
+                                            <option value="dotted">点状</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>下边线：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="TopConBorderBottomToggle" id="Top_conBorderBottomAuto" onclick="Tset.TopConBorderBottomToggle(0);" />
+                                <label class="labelObj" for="Top_conBorderBottomAuto">默认</label>
+                                <input type="radio" class="radioObj" name="TopConBorderBottomToggle" id="Top_conBorderBottomHide" onclick="Tset.TopConBorderBottomToggle(1)">
+                                <label class="labelObj" for="Top_conBorderBottomHide">隐藏</label>
+                                <input type="radio" class="radioObj" name="TopConBorderBottomToggle" id="Top_conBorderBottomCus" onclick="Tset.TopConBorderBottomToggle(2);" />
+                                <label class="labelObj" for="Top_conBorderBottomCus">自定义</label>
+                                <ul class="attrSetingList" id="Top_conBorderBottomAttrlist">
+                                    <li>
+                                        <span class="labelspan">颜色：</span>
+                                        <input class="colorObj" name="colorInput" id="Top_conBorderBottomColor" value="#cccccc" onchange="Tset.TopConBorderBottomColor(this.value);" />
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">高度：</span>
+                                        <select class="selectObj" name="TopConBorderBottomWidth" id="Top_conBorderBottomWidth" onchange="Tset.TopConBorderBottomWidth(this.value);">
+                                            <option value="1" selected="selected">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="15">15</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>
+                                            <option value="22">22</option>
+                                            <option value="23">23</option>
+                                            <option value="24">24</option>
+                                            <option value="25">25</option>
+                                            <option value="26">26</option>
+                                            <option value="27">27</option>
+                                            <option value="28">28</option>
+                                            <option value="29">29</option>
+                                            <option value="30">30</option>
+                                        </select>
+                                        <span class="px">像素</span>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">样式：</span>
+                                        <select class="selectObj" name="TopConBorderBottomStyle" id="Top_conBorderBottomStyle" onchange="Tset.TopConBorderBottomStyle(this.value);">
+                                            <option value="solid" selected="selected">实线</option>
+                                            <option value="dashed">虚线</option>
+                                            <option value="dotted">点状</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>左边线：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="TopConBorderLeftToggle" id="Top_conBorderLeftAuto" onclick="Tset.TopConBorderLeftToggle(0);" />
+                                <label class="labelObj" for="Top_conBorderLeftAuto">默认</label>
+                                <input type="radio" class="radioObj" name="TopConBorderLeftToggle" id="Top_conBorderLeftHide" onclick="Tset.TopConBorderLeftToggle(1)">
+                                <label class="labelObj" for="Top_conBorderLeftHide">隐藏</label>
+                                <input type="radio" class="radioObj" name="TopConBorderLeftToggle" id="Top_conBorderLeftCus" onclick="Tset.TopConBorderLeftToggle(2);" />
+                                <label class="labelObj" for="Top_conBorderLeftCus">自定义</label>
+                                <ul class="attrSetingList" id="Top_conBorderLeftAttrlist">
+                                    <li>
+                                        <span class="labelspan">颜色：</span>
+                                        <input class="colorObj" name="colorInput" id="Top_conBorderLeftColor" value="#cccccc" onchange="Tset.TopConBorderLeftColor(this.value);" />
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">宽度：</span>
+                                        <select class="selectObj" name="TopConBorderLeftWidth" id="Top_conBorderLeftWidth" onchange="Tset.TopConBorderLeftWidth(this.value);">
+                                            <option value="1" selected="selected">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="15">15</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>
+                                            <option value="22">22</option>
+                                            <option value="23">23</option>
+                                            <option value="24">24</option>
+                                            <option value="25">25</option>
+                                            <option value="26">26</option>
+                                            <option value="27">27</option>
+                                            <option value="28">28</option>
+                                            <option value="29">29</option>
+                                            <option value="30">30</option>
+                                        </select>
+                                        <span class="px">像素</span>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">样式：</span>
+                                        <select class="selectObj" name="TopConBorderLeftStyle" id="Top_conBorderLeftStyle" onchange="Tset.TopConBorderLeftStyle(this.value);">
+                                            <option value="solid" selected="selected">实线</option>
+                                            <option value="dashed">虚线</option>
+                                            <option value="dotted">点状</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>右边线：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="TopConBorderRightToggle" id="Top_conBorderRightAuto" onclick="Tset.TopConBorderRightToggle(0);" />
+                                <label class="labelObj" for="Top_conBorderRightAuto">默认</label>
+                                <input type="radio" class="radioObj" name="TopConBorderRightToggle" id="Top_conBorderRightHide" onclick="Tset.TopConBorderRightToggle(1)">
+                                <label class="labelObj" for="Top_conBorderRightHide">隐藏</label>
+                                <input type="radio" class="radioObj" name="TopConBorderRightToggle" id="Top_conBorderRightCus" onclick="Tset.TopConBorderRightToggle(2);" />
+                                <label class="labelObj" for="Top_conBorderRightCus">自定义</label>
+                                <ul class="attrSetingList" id="Top_conBorderRightAttrlist">
+                                    <li>
+                                        <span class="labelspan">颜色：</span>
+                                        <input class="colorObj" name="colorInput" id="Top_conBorderRightColor" value="#cccccc" onchange="Tset.TopConBorderRightColor(this.value);" />
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">宽度：</span>
+                                        <select class="selectObj" name="TopConBorderRightWidth" id="Top_conBorderRightWidth" onchange="Tset.TopConBorderRightWidth(this.value);">
+                                            <option value="1" selected="selected">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="15">15</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>
+                                            <option value="22">22</option>
+                                            <option value="23">23</option>
+                                            <option value="24">24</option>
+                                            <option value="25">25</option>
+                                            <option value="26">26</option>
+                                            <option value="27">27</option>
+                                            <option value="28">28</option>
+                                            <option value="29">29</option>
+                                            <option value="30">30</option>
+                                        </select>
+                                        <span class="px">像素</span>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">样式：</span>
+                                        <select class="selectObj" name="TopConBorderRightStyle" id="Top_conBorderRightStyle" onchange="Tset.TopConBorderRightStyle(this.value);">
+                                            <option value="solid" selected="selected">实线</option>
+                                            <option value="dashed">虚线</option>
+                                            <option value="dotted">点状</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>内边距：</th>
+                            <td>
+                                <input type="radio" class="radioObj" name="TopConPaddingToggle" id="Top_conPaddingAuto" onclick="Tset.TopConPaddingToggle(0)">
+                                <label class="labelObj" for="Top_conPaddingAuto">默认</label>
+                                <input type="radio" class="radioObj" name="TopConPaddingToggle" id="Top_conPaddingCus" onclick="Tset.TopConPaddingToggle(2)">
+                                <label class="labelObj" for="Top_conPaddingCus">自定义</label>
+                                <ul class="attrSetingList" id="Top_conPaddingAttrlist">
+                                    <li>
+                                        <span class="labelspan">上：</span>
+                                        <input type="text" class="inputObj" name="TopConPaddingTop" id="Top_conPaddingTop" style="width:40px;" onchange="Tset.TopConPaddingTop(this)" />
+                                        <span class="px">像素</span>
+                                        &nbsp;&nbsp;&nbsp;
+                                        <span class="labelspan">下：</span>
+                                        <input type="text" class="inputObj" name="TopConPaddingBottom" id="Top_conPaddingBottom" style="width:40px;" onchange="Tset.TopConPaddingBottom(this)"  />
+                                        <span class="px">像素</span>
+                                    </li>
+                                    <li>
+                                        <span class="labelspan">左：</span>
+                                        <input type="text" class="inputObj" name="TopConPaddingLeft" id="Top_conPaddingLeft" style="width:40px;" onchange="Tset.TopConPaddingLeft(this)" />
+                                        <span class="px">像素</span>
+                                        &nbsp;&nbsp;&nbsp;
+                                        <span class="labelspan">右：</span>
+                                        <input type="text" class="inputObj" name="TopConPaddingRight" id="Top_conPaddingRight" style="width:40px;" onchange="Tset.TopConPaddingRight(this)" />
+                                        <span class="px">像素</span>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="submitBut">
+                    <b class="but but-blue" id="Top_interiorEnter" onclick="Tset.TopEnter(this)">确定</b>
+                    <b class="but but-blue" id="Top_interiorReset" onclick="Tset.TopInteriorReset()">恢复本项默认</b>
+                </div>
+            </div>
+            <!--头部内部设置 end-->
+        </div>
+    </div>
+</div>
+</body>
+</html>

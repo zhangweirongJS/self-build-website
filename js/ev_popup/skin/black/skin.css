@@ -1,0 +1,101 @@
+.evPopupShade{position:absolute; width:100%; height:100%; left:0px; top:0px;}
+.evPopup{position:absolute; overflow:hidden;}
+.evPopupMoveShade{position:absolute;}
+.evPopupMoveShade div{background-color:#fff; opacity:0.4; filter:alpha(opacity:40); border:1px solid #aaa;}
+.evPopup .loadingWait{background:url(images/small-loading-wait-bg.gif) no-repeat center center #fff; position:absolute; left:0px; top:0px; width:100%;}
+.evPopupBodyTL,.evPopupBodyTC,.evPopupBodyTR,.evPopupBodyBL,.evPopupBodyBC,.evPopupBodyBR{background-image:url(images/evPopupBodyT_B_bg.png);}
+.evPopupBodyCL,.evPopupBodyCR{background-image:url(images/evPopupBodyC_bg.png);}
+.evPopupHeadL,.evPopupHeadC,.evPopupHeadR{background-image:url(images/evPopupTitle_bg.png); height:38px;}
+/**poputHead**/
+.evPopupHead{position:absolute; left:0px; top:0px; width:100%; z-index:4;}
+.evPopupHeadL,.evPopupHeadR{position:absolute; top:0px; width:6px; height:38px;}
+.evPopupHeadL{left:2px; background-position:0 0;}
+.evPopupHeadR{right:2px; background-position:0 -76px;}
+.evPopupHeadC{height:38px; background-position:0 -38px; background-repeat:repeat-x; margin:0px 6px;}
+/**popupBody**/
+.evPopupBody{height:100%;}
+.evPopupBodyT,.evPopupBodyB,.evPopupBodyC{position:relative;}
+.evPopupBodyT,.evPopupBodyB{z-index:1;}
+	.evPopupBodyTL,.evPopupBodyTR,.evPopupBodyBL,.evPopupBodyBR{position:absolute; top:0px;width:10px; height:10px;}
+		.evPopupBodyTL{left:0px;background-position:0 0;}
+		.evPopupBodyTR{right:0px; background-position:-10px 0;}
+		.evPopupBodyTC{height:10px; background-position:0 -20px; margin:0px 10px;zoom:1;}
+	.evPopupBodyBL{left:0px;background-position:0 -10px;}
+	.evPopupBodyBR{right:0px;background-position:-10px -10px;}
+	.evPopupBodyBC{height:10px; background-position:0 -30px; margin:0px 10px;}
+	.evPopupBodyC{ overflow:hidden; z-index:2;}
+	.evPopupBodyCL,.evPopupBodyCR{position:absolute; width:10px; top:0px; padding-bottom:99999px;}
+	.evPopupBodyCL{left:0px;}
+	.evPopupBodyCR{right:0px; background-position:-10px 0;}
+		.evPopupBodyCC{margin:0px 3px; background-color:#fff; position:relative;}
+		.evPopupBodyCC .icon{width:32px; height:32px; display:inline-block; vertical-align:middle; background-image:url(images/evPopupAlert_icon.png); margin-right:5px;}
+			.evPopupBodyCC .rightIcon{background-position:0 0;}
+			.evPopupBodyCC .errorIcon{background-position:0 -32px;}
+			.evPopupBodyCC .warnIcon{background-position:0 -64px;}
+		.evPopupBodyCC .loadingIcon{ background:url(images/big-loading-wait-bg.gif) left top; width:125px; height:125px; display:inline-block;}
+/**evPopupOpbut**/
+.evPopupOpbut{position:absolute; right:8px; top:0px; z-index:5;}
+.evPopupOpbut span{display:inline-block; background:url(images/evPopupOpbut_bg.png); width:17px; height:17px; margin:10px; cursor:pointer;}
+.evPopupOpbut .evOpbutClose{background-position:0 -17px;}
+	.evPopupOpbut .evOpbutCloseHover{background-position:0 0px;}
+.evPopupOpbut .evOpbutMax{background-position:-17px -17px;}
+	.evPopupOpbut .evOpbutMaxHover{background-position:-17px 0;}
+.evPopupOpbut .evOpbutMin{background-position:-34px -17px;}
+	.evPopupOpbut .evOpbutMinHover{background-position:-34px 0px;}
+.evPopupOpbut .evOpbutMaxmin{background-position:-51px -17px;}
+	.evPopupOpbut .evOpbutMaxminHover{background-position:-51px 0px;}
+/**popupBut**/
+.evPopupButArea{width:100%; position:absolute; left:0px; bottom:2px; z-index:5;}
+	.evPopupBut{border-top:1px solid #e5e5e5; text-align:center; margin:0px 3px;}
+	.evPopupBut .popupBut{display:inline-block; cursor:pointer; border-left:1px solid #ccc; margin-left:-1px;}
+	.evPopupBut .popupBut .popupButI{ height:50px; line-height:50px; display:inline-block; color:#1d7ee8; cursor:pointer;}
+	.evPopupBut .popupBut_1{border-left:0px;}
+/**标题文字样式**/
+.evPopupHeadName{color:#fff; line-height:34px; font-size:14px; white-space:pre; padding-left:10px;}
+/**alert style**/
+.evPopupAlert{}
+.evPopupAlert .evPopupBody{}
+.evPopupAlert .evPopupBodyC{_height:92px;}
+	.evAlertCon,.evConfirmCon{overflow:hidden; padding:0px 20px 10px; min-width:80px; text-align:center;}
+	.evAlertCon img,.evConfirmCon img{vertical-align:middle; margin-right:10px;}
+	.evAlertCon span.hintText,.evConfirmCon span.hintText{font-size:14px; padding-left:5px; line-height:40px;}
+/**confirm style**/
+.evPopupConfirm{}
+	.evConfirmCon{overflow:hidden; padding:0px 20px 10px; min-width:80px; text-align:center;}
+		.evConfirmCon img{vertical-align:middle; margin-right:10px;}
+/**prompt style**/
+.evPopupPrompt{}
+	.evPromptCon{padding:0px 20px 10px;}
+		.evPromptCon .inputTextE,.evPromptCon .inputTextE .inputText{background:url(images/evPopup_Prompt_input_bg.png);}
+		.evPromptCon .inputTextE{background-position:right -32px;}
+		.evPromptCon .inputTextE .inputText{background-position:0 0; margin-right:10px; height:32px;}
+		.evPromptCon .inputTextE input{height:24px; border:0px; line-height:24px; background-color:transparent; margin:5px 0 0 8px;}
+/**layer style**/
+.evPopupLayer{}
+	.evLayerCon{padding:0px 10px;}
+/**iframe**/
+.evPopupIframe{}
+.evPopupIframe .evIframeCon{width:100%; height:100%; position:relative;}	
+.evPopupIframe .evIframeCon iframe{}
+/**loading style**/
+.evPopupLoading{}
+	.evPopupLoading .evPopupBodyT,.evPopupLoading .evPopupBodyB{height:0px; overflow:hidden;}
+	.evPopupLoading .evPopupBodyCL,.evPopupLoading .evPopupBodyCR{width:0px; overflow:hidden; display:none;}
+	.evPopupLoading .evPopupBodyCC{background:none;}
+/**evLayerCon**/
+.evLayerCon{}
+	.evLayerCon p{line-height:30px; font-size:14px; text-align:center;}
+
+/* white皮肤 */
+.evPopupWhite{}
+	.evPopupWhite .evPopupHead{position:absolute; left:0px; top:0px; width:100%; z-index:4;}
+	.evPopupWhite .evPopupHeadL,.evPopupWhite .evPopupHeadR,.evPopupWhite .evPopupHeadC{background-image:url(white/evPopupTitle_bg.png)}
+	.evPopupWhite .evPopupHeadL,.evPopupHeadR{position:absolute; top:0px; width:6px; height:38px;}
+	.evPopupWhite .evPopupHeadL{left:2px; background-position:1px 0; background-repeat:no-repeat;}
+	.evPopupWhite .evPopupHeadR{right:2px; background-position:-1px -76px; background-repeat:no-repeat;}
+	.evPopupWhite .evPopupHeadC{height:auto; background-position:0 -38px; background-repeat:repeat-x; margin:0px 6px; border-bottom:1px solid #CCC;}
+	.evPopupWhite .evPopupHeadC h3{margin:0; padding:14px 0px 10px 10px;}
+	.evPopupWhite .evPopupHead .evPopupHeadName{color:#333;}
+.evPopupWhite .evPopupOpbut{position:absolute; right:8px; top:0px; z-index:5;}
+.evPopupWhite .evPopupOpbut span{display:inline-block; background:url(white/evPopupOpbut_bg.png); width:19px; height:19px; margin:20px 10px 10px; cursor:pointer;}
+.evPopupWhite .evPopupOpbut .evOpbutClose{background-position:0 -19px;}
